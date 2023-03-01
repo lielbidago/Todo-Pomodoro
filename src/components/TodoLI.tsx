@@ -1,13 +1,18 @@
-import {todoLi} from '../appHooks/todoListHook'
+import {itodoLi} from '../appHooks/todoListHook'
 
-// get list li id and details as parameter
+interface TodoLIProps{
+    changeStatusTodo,
+    todo: {id: number, completed: boolean, title:string}
 
-export function TodoLI(props: todoLi){
-    
+}
+export function TodoLI(props: TodoLIProps){
+    const {changeStatusTodo} = props
+    const {id, completed, title} = props.todo
+
     return (
-        <li className="Todo-li" id={'li-'+props.id.toString()}>
-            <input className="toggle" type="checkbox" checked={props.completed}></input>
-            <label>{props.title}</label>
+        <li className="Todo-li" id={'li-'+ id.toString()}>
+            <input className="toggle" type="checkbox" checked={completed} onChange = {()=>changeStatusTodo(id)}></input>
+            <label>{title}</label>
         </li>
     )
 }
