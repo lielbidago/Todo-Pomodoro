@@ -1,8 +1,10 @@
 import React from 'react';
-// import './App.css';
+import './App.scss';
 import {WelcomePage} from "./pages/welcome"
 import {ListAndTimer} from "./pages/ListAndTimer"
 import  {Route, Routes} from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.css';
+
 
 
 function App() {
