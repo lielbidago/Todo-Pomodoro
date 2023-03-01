@@ -1,0 +1,34 @@
+
+body{
+    text-align: center;
+    min-width: 243px;
+    width: 100vw;
+
+    // $font-family-base: system-ui;
+    background: rgb(255,180,162);
+    background: radial-gradient(circle, rgba(255,180,162,1) 0%, rgba(190,138,149,0.9902912621359223) 100%);
+}
+
+.TodoPomodoroHeader{
+    position: relative;
+    border-bottom: black solid 1px;
+}
+
+.pomodoro-timer{
+    border: solid black;
+    
+}
+
+.Todo-li{
+    list-style: none;
+}
+
+// .pomodoro-timer{
+//     background-color: antiquewhite;
+
+// }
+
+.TodoPomodoroList{
+    border: solid 1px white;
+    border-radius: 10%;
+}
