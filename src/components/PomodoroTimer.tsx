@@ -3,11 +3,12 @@ import { useEffect } from "react";
 interface PomodoroTimer{
     timer: number,
     timerMode: string,
-    startTimer,
+    startTimer():void,
     timerStatus:boolean,
-    changeTime,
-    pauseTimer,
-    resumeTimer
+    changeTime():void,
+    pauseTimer():void,
+    resumeTimer():void,
+    changeTimerModes(newMode: string):void
     
 }
 
@@ -21,21 +22,39 @@ function formatTimer(timer: number){
       `${seconds}`.padStart(2,'0');
 }
 
+//'Pomodoro Session'
+
 export function PomodoroTimer(props:PomodoroTimer){
     
-    const {timer, timerMode, startTimer, timerStatus,changeTime, pauseTimer, resumeTimer } = props
+    const {timer, timerMode, startTimer, timerStatus,changeTime, pauseTimer, resumeTimer, changeTimerModes } = props
 
     const I = useEffect(()=>{
+        
+        if(timer === 0){
+
+            pauseTimer()
+
+            if(timerMode==='Pomodoro Break'){
+                changeTimerModes('Pomodoro Session')
+                                
+            }else{
+                changeTimerModes('Pomodoro Break')
+            }
+
+            
+        }
+
         if(timerStatus){
             const interval = setInterval(() => {
                 changeTime()
             }, 1000);
 
-        return () => clearInterval(interval);
+            
+            return () => {clearInterval(interval)};
         }
     }, [timer, timerStatus])
 
-    console.log(`interval id:`,I)
+    // console.log(`interval id:`,I)
     
     // return (
     //     <div className="pomodoro-timer card bg-transparent col-9">
@@ -55,11 +74,13 @@ export function PomodoroTimer(props:PomodoroTimer){
     //     </div>
     // )
 
+    
+    //card bg-transparent border-light mb-3 col-9
     return (
-        <div className="pomodoro-timer card bg-transparent border-light mb-3 col-9">
-            <div className="card-body">
-                <h5 className="card-title">{timerMode}</h5>
-                <h6 className="card-subtitle mb-2 text-light">{formatTimer(timer)}</h6>
+        <div className="pomodoro-timer">
+            <div className="timer">
+                <h5 className="timer-title">{timerMode}</h5>
+                <h2 className="time">{formatTimer(timer)}</h2>
                 <div className="timerButtons">
                     {timerStatus? <button className='btn btn-outline-light' onClick={pauseTimer}>pause</button>: 
                     <button className='btn btn-outline-light' onClick={resumeTimer}>resume</button>}
