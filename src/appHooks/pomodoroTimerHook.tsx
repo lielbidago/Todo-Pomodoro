@@ -2,8 +2,8 @@ import { useState } from "react";
 
 export function PomodoroTimerHook(){
 
-    const [sessionLen, setSessionLen] = useState(2400)
-    const [breakLen, setBreakLen] = useState(1200)
+    const [sessionLen, setSessionLen] = useState(10)
+    const [breakLen, setBreakLen] = useState(5)
     const [timer, setTimer] = useState(0)
 
     const [timerMode, setTimerMode] = useState('Pomodoro Session') // or Pomodoro Break
@@ -40,6 +40,10 @@ export function PomodoroTimerHook(){
         setTimerStatus(true)
     }
 
+    function changeTimerModes(newMode: string){
+        setTimerMode(newMode)
+    }
+
 
     return {
         timer,
@@ -50,7 +54,8 @@ export function PomodoroTimerHook(){
         timerStatus,
         changeTime,
         pauseTimer,
-        resumeTimer
+        resumeTimer,
+        changeTimerModes
     }
 
 }

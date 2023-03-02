@@ -9,10 +9,10 @@ interface TodoPomodoListProps{
 export function TodoPomodoList(props: TodoPomodoListProps){
     
     const {todoList, changeStatusTodo} = props
-
+// col
     return (
-        <div className="TodoPomodoroList col">
-            <h2>My Todos</h2>
+        <div className="TodoPomodoroList">
+            <h4>My Todos</h4>
             <ul className="my-todos">
                 {todoList.map((td:itodoLi)=> (<TodoLI todo={td} key={td.id} changeStatusTodo={changeStatusTodo}/>))}
             </ul>

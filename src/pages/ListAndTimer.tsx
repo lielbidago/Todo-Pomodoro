@@ -6,11 +6,11 @@ import {TodosListHook} from '../appHooks/todoListHook'
 
 export function ListAndTimer(){
 
-    const {timer, breakLen, sessionLen, timerMode, startTimer, timerStatus, changeTime, pauseTimer, resumeTimer} = PomodoroTimerHook();
+    const {timer, breakLen, sessionLen, timerMode, startTimer, timerStatus, changeTime, pauseTimer, resumeTimer, changeTimerModes} = PomodoroTimerHook();
     const {todoList, changeStatusTodo} = TodosListHook()
-
+//container-sm row text-center fw-light 
     return (
-        <div className="ListAndTimer container-sm row text-center fw-light ">
+        <div className="ListAndTimer">
             <TodoPomodoroHeader/>
             <PomodoroTimer timer={timer}
              timerMode={timerMode}
@@ -18,7 +18,8 @@ export function ListAndTimer(){
              timerStatus={timerStatus}
              changeTime={changeTime}
              pauseTimer={pauseTimer}
-             resumeTimer={resumeTimer}/>
+             resumeTimer={resumeTimer}
+             changeTimerModes={changeTimerModes}/>
              <TodoPomodoList todoList={todoList} changeStatusTodo={changeStatusTodo}/>
 
         </div>

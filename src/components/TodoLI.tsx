@@ -11,8 +11,13 @@ export function TodoLI(props: TodoLIProps){
 
     return (
         <li className="Todo-li" id={'li-'+ id.toString()}>
-            <input className="toggle" type="checkbox" checked={completed} onChange = {()=>changeStatusTodo(id)}></input>
-            <label>{title}</label>
+            <div className='checkbox-wrapper-11'>
+                <input className="toggle" type="checkbox" checked={completed} onChange = {()=>changeStatusTodo(id)}></input>
+                <label>{title}</label> 
+            </div>
+
+            
+
         </li>
     )
 }
