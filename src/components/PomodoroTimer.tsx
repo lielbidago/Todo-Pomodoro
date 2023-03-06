@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Button } from "react-bootstrap";
 
 interface PomodoroTimer{
     timer: number,
@@ -8,7 +9,8 @@ interface PomodoroTimer{
     changeTime():void,
     pauseTimer():void,
     resumeTimer():void,
-    changeTimerModes(newMode: string):void
+    changeTimerModes(newMode: string):void,
+    handleShowEditTimer():void
     
 }
 
@@ -26,11 +28,12 @@ function formatTimer(timer: number){
 
 export function PomodoroTimer(props:PomodoroTimer){
     
-    const {timer, timerMode, startTimer, timerStatus,changeTime, pauseTimer, resumeTimer, changeTimerModes } = props
+    const {timer, timerMode, startTimer, timerStatus,
+        changeTime, pauseTimer, resumeTimer, changeTimerModes, handleShowEditTimer } = props
 
     const I = useEffect(()=>{
         
-        if(timer === 0){
+        if(timer === 0 && timerStatus){
 
             pauseTimer()
 
@@ -41,7 +44,6 @@ export function PomodoroTimer(props:PomodoroTimer){
                 changeTimerModes('Pomodoro Break')
             }
 
-            
         }
 
         if(timerStatus){
@@ -54,28 +56,6 @@ export function PomodoroTimer(props:PomodoroTimer){
         }
     }, [timer, timerStatus])
 
-    // console.log(`interval id:`,I)
-    
-    // return (
-    //     <div className="pomodoro-timer card bg-transparent col-9">
-    //         <div className="timerTitle">
-    //             <h2>{timerMode}</h2>
-    //         </div>
-    //         <div className="timerMain">
-    //             <h3>{formatTimer(timer)}</h3>
-    //             <div className="timerButtons ">
-    //                 {timerStatus? <button className='btn btn-outline-light' onClick={pauseTimer}>pause</button>: 
-    //                 <button className='btn btn-outline-light' onClick={resumeTimer}>resume</button>}
-                    
-    //                 <button className='btn btn-outline-light' onClick={startTimer}>{'start'}</button>
-    //             </div>
-    //         </div>
-
-    //     </div>
-    // )
-
-    
-    //card bg-transparent border-light mb-3 col-9
     return (
         <div className="pomodoro-timer">
             <div className="timer">
@@ -85,9 +65,12 @@ export function PomodoroTimer(props:PomodoroTimer){
                     {timerStatus? <button className='btn btn-outline-light' onClick={pauseTimer}>pause</button>: 
                     <button className='btn btn-outline-light' onClick={resumeTimer}>resume</button>}
                     
-                    <button className='btn btn-outline-light' onClick={startTimer}>{'start'}</button>
+                    <button className='btn btn-outline-light' onClick={startTimer}>{timerStatus?'restart':'start'}</button>
                  </div>
             </div>
+            <Button variant="light" onClick={handleShowEditTimer} className="me-2 session-settings">
+              session settings
+            </Button>
         </div>
     );
 }

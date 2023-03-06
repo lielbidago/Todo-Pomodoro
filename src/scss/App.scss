@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;1,300&family=Red+Hat+Display:ital,wght@0,300;0,600;1,300&display=swap');
+@import '../scss/checkbox.scss';
+
+h4{
+    font-family: 'Red Hat Display', sans-serif;
+}
+
+body{
+    text-align: center;
+    // min-width: 243px;
+    margin: 0;
+    padding: 0;
+    font-family: 'Red Hat Display', sans-serif;
+    background: #ffb4a2;
+    background: radial-gradient(circle, #ffb4a2 0%, #be8a95fc 100%);
+}
+
+.TodoPomodoroHeader{
+  min-width: 100vw;
+  grid-area: TodoPomodoroHeader;
+  height: fit-content;
+
+}
+
+.ListAndTimer{
+    display: grid;
+    grid-template-columns: 35% 65%;
+    grid-template-rows: minmax(auto, 8%) 1fr 5%;
+    font-family: 'Red Hat Display', sans-serif;
+    height: 100vh;
+    width: auto;
+    margin: 1%;
+    gap: 2%;
+    grid-template-areas: 
+    "TodoPomodoroHeader TodoPomodoroHeader"
+    "TodoPomodoroList pomodoro-timer"
+    "footer footer"
+
+}
+
+
+.pomodoro-timer{
+  grid-area: pomodoro-timer;
+  min-width: max-content;
+  min-height: max-content;
+  
+  .session-settings{
+
+
+  }
+    
+}
+
+.timer{
+
+    padding: 15%;
+    margin: auto;
+    min-width: max-content;
+    min-height: max-content;
+    max-width: 80%;
+    text-align: center;
+    background: rgb(163, 163, 163);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.308) 0%, rgba(1, 0, 0, 0.148) 100%);
+    border-radius: 5%;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    
+
+}
+
+.Todo-li{
+  list-style: none;
+  border-bottom: 1px solid rgb(184, 184, 184);
+  width:90%;
+
+}
+
+.todos-title{
+    text-align: center;
+    color: #b97261;
+    padding: 4%;
+}
+
+.TodoPomodoroList{
+    grid-area: TodoPomodoroList;
+    min-width: max-content;
+    background: rgb(255, 255, 255);      
+    justify-self: stretch;
+    align-self: stretch;
+    overflow-y: scroll;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.091);
+    text-align: center;
+    margin-top: 15%;
+
+  .EnterTodo > * {
+    display: inline-block;
+    padding:1%;
+    margin:0 1%;
+
+  }
+
+}
+
+footer{
+    grid-area: footer;
+    position: sticky;
+    bottom: 0;
+    width: 100vw;
+    // border: solid 1px black;
+    text-align: center;
+    font-weight: lighter;
+    font-size: small;
+}
+
+@media (max-width: 480px){
+
+  .ListAndTimer{
+      display: grid;
+      grid-template-columns: auto;
+      grid-template-rows: minmax(auto, 5%) minmax(auto, 30%) 1fr minmax(auto, 5%);
+      // height: 100vh;
+      // width: 100vw;
+      // gap: 1%;
+      grid-template-areas: 
+      "TodoPomodoroHeader "
+      "pomodoro-timer"
+      "TodoPomodoroList"
+      "footer";
+      margin:0;
+      overflow-y: scroll;
+    
+  }
+
+    .TodoPomodoroHeader{
+        min-width: 100vw;
+        grid-area: TodoPomodoroHeader;
+        height: fit-content;
+        min-height: 5%; //
+    }
+
+    .pomodoro-timer{
+      margin-bottom: 15%;
+    }
+
+    .timer{
+        min-width: 40vw;
+        width: 90vw;
+        text-align: center;
+        background: rgb(219,187,187);
+        background: radial-gradient(circle, rgba(219,187,187,0.5555555555555556) 0%, rgba(167,103,103,0.6231884057971014) 100%);
+        
+    }
+
+    .TodoPomodoroList{
+        grid-area: TodoPomodoroList;
+        min-width: max-content;
+        background: rgb(255, 255, 255);      
+        justify-self: stretch;
+        align-self: stretch;
+        overflow-y: scroll;
+        min-height: 70%; //
+
+    }
+
+    footer{
+      grid-area: footer;
+      position: sticky;
+      bottom: 0;
+      width: 100vw;
+      text-align: center;
+      font-weight: lighter;
+      font-size: small;
+  }
+}
+
+
+
+
