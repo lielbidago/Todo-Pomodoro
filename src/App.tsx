@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.scss';
+import './scss/App.scss';
 import {WelcomePage} from "./pages/welcome"
 import {ListAndTimer} from "./pages/ListAndTimer"
 import  {Route, Routes} from "react-router-dom";
