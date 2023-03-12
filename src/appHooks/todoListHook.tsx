@@ -43,13 +43,18 @@ export function TodosListHook(){
 
     function changeStatusTodo(taskID: number){
         const newTodoList: itodoLi[] = todoList.map((td) => (td.id === taskID ? {...td, completed:!td.completed}: td ))
-        console.log(`changed statis of todo ${taskID}`)
+        console.log(`changed status of todo ${taskID}`)
         setTodoList(newTodoList)
     }
 
     function changeStatusTodosEdit(status: boolean){
         console.log('entered changeStatusTodosEdit with ', status)
         setEditListStatus(status)
+    }
+
+    function editTask(TaskId:number, newTask:string){
+        const newTodoList: itodoLi[] = todoList.map((td) => (td.id === TaskId ? {...td, completed:false, title:newTask}: td ))
+        setTodoList(newTodoList)
     }
 
 
@@ -60,7 +65,8 @@ export function TodosListHook(){
         deleteTodo,
         changeStatusTodo,
         editListStatus,
-        changeStatusTodosEdit
+        changeStatusTodosEdit,
+        editTask
     }
 
 }

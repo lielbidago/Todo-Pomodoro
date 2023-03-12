@@ -1,11 +1,14 @@
 
+import { Button } from "react-bootstrap";
+
 interface TodoPomodoroHeaderProps{
     changeStatusTodosEdit(status:boolean):void
+    handleShowSettings
 }
 
 export function TodoPomodoroHeader(props:TodoPomodoroHeaderProps){
     
-  const {changeStatusTodosEdit} = props;
+  const {changeStatusTodosEdit, handleShowSettings} = props;
 
   function onOpen(event: React.MouseEvent<HTMLElement>){  
     changeStatusTodosEdit(true)
@@ -17,7 +20,11 @@ export function TodoPomodoroHeader(props:TodoPomodoroHeaderProps){
         <nav className="navbar navbar-expand-lg bg-body-tertiary TodoPomodoroHeader">
             <div className="container-fluid">
                 <a className="navbar-brand" href="\"><h4>Todo Pomodoro</h4></a>
-                {/* <button type="button" className="btn btn-outline-light editTODOS" onClick={onOpen}>edit</button> */}
+                <div className="header-button">
+                    <button type="button" className="btn btn-outline-light editTODOS" onClick={onOpen}>edit</button>
+                    <Button variant="outline-light" onClick={handleShowSettings} className="me-2 session-settings">settings</Button>
+                </div>
+
             </div>
             
         </nav>

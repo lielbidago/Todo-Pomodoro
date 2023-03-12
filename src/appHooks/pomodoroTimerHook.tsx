@@ -5,10 +5,10 @@ export function PomodoroTimerHook(){
     const [sessionLen, setSessionLen] = useState(10)
     const [breakLen, setBreakLen] = useState(5)
     const [timer, setTimer] = useState(null)
-    const [showEditTimer, setShowEditTimer] = useState(false);
+    const [showSettings, setShowSettings] = useState(false);
       
-    const handleCloseEditTimer = () => setShowEditTimer(false);
-    const handleShowEditTimer = () => setShowEditTimer(true);
+    const handleCloseSettings = () => setShowSettings(false);
+    const handleShowSettings = () => setShowSettings(true);
 
     const [timerMode, setTimerMode] = useState('Pomodoro Session') // or Pomodoro Break
     const [timerStatus, setTimerStatus] = useState(false)
@@ -18,7 +18,6 @@ export function PomodoroTimerHook(){
         
         setTimerStatus(true)
 
-        alert('started timer')
         if(timerMode === 'Pomodoro Session'){
             setTimer(sessionLen)
         }else if (timerMode === 'Pomodoro Break'){
@@ -27,9 +26,10 @@ export function PomodoroTimerHook(){
 
     }
 
-    // function getSessionAndBreakLen(){
-
-    // }
+    function setSessionAndBreakLen(sessionLen:string, breakLen:string){
+        setSessionLen(Number(sessionLen)*60);
+        setBreakLen(Number(breakLen)*60);
+    }
 
     function changeTime(){
         setTimer(timer-1)
@@ -60,9 +60,10 @@ export function PomodoroTimerHook(){
         pauseTimer,
         resumeTimer,
         changeTimerModes,
-        showEditTimer,
-        handleCloseEditTimer,
-        handleShowEditTimer
+        showSettings,
+        handleCloseSettings,
+        handleShowSettings,
+        setSessionAndBreakLen
     }
 
 }
