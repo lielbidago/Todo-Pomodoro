@@ -9,7 +9,7 @@ export function WelcomePage(){
                 <p>here you can enter your tasks and create a time line for complition,
                      that you'll do using our pomodoro timer</p>
             </div>
-            <Link role="button" type="button" className=" start btn" to={`/Todos-and-pomodoro`}>START</Link>
+            <Link role="button" type="button" className="start btn btn-outline-dark" to={`/Todos-and-pomodoro`}>START</Link>
 
         </div>
     )

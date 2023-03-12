@@ -3,8 +3,8 @@ import {TodoPomodoroHeader} from '../components/header'
 import { PomodoroTimer } from '../components/PomodoroTimer';
 import {TodoPomodoList} from '../components/TodoPomodoroList'
 import {TodosListHook} from '../appHooks/todoListHook'
-import { useRef } from 'react';
-import { EditTimer } from '../components/EditTimer';
+import { Settings } from '../components/Settings';
+import { TodosEditModal } from '../components/TodosEditModal';
 
 
 
@@ -12,15 +12,15 @@ export function ListAndTimer(){
 
     const {timer, timerMode, startTimer, timerStatus, changeTime,
         pauseTimer, resumeTimer, changeTimerModes,
-        handleCloseEditTimer, showEditTimer, handleShowEditTimer } = PomodoroTimerHook();
-    const {todoList, editListStatus, changeStatusTodo, changeStatusTodosEdit, addTodo} = TodosListHook()
+        handleCloseSettings, showSettings, handleShowSettings, setSessionAndBreakLen } = PomodoroTimerHook();
 
-    const inputRef = useRef(null);
+    const {todoList, editListStatus, changeStatusTodo,
+        changeStatusTodosEdit, addTodo, editTask} = TodosListHook()
 
     return (
         <div className="ListAndTimer">
 
-            <TodoPomodoroHeader changeStatusTodosEdit={changeStatusTodosEdit}/>
+            <TodoPomodoroHeader changeStatusTodosEdit={changeStatusTodosEdit} handleShowSettings={handleShowSettings}/>
 
             <PomodoroTimer timer={timer}
              timerMode={timerMode}
@@ -30,11 +30,14 @@ export function ListAndTimer(){
              pauseTimer={pauseTimer}
              resumeTimer={resumeTimer}
              changeTimerModes={changeTimerModes}
-             handleShowEditTimer={handleShowEditTimer}/>
+             handleShowSettings={handleShowSettings}/>
 
-             <TodoPomodoList todoList={todoList} 
-             changeStatusTodo={changeStatusTodo} addTodo={addTodo}/>
-            <EditTimer showEditTimer={showEditTimer} handleCloseEditTimer={handleCloseEditTimer}/>
+            {editListStatus?
+                <TodosEditModal todoListAPI={{addTodo, changeStatusTodosEdit, todoList, changeStatusTodo, editTask}} />:
+                <TodoPomodoList todoList={todoList} 
+                changeStatusTodo={changeStatusTodo} addTodo={addTodo} editTask={editTask}/>}
+             
+            <Settings showSettings={showSettings} handleCloseSettings={handleCloseSettings} setSessionAndBreakLen={setSessionAndBreakLen}/>
              
 
         </div>

@@ -4,13 +4,14 @@ import { TodoLI } from "./TodoLI"
 
 interface TodoPomodoListProps{
     todoList: itodoLi[]
-    changeStatusTodo,
-    addTodo(td:string):void
+    changeStatusTodo(taskID):void,
+    addTodo(td:string):void,
+    editTask(TaskId:number, newTask:string):void
 }
 
 export function TodoPomodoList(props: TodoPomodoListProps){
     
-    const {todoList, changeStatusTodo, addTodo} = props
+    const {todoList, changeStatusTodo, addTodo, editTask} = props
     const inputRef = useRef(null);
 
     function onTaskEnter(event: React.KeyboardEvent<HTMLDivElement>){
@@ -24,7 +25,7 @@ export function TodoPomodoList(props: TodoPomodoListProps){
         addTodo(inputRef.current.value);
         inputRef.current.value = "";
     }
-// col
+
     return (
         <div className="TodoPomodoroList">
             <h4 className="todos-title" >My Todos</h4>
@@ -33,7 +34,7 @@ export function TodoPomodoList(props: TodoPomodoListProps){
                 <button type="button" className="btn btn-outline-dark" onClick={onEnterTask}>add task</button>
             </div>
             <ul className="my-todos">
-                {todoList.map((td:itodoLi)=> (<TodoLI todo={td} key={td.id} changeStatusTodo={changeStatusTodo}/>))}
+                {todoList.map((td:itodoLi)=> (<TodoLI todo={td} key={td.id} changeStatusTodo={changeStatusTodo} editTask={editTask}/>))}
             </ul>
         </div>
     )

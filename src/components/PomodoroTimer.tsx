@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Button } from "react-bootstrap";
+
 
 interface PomodoroTimer{
     timer: number,
@@ -10,7 +10,7 @@ interface PomodoroTimer{
     pauseTimer():void,
     resumeTimer():void,
     changeTimerModes(newMode: string):void,
-    handleShowEditTimer():void
+    handleShowSettings():void
     
 }
 
@@ -29,7 +29,7 @@ function formatTimer(timer: number){
 export function PomodoroTimer(props:PomodoroTimer){
     
     const {timer, timerMode, startTimer, timerStatus,
-        changeTime, pauseTimer, resumeTimer, changeTimerModes, handleShowEditTimer } = props
+        changeTime, pauseTimer, resumeTimer, changeTimerModes, handleShowSettings } = props
 
     const I = useEffect(()=>{
         
@@ -68,9 +68,8 @@ export function PomodoroTimer(props:PomodoroTimer){
                     <button className='btn btn-outline-light' onClick={startTimer}>{timerStatus?'restart':'start'}</button>
                  </div>
             </div>
-            <Button variant="light" onClick={handleShowEditTimer} className="me-2 session-settings">
-              session settings
-            </Button>
+
+            
         </div>
     );
 }
