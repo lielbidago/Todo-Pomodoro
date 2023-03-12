@@ -5,6 +5,8 @@ import {TodoPomodoList} from '../components/TodoPomodoroList'
 import {TodosListHook} from '../appHooks/todoListHook'
 import { Settings } from '../components/Settings';
 import { TodosEditModal } from '../components/TodosEditModal';
+import {customeBackground} from '../helperFunctions/themes'
+import { ProgressBarP } from '../components/prograssBar';
 
 
 
@@ -12,13 +14,16 @@ export function ListAndTimer(){
 
     const {timer, timerMode, startTimer, timerStatus, changeTime,
         pauseTimer, resumeTimer, changeTimerModes,
-        handleCloseSettings, showSettings, handleShowSettings, setSessionAndBreakLen } = PomodoroTimerHook();
+        handleCloseSettings, showSettings, handleShowSettings,
+        setSessionAndBreakLen } = PomodoroTimerHook();
 
     const {todoList, editListStatus, changeStatusTodo,
-        changeStatusTodosEdit, addTodo, editTask} = TodosListHook()
+        changeStatusTodosEdit, addTodo, editTask, progressValue}
+        = TodosListHook()
+    
 
     return (
-        <div className="ListAndTimer">
+        <div className="ListAndTimer" >
 
             <TodoPomodoroHeader changeStatusTodosEdit={changeStatusTodosEdit} handleShowSettings={handleShowSettings}/>
 
@@ -30,7 +35,9 @@ export function ListAndTimer(){
              pauseTimer={pauseTimer}
              resumeTimer={resumeTimer}
              changeTimerModes={changeTimerModes}
-             handleShowSettings={handleShowSettings}/>
+             handleShowSettings={handleShowSettings} progressValue={progressValue}/>
+
+            
 
             {editListStatus?
                 <TodosEditModal todoListAPI={{addTodo, changeStatusTodosEdit, todoList, changeStatusTodo, editTask}} />:

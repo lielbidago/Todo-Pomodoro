@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { ProgressBarP } from "./prograssBar";
 
 
 interface PomodoroTimer{
@@ -10,7 +11,8 @@ interface PomodoroTimer{
     pauseTimer():void,
     resumeTimer():void,
     changeTimerModes(newMode: string):void,
-    handleShowSettings():void
+    handleShowSettings():void,
+    progressValue():number
     
 }
 
@@ -29,7 +31,7 @@ function formatTimer(timer: number){
 export function PomodoroTimer(props:PomodoroTimer){
     
     const {timer, timerMode, startTimer, timerStatus,
-        changeTime, pauseTimer, resumeTimer, changeTimerModes, handleShowSettings } = props
+        changeTime, pauseTimer, resumeTimer, changeTimerModes, progressValue } = props
 
     const I = useEffect(()=>{
         
@@ -69,6 +71,7 @@ export function PomodoroTimer(props:PomodoroTimer){
                  </div>
             </div>
 
+            <ProgressBarP progressValue={progressValue()}/>
             
         </div>
     );

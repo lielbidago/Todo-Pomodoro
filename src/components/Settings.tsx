@@ -1,10 +1,11 @@
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 import { Button, Offcanvas, Form, InputGroup, Col, Row  } from 'react-bootstrap';
-
+import {appContext} from '../context/appContext'
 
 export function Settings({showSettings, handleCloseSettings, setSessionAndBreakLen}){
     
+    const {getCustomeThemes} = useContext(appContext);
     const formRef = useRef(null)
     
     function submitForm(event: React.FormEvent<HTMLFormElement>): void {
@@ -12,6 +13,7 @@ export function Settings({showSettings, handleCloseSettings, setSessionAndBreakL
         const formData = new FormData(formRef.current);
         const payload = Object.fromEntries(formData)
         setSessionAndBreakLen(payload.session_len, payload.break_len);
+        getCustomeThemes(payload.color1, payload.color2);
     }
 
     return (
@@ -52,14 +54,22 @@ export function Settings({showSettings, handleCloseSettings, setSessionAndBreakL
                         </Col>
                         <Col>
                             <Form.Group className="mb-3">
-                            <Form.Label htmlFor="exampleColorInput">Color picker</Form.Label>
+                            <Form.Label htmlFor="exampleColorInput">Pick theme color1</Form.Label>
                                 <Form.Control
                                     type="color"
                                     id="exampleColorInput"
                                     defaultValue="#ffb4a2"
                                     title="Choose your color"
-                                    name="color"
+                                    name="color1"
                                 />
+                            <Form.Label htmlFor="exampleColorInput">Pick theme color2</Form.Label>
+                                <Form.Control
+                                    type="color"
+                                    id="exampleColorInput"
+                                    defaultValue="#be8993"
+                                    title="Choose your color"
+                                    name="color2"
+                                />                            
                         </Form.Group>
                         </Col>
                     </Row>

@@ -28,7 +28,7 @@ export function TodoPomodoList(props: TodoPomodoListProps){
 
     return (
         <div className="TodoPomodoroList">
-            <h4 className="todos-title" >My Todos</h4>
+            <div className="todos-title"><h4 >My Todos</h4></div>
             <div className="EnterTodo">
                 <input ref={inputRef} autoFocus placeholder={'enter a task here!'} onKeyUp={onTaskEnter}/>
                 <button type="button" className="btn btn-outline-dark" onClick={onEnterTask}>add task</button>
