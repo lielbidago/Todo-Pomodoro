@@ -28,9 +28,9 @@ export function TodoLI(props: TodoLIProps){
             {!showInput? 
             <div className='checkbox-wrapper-11'>
                 <input className="toggle" type="checkbox" checked={completed} onChange = {()=>changeStatusTodo(id)}></input>
-                <label onClick={()=>{setShowInput(true)}}>{title}</label> 
+                <label onDoubleClick={()=>{setShowInput(true)}}>{title}</label> 
             </div>
-            : <input placeholder={title} ref={inputRef} autoFocus onKeyUp={onTaskEnter} ></input>}
+            : <input type='text' placeholder={title} ref={inputRef} autoFocus onKeyUp={onTaskEnter}></input>}
         </li>
     )
 }

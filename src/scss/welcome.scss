@@ -1,0 +1,41 @@
+
+// html, body {
+//     margin:0;
+//     height:100%;
+//     overflow:hidden;
+// }
+.welcome-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    
+}
+
+.welcomediv{
+    padding:5%;
+    text-align: center;
+    border-radius: 30px;
+    
+    text-align: center;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.435) 0%, rgba(1, 0, 0, 0.148) 100%);
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    
+    .start:hover{
+        color: #ffb4a2;
+    }
+
+}
+
+
+// .welcome-page .welcomediv{
+
+//     transform: translateY(-70%);
+//     visibility: hidden;
+// }
+
+
+
+
