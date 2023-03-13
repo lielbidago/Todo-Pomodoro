@@ -44,6 +44,7 @@ footer{
   text-align: center;
   font-weight: lighter;
   font-size: small;
+  box-shadow: 5px 3px 10px rgba(0, 0, 0, 0.252);
 }
 
 .ListAndTimer{
@@ -66,7 +67,7 @@ footer{
 
 
 .TodoPomodoroHeader{
-  min-width: 100%;
+  width: 99%;
   margin:0;
   grid-area: TodoPomodoroHeader;
   height: fit-content;
@@ -82,6 +83,9 @@ footer{
   min-height: max-content;
   display: flex;
   flex-direction: column;
+  button{
+    margin: 1%;
+  }
     
 }
 .ProgressBarP{
@@ -94,6 +98,17 @@ footer{
   h6{
     font-weight: bold;
   }
+
+}
+.progress{
+  background-color: rgba(255, 255, 255, 0.342) !important;
+  height: 25px !important;
+}
+.progress-bar{
+  background: radial-gradient(circle,rgba(1, 0, 0, 0.383) 0%,
+   rgba(102, 102, 102, 0.201) 100%)
+    !important;
+  
 }
 
 .timer{
@@ -112,18 +127,14 @@ footer{
 
 }
 
-
-
-
 .TodoPomodoroList{
     grid-area: TodoPomodoroList;
-    min-width: max-content;
+
     background: rgb(255, 255, 255);      
     justify-self: stretch;
     align-self: stretch;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.091);
     text-align: center;
-
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
     scrollbar-width: none; /* for Firefox */
     overflow-y: scroll; 
@@ -149,6 +160,7 @@ footer{
   list-style: none;
   border-bottom: 1px solid rgb(184, 184, 184);
   width:90%;
+  max-width: 90%;
 
   input[type=text]{
     width:100%;
@@ -156,7 +168,36 @@ footer{
 
   }
 
+  label{
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+
+  .checkbox-wrapper-11{
+    display: flex;
+    
+  }
+  .deleteTodo{
+    border: 0;
+    background-color: white;
+    font-weight: bold;
+    font-size: larger;
+    color: grey;
+    position:absolute;
+    right:0;
+    
+  }
+
+  .deleteTodo:hover{
+    color: black;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    padding: 0 1%;
+    border-radius: 30px;
+  }
+
 }
+
+
 .todos-title{
   text-align: center;
   padding: 3%;
@@ -183,20 +224,9 @@ footer{
 
   .ListAndTimer{
 
-
     display: flex;
     flex-direction: column;
     height: max-content;
-      // display: grid;
-      // grid-template-columns: auto;
-      // grid-template-rows: minmax(auto, 5%) minmax(auto, 30%) 1fr minmax(auto, 5%);
-
-      // gap: 1%;
-      // grid-template-areas: 
-      // "TodoPomodoroHeader "
-      // "pomodoro-timer"
-      // "TodoPomodoroList"
-      // "footer";
     
   }
 
@@ -228,7 +258,7 @@ footer{
         background: rgb(255, 255, 255);      
         overflow-y: scroll;
         height: 50%;
-        max-height: 400px;
+        min-height: 500px;
         margin-bottom: 5%;
 
         .todos-title{

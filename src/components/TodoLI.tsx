@@ -4,11 +4,12 @@ import { useRef, useState } from 'react'
 interface TodoLIProps{
     changeStatusTodo(TaskId:number),
     todo: {id: number, completed: boolean, title:string},
-    editTask(TaskId:number, newTask:string):void
+    editTask(TaskId:number, newTask:string):void,
+    deleteTodo(taskID:number):void
 }
 
 export function TodoLI(props: TodoLIProps){
-    const {changeStatusTodo, editTask} = props
+    const {changeStatusTodo, editTask, deleteTodo} = props
     const {id, completed, title} = props.todo
 
     const [showInput, setShowInput] = useState(false)
@@ -18,8 +19,11 @@ export function TodoLI(props: TodoLIProps){
     function onTaskEnter(event: React.KeyboardEvent<HTMLDivElement>){
         
         if(event.key === 'Enter'){
-            editTask(id, inputRef.current.value);
-            setShowInput(false)
+            if(inputRef.current.value!==''){
+                editTask(id, inputRef.current.value);
+            }
+            setShowInput(false);
+
         }
     }
 
@@ -29,6 +33,7 @@ export function TodoLI(props: TodoLIProps){
             <div className='checkbox-wrapper-11'>
                 <input className="toggle" type="checkbox" checked={completed} onChange = {()=>changeStatusTodo(id)}></input>
                 <label onDoubleClick={()=>{setShowInput(true)}}>{title}</label> 
+                <button className="deleteTodo" onClick={()=>deleteTodo(id)}>&times;</button>
             </div>
             : <input type='text' placeholder={title} ref={inputRef} autoFocus onKeyUp={onTaskEnter}></input>}
         </li>
