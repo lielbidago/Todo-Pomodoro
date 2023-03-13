@@ -19,10 +19,10 @@ function App() {
   return (
     <appContext.Provider value={appAPI}>
     <Routes>
-      <Route path='*' element={<div className='app-screen' style={customeBackground()}><WelcomePage/></div>}/>
-      <Route path='Todos-and-pomodoro' element={<div className='app-screen' style={customeBackground()}><ListAndTimer/></div>}/>
+      <Route path='*' element={<div className='app-screen' style={customeBackground()}><WelcomePage/><Footer/></div>}/>
+      <Route path='Todos-and-pomodoro' element={<div className='app-screen' style={customeBackground()}><ListAndTimer/><Footer/></div>}/>
     </Routes>
-    <Footer/>
+    
     </appContext.Provider>
     
   )

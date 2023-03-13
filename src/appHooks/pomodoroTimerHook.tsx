@@ -6,6 +6,7 @@ export function PomodoroTimerHook(){
     const [breakLen, setBreakLen] = useState(5)
     const [timer, setTimer] = useState(null)
     const [showSettings, setShowSettings] = useState(false);
+    const [sessionsLoop, setSessionsLoop] = useState(false);
       
     const handleCloseSettings = () => setShowSettings(false);
     const handleShowSettings = () => setShowSettings(true);
@@ -48,6 +49,10 @@ export function PomodoroTimerHook(){
         setTimerMode(newMode)
     }
 
+    function setSessionLoopMode(status:boolean){
+        setSessionsLoop(status);
+    }
+    
 
     return {
         timer,
@@ -63,7 +68,9 @@ export function PomodoroTimerHook(){
         showSettings,
         handleCloseSettings,
         handleShowSettings,
-        setSessionAndBreakLen
+        setSessionAndBreakLen,
+        sessionsLoop,
+        setSessionLoopMode
     }
 
 }

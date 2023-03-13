@@ -32,7 +32,8 @@ export function TodosEditModal(props:TodosEditModalProps){
             </div>
             <input ref={inputRef} autoFocus placeholder={'enter a task here!'} onKeyUp={onTaskEnter}/>
             <ul className="my-todos">
-            {todoListAPI.todoList.map((td)=> (<TodoLI todo={td} key={td.id} changeStatusTodo={todoListAPI.changeStatusTodo} editTask={todoListAPI.editTask}/>))}
+            {todoListAPI.todoList.map((td)=> (<TodoLI todo={td} key={td.id} changeStatusTodo={todoListAPI.changeStatusTodo}
+             editTask={todoListAPI.editTask} deleteTodo={todoListAPI.deleteTodo} />))}
             </ul>
         </div>
 

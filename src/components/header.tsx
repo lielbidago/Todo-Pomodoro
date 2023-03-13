@@ -22,7 +22,7 @@ export function TodoPomodoroHeader(props:TodoPomodoroHeaderProps){
                 <a className="navbar-brand" href="\"><h4>Todo Pomodoro</h4></a>
                 <div className="header-button">
                     {/* <button type="button" className="btn btn-outline-light editTODOS" onClick={onOpen}>edit</button> */}
-                    <Button variant="outline-light" onClick={handleShowSettings} className="me-2 session-settings">settings</Button>
+                    <Button variant="outline-dark" onClick={handleShowSettings} className="me-2 session-settings">≡</Button>
                 </div>
 
             </div>

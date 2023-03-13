@@ -12,7 +12,9 @@ interface PomodoroTimer{
     resumeTimer():void,
     changeTimerModes(newMode: string):void,
     handleShowSettings():void,
-    progressValue():number
+    progressValue():number,
+    sessionsLoop:boolean,
+    
     
 }
 
@@ -31,7 +33,8 @@ function formatTimer(timer: number){
 export function PomodoroTimer(props:PomodoroTimer){
     
     const {timer, timerMode, startTimer, timerStatus,
-        changeTime, pauseTimer, resumeTimer, changeTimerModes, progressValue } = props
+        changeTime, pauseTimer, resumeTimer, changeTimerModes, progressValue, 
+        sessionsLoop } = props
 
     const I = useEffect(()=>{
         
@@ -45,6 +48,11 @@ export function PomodoroTimer(props:PomodoroTimer){
             }else{
                 changeTimerModes('Pomodoro Break')
             }
+
+            if(sessionsLoop){
+                startTimer();
+            }
+
 
         }
 

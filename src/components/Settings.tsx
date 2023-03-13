@@ -3,7 +3,7 @@ import { useState, useRef, useContext } from 'react';
 import { Button, Offcanvas, Form, InputGroup, Col, Row  } from 'react-bootstrap';
 import {appContext} from '../context/appContext'
 
-export function Settings({showSettings, handleCloseSettings, setSessionAndBreakLen}){
+export function Settings({showSettings, handleCloseSettings, setSessionAndBreakLen, setSessionLoopMode}){
     
     const {getCustomeThemes} = useContext(appContext);
     const formRef = useRef(null)
@@ -12,8 +12,16 @@ export function Settings({showSettings, handleCloseSettings, setSessionAndBreakL
         event.preventDefault()
         const formData = new FormData(formRef.current);
         const payload = Object.fromEntries(formData)
-        setSessionAndBreakLen(payload.session_len, payload.break_len);
+
+        setSessionAndBreakLen(payload.session_len||='1', payload.break_len||='1');
         getCustomeThemes(payload.color1, payload.color2);
+        if(payload.SessionLoopMode === 'Loop'){
+            setSessionLoopMode(true);
+        }else{
+            setSessionLoopMode(false);
+        }
+
+
     }
 
     return (
@@ -54,7 +62,7 @@ export function Settings({showSettings, handleCloseSettings, setSessionAndBreakL
                         </Col>
                         <Col>
                             <Form.Group className="mb-3">
-                            <Form.Label htmlFor="exampleColorInput">Pick theme color1</Form.Label>
+                            <Form.Label htmlFor="ColorInput1">Pick theme color1</Form.Label>
                                 <Form.Control
                                     type="color"
                                     id="exampleColorInput"
@@ -62,7 +70,7 @@ export function Settings({showSettings, handleCloseSettings, setSessionAndBreakL
                                     title="Choose your color"
                                     name="color1"
                                 />
-                            <Form.Label htmlFor="exampleColorInput">Pick theme color2</Form.Label>
+                            <Form.Label htmlFor="ColorInput2">Pick theme color2</Form.Label>
                                 <Form.Control
                                     type="color"
                                     id="exampleColorInput"
@@ -73,7 +81,15 @@ export function Settings({showSettings, handleCloseSettings, setSessionAndBreakL
                         </Form.Group>
                         </Col>
                     </Row>
-                    
+                    <Row>
+                        <Form.Group className='mb-3'>
+                            <Form.Label htmlFor="SessionLoopMode">Pick Session Mode</Form.Label>
+                            <Form.Select size="sm" name='SessionLoopMode' defaultValue={'not Loop'}>
+                                <option value='Loop'>Loop</option>
+                                <option value='not Loop'>not Loop</option>
+                            </Form.Select>
+                        </Form.Group>
+                    </Row>
                     
                     
                     <Button variant="dark" size="sm" type="submit">Submit</Button>

@@ -5,8 +5,8 @@ import {TodoPomodoList} from '../components/TodoPomodoroList'
 import {TodosListHook} from '../appHooks/todoListHook'
 import { Settings } from '../components/Settings';
 import { TodosEditModal } from '../components/TodosEditModal';
-import {customeBackground} from '../helperFunctions/themes'
-import { ProgressBarP } from '../components/prograssBar';
+import { Footer } from '../components/footer';
+
 
 
 
@@ -15,10 +15,12 @@ export function ListAndTimer(){
     const {timer, timerMode, startTimer, timerStatus, changeTime,
         pauseTimer, resumeTimer, changeTimerModes,
         handleCloseSettings, showSettings, handleShowSettings,
-        setSessionAndBreakLen } = PomodoroTimerHook();
+        setSessionAndBreakLen,sessionsLoop,
+        setSessionLoopMode } = PomodoroTimerHook();
 
     const {todoList, editListStatus, changeStatusTodo,
-        changeStatusTodosEdit, addTodo, editTask, progressValue}
+        changeStatusTodosEdit, addTodo, editTask, 
+        progressValue, deleteTodo}
         = TodosListHook()
     
 
@@ -35,18 +37,28 @@ export function ListAndTimer(){
              pauseTimer={pauseTimer}
              resumeTimer={resumeTimer}
              changeTimerModes={changeTimerModes}
-             handleShowSettings={handleShowSettings} progressValue={progressValue}/>
+             handleShowSettings={handleShowSettings} progressValue={progressValue} sessionsLoop={sessionsLoop}
+             />
 
             
 
-            {editListStatus?
+            {/* {editListStatus?
                 <TodosEditModal todoListAPI={{addTodo, changeStatusTodosEdit, todoList, changeStatusTodo, editTask}} />:
                 <TodoPomodoList todoList={todoList} 
-                changeStatusTodo={changeStatusTodo} addTodo={addTodo} editTask={editTask}/>}
-             
-            <Settings showSettings={showSettings} handleCloseSettings={handleCloseSettings} setSessionAndBreakLen={setSessionAndBreakLen}/>
-             
+                changeStatusTodo={changeStatusTodo}
+                 addTodo={addTodo}
+                  editTask={editTask}
+                  deleteTodo={deleteTodo}/>} */}
 
+                  <TodoPomodoList todoList={todoList} 
+                changeStatusTodo={changeStatusTodo}
+                 addTodo={addTodo}
+                  editTask={editTask}
+                  deleteTodo={deleteTodo}/>
+             
+            <Settings setSessionLoopMode={setSessionLoopMode} showSettings={showSettings} handleCloseSettings={handleCloseSettings} setSessionAndBreakLen={setSessionAndBreakLen}/>
+             
+            
         </div>
     )
 }

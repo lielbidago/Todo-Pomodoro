@@ -10,6 +10,6 @@ export function ProgressBarP(props: prograssBarProps){
     
     return <div className="ProgressBarP">
         <h6>Your progress</h6>
-        <ProgressBar variant='dark' now={progressValue} label={`${progressValue}%`}/>
+        <ProgressBar variant='' now={progressValue} label={`${progressValue}%`}/>
         </div>
 }
