@@ -32,9 +32,11 @@ export function TodoPomodoList(props: TodoPomodoListProps){
         }
     }
 
+    const dotsColor = localStorage.getItem('theme1')
+
     return (
         <div className="TodoPomodoroList">
-            <div className="todos-title"><h4 >My Todos</h4></div>
+            <div className="todos-title" style={{borderTopColor: `${dotsColor}`}}><h4 >My Todos</h4></div>
             <div className="EnterTodo">
                 <input ref={inputRef} autoFocus placeholder={'enter a task here!'} onKeyUp={onTaskEnter}/>
                 <button type="button" className="btn btn-outline-dark" onClick={onEnterTask}>add task</button>
