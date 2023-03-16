@@ -2,9 +2,9 @@ import { useState } from "react";
 
 export function PomodoroTimerHook(){
 
-    const [sessionLen, setSessionLen] = useState(10)
-    const [breakLen, setBreakLen] = useState(5)
-    const [timer, setTimer] = useState(null)
+    const [sessionLen, setSessionLen] = useState(2400)
+    const [breakLen, setBreakLen] = useState(600)
+    const [timer, setTimer] = useState(2400)
     const [showSettings, setShowSettings] = useState(false);
     const [sessionsLoop, setSessionsLoop] = useState(false);
       
@@ -15,21 +15,35 @@ export function PomodoroTimerHook(){
     const [timerStatus, setTimerStatus] = useState(false)
 
 
-    function startTimer(){
-        
-        setTimerStatus(true)
-
+    function setTimerTime(){
         if(timerMode === 'Pomodoro Session'){
             setTimer(sessionLen)
         }else if (timerMode === 'Pomodoro Break'){
             setTimer(breakLen)
         }
+    }
+
+    function startTimer(){
+        
+        setTimerStatus(true);
+
+        setTimerTime();
 
     }
 
-    function setSessionAndBreakLen(sessionLen:string, breakLen:string){
-        setSessionLen(Number(sessionLen)*60);
-        setBreakLen(Number(breakLen)*60);
+
+
+    function setSessionAndBreakLen(sessionLenStr:string, breakLenStr:string){
+        
+        setSessionLen(Number(sessionLenStr)*60);
+        setBreakLen(Number(breakLenStr)*60);
+
+        if(timerMode === 'Pomodoro Session'){
+            setTimer(Number(sessionLenStr)*60)
+        }else if (timerMode === 'Pomodoro Break'){
+            setTimer(Number(breakLenStr)*60)
+        }
+
     }
 
     function changeTime(){
@@ -47,6 +61,8 @@ export function PomodoroTimerHook(){
 
     function changeTimerModes(newMode: string){
         setTimerMode(newMode)
+        setTimerTime();
+
     }
 
     function setSessionLoopMode(status:boolean){
@@ -70,6 +86,7 @@ export function PomodoroTimerHook(){
         handleShowSettings,
         setSessionAndBreakLen,
         sessionsLoop,
+        setTimerTime,
         setSessionLoopMode
     }
 

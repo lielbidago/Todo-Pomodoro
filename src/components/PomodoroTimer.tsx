@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { ProgressBarP } from "./prograssBar";
 
 
 interface PomodoroTimer{
@@ -14,8 +13,8 @@ interface PomodoroTimer{
     handleShowSettings():void,
     progressValue():number,
     sessionsLoop:boolean,
-    
-    
+    sessionLen:number,
+    breakLen:number,    
 }
 
 function formatTimer(timer: number){
@@ -28,15 +27,14 @@ function formatTimer(timer: number){
       `${seconds}`.padStart(2,'0');
 }
 
-//'Pomodoro Session'
 
 export function PomodoroTimer(props:PomodoroTimer){
     
     const {timer, timerMode, startTimer, timerStatus,
-        changeTime, pauseTimer, resumeTimer, changeTimerModes, progressValue, 
-        sessionsLoop } = props
+        changeTime, pauseTimer, resumeTimer, changeTimerModes, 
+        sessionsLoop, sessionLen, breakLen } = props
 
-    const I = useEffect(()=>{
+    useEffect(()=>{
         
         if(timer === 0 && timerStatus){
 
@@ -64,12 +62,25 @@ export function PomodoroTimer(props:PomodoroTimer){
             
             return () => {clearInterval(interval)};
         }
-    }, [timer, timerStatus])
+
+        
+    }, [timer, timerStatus, sessionLen, breakLen ])
+
+
+    function handleModeChange(event: React.MouseEvent<HTMLElement>){
+
+        if(timerMode==='Pomodoro Break'){
+            changeTimerModes('Pomodoro Session')
+                            
+        }else{
+            changeTimerModes('Pomodoro Break')
+        }
+    }
 
     return (
         <div className="pomodoro-timer">
             <div className="timer">
-                <h5 className="timer-title">{timerMode}</h5>
+                <h5 onDoubleClick={handleModeChange} className="timer-title">{timerMode}</h5>
                 <h2 className="time">{formatTimer(timer)}</h2>
                 <div className="timerButtons">
                     {timerStatus? <button className='btn btn-outline-light' onClick={pauseTimer}>pause</button>: 
@@ -78,9 +89,6 @@ export function PomodoroTimer(props:PomodoroTimer){
                     <button className='btn btn-outline-light' onClick={startTimer}>{timerStatus?'restart':'start'}</button>
                  </div>
             </div>
-
-            <ProgressBarP progressValue={progressValue()}/>
-            
         </div>
     );
 }

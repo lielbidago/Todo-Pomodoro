@@ -15,14 +15,18 @@ export function Settings({showSettings, handleCloseSettings, setSessionAndBreakL
 
         setSessionAndBreakLen(payload.session_len||='1', payload.break_len||='1');
         getCustomeThemes(payload.color1, payload.color2);
+        
         if(payload.SessionLoopMode === 'Loop'){
             setSessionLoopMode(true);
         }else{
             setSessionLoopMode(false);
         }
 
-
+        handleCloseSettings()
     }
+
+    const customeTheme1 = localStorage.getItem('theme1');
+    const customeTheme2 = localStorage.getItem('theme2');
 
     return (
         <>
@@ -36,7 +40,7 @@ export function Settings({showSettings, handleCloseSettings, setSessionAndBreakL
                     <Row>
                         <Col xs={7}>
                             <Form.Group className='mb-3'>
-                                <Form.Label>Set session/break length:</Form.Label>                        
+                                <Form.Label>Set session/break lengths (minutes):</Form.Label>                        
                                 <InputGroup size="sm" className="mb-3">
                                     <InputGroup.Text id="inputGroup-sizing-sm">Session</InputGroup.Text>
                                     <Form.Control
@@ -66,7 +70,7 @@ export function Settings({showSettings, handleCloseSettings, setSessionAndBreakL
                                 <Form.Control
                                     type="color"
                                     id="exampleColorInput"
-                                    defaultValue="#ffb4a2"
+                                    defaultValue={customeTheme1}
                                     title="Choose your color"
                                     name="color1"
                                 />
@@ -74,7 +78,7 @@ export function Settings({showSettings, handleCloseSettings, setSessionAndBreakL
                                 <Form.Control
                                     type="color"
                                     id="exampleColorInput"
-                                    defaultValue="#be8993"
+                                    defaultValue={customeTheme2}
                                     title="Choose your color"
                                     name="color2"
                                 />                            
