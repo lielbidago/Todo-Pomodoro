@@ -183,6 +183,7 @@ footer{
   }
   .todos-title{
     border-top: 15px dotted #9393938d;
+    
     border-radius: 21px 13px 0px 0px;
     margin-top: 2%;
   }
@@ -253,6 +254,12 @@ footer{
 @media (min-width: 1200px){
   body{
     font-size: medium;
+  }
+
+  .todos-title{
+    border-top: 19px dotted #9393938d;
+    border-radius: 21px 13px 0px 0px;
+    margin-top: 3%;
   }
   
   .updates{
