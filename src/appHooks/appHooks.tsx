@@ -13,6 +13,8 @@ export function AppHooks(){
         localStorage.setItem('theme2', theme2);
     }
 
+    
+
 
 
     return {

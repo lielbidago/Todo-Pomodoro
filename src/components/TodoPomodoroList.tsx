@@ -17,14 +17,19 @@ export function TodoPomodoList(props: TodoPomodoListProps){
 
     function onTaskEnter(event: React.KeyboardEvent<HTMLDivElement>){
         if(event.key === 'Enter'){
-            addTodo(inputRef.current.value);
-            inputRef.current.value = "";
+            if(inputRef.current.value!=='' && inputRef.current.value!==' '){
+                addTodo(inputRef.current.value);
+                inputRef.current.value = "";
+            }
+
         }
     }
 
     function onEnterTask(event: React.MouseEvent<HTMLElement>){
-        addTodo(inputRef.current.value);
-        inputRef.current.value = "";
+        if(inputRef.current.value!=='' && inputRef.current.value!==' '){
+            addTodo(inputRef.current.value);
+            inputRef.current.value = "";
+        }
     }
 
     return (
