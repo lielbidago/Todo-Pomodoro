@@ -16,8 +16,6 @@ body{
   padding: 0;
   text-align: center;
   overflow-x: hidden;
-
-
 }
 
 
@@ -58,7 +56,7 @@ footer{
 .ListAndTimer{
     display: grid;
     grid-template-columns: 35% 65%;
-    grid-template-rows: minmax(auto, 6%) 1fr 1fr 5%;
+    grid-template-rows: minmax(auto, 7%) 1fr 0.4fr 5%;
     font-family: 'Red Hat Display', sans-serif;
     margin:0 1%;
     width: 97%;
@@ -247,7 +245,7 @@ footer{
   grid-area: footer;
 
 }
-@media (min-width: 1400px){
+@media (min-width: 1200px){
   .updates{
     margin-top: 10%;
   }
