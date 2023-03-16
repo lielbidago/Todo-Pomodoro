@@ -13,7 +13,12 @@ export function Settings({showSettings, handleCloseSettings, setSessionAndBreakL
         const formData = new FormData(formRef.current);
         const payload = Object.fromEntries(formData)
 
-        setSessionAndBreakLen(payload.session_len||='1', payload.break_len||='1');
+        if (payload.session_len !== "" &&
+        payload.session_len !== " " &&
+         payload.break_len !== '' && payload.break_len !== ' '){
+            setSessionAndBreakLen(payload.session_len||='1', payload.break_len||='1');
+        }
+        
         getCustomeThemes(payload.color1, payload.color2);
         
         if(payload.SessionLoopMode === 'Loop'){
