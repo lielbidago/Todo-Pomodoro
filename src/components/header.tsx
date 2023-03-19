@@ -2,17 +2,16 @@
 import { Button } from "react-bootstrap";
 
 interface TodoPomodoroHeaderProps{
-    changeStatusTodosEdit(status:boolean):void
     handleShowSettings
 }
 
 export function TodoPomodoroHeader(props:TodoPomodoroHeaderProps){
     
-  const {changeStatusTodosEdit, handleShowSettings} = props;
+  const { handleShowSettings} = props;
 
-  function onOpen(event: React.MouseEvent<HTMLElement>){  
-    changeStatusTodosEdit(true)
-  }
+//   function onOpen(event: React.MouseEvent<HTMLElement>){  
+//     changeStatusTodosEdit(true)
+//   }
   
   return (
         // <h1 className="TodoPomodoroHeader">Todo Pomodoro</h1>

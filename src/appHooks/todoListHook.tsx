@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 
 export interface itodoLi{
@@ -23,7 +24,16 @@ export function TodosListHook(){
     // {title:'do something 12', id:Date.now()+10, completed: false}]
     
     const [ todoList, setTodoList ] = useState([{title:'do something', id:Date.now(), completed: false}]);
-    const [editListStatus, setEditListStatus] = useState(false)
+    // const [editListStatus, setEditListStatus] = useState(false)
+
+
+
+    function updateTodosList(){
+        if(localStorage.getItem('todoList')){
+            setTodoList(JSON.parse(localStorage.getItem('todoList')))
+        }
+    }
+
 
     function addTodo(task: string){
         const newTodoList: itodoLi[] = todoList.map((td)=>td)
@@ -34,32 +44,35 @@ export function TodosListHook(){
         })
 
         setTodoList(newTodoList)
+        localStorage.setItem('todoList', JSON.stringify(newTodoList));
     }
 
     function deleteTodo(taskID: number){
         const newTodoList: itodoLi[] = todoList.filter(td => td.id !== taskID)
         setTodoList(newTodoList)
+        localStorage.setItem('todoList', JSON.stringify(newTodoList));
     }
 
     function changeStatusTodo(taskID: number){
         const newTodoList: itodoLi[] = todoList.map((td) => (td.id === taskID ? {...td, completed:!td.completed}: td ))
-        console.log(`changed status of todo ${taskID}`)
-        setTodoList(newTodoList)
+        // console.log(`changed status of todo ${taskID}`)
+        setTodoList(newTodoList);
+        localStorage.setItem('todoList', JSON.stringify(newTodoList));
     }
 
-    function changeStatusTodosEdit(status: boolean){
-        setEditListStatus(status)
-    }
+    // function changeStatusTodosEdit(status: boolean){
+    //     setEditListStatus(status)
+    // }
 
     function editTask(TaskId:number, newTask:string){
         const newTodoList: itodoLi[] = todoList.map((td) => (td.id === TaskId ? {...td, completed:false, title:newTask}: td ))
         setTodoList(newTodoList)
+        localStorage.setItem('todoList', JSON.stringify(newTodoList));
     }
 
     function progressValue(){
         
         let completed = todoList.filter((td)=>td.completed).length;
-
         return Math.round((completed/todoList.length)*100)
 
     }
@@ -71,10 +84,11 @@ export function TodosListHook(){
         addTodo,
         deleteTodo,
         changeStatusTodo,
-        editListStatus,
-        changeStatusTodosEdit,
+        // editListStatus,
+        // changeStatusTodosEdit,
         editTask,
-        progressValue
+        progressValue,
+        updateTodosList
     }
 
 }

@@ -14,7 +14,8 @@ interface PomodoroTimer{
     progressValue():number,
     sessionsLoop:boolean,
     sessionLen:number,
-    breakLen:number,    
+    breakLen:number, 
+    setTimerTime():void   
 }
 
 function formatTimer(timer: number){
@@ -32,7 +33,7 @@ export function PomodoroTimer(props:PomodoroTimer){
     
     const {timer, timerMode, startTimer, timerStatus,
         changeTime, pauseTimer, resumeTimer, changeTimerModes, 
-        sessionsLoop, sessionLen, breakLen } = props
+        sessionsLoop, sessionLen, breakLen, setTimerTime } = props
 
     useEffect(()=>{
         
@@ -64,7 +65,13 @@ export function PomodoroTimer(props:PomodoroTimer){
         }
 
         
+
+        
     }, [timer, timerStatus, sessionLen, breakLen ])
+
+    useEffect(()=>{
+        setTimerTime()
+    }, [timerMode])
 
 
     function handleModeChange(event: React.MouseEvent<HTMLElement>){
