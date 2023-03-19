@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import { itodoLi } from "../appHooks/todoListHook"
 import { TodoLI } from "./TodoLI"
 
@@ -8,11 +8,12 @@ interface TodoPomodoListProps{
     addTodo(td:string):void,
     editTask(TaskId:number, newTask:string):void,
     deleteTodo(taskID:number):void
+    updateTodosList():void
 }
 
 export function TodoPomodoList(props: TodoPomodoListProps){
     
-    const {todoList, changeStatusTodo, addTodo, editTask, deleteTodo} = props
+    const {todoList, changeStatusTodo, addTodo, editTask, deleteTodo, updateTodosList} = props
     const inputRef = useRef(null);
 
     function onTaskEnter(event: React.KeyboardEvent<HTMLDivElement>){
@@ -32,9 +33,15 @@ export function TodoPomodoList(props: TodoPomodoListProps){
         }
     }
 
+    useEffect(()=>{
+        updateTodosList()
+    }, [])
+
     const dotsColor1 = localStorage.getItem('theme1');
+
     // const dotsColor2 = localStorage.getItem('theme2');
     // const gradient = {borderImage: `linear-gradient(90deg, ${dotsColor1}, ${dotsColor2}) 1`}
+
     return (
         <div className="TodoPomodoroList">
             <div className="todos-title" style={{borderTopColor: `${dotsColor1}`}}><h4 >My Todos</h4></div>

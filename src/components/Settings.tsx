@@ -95,7 +95,7 @@ export function Settings({showSettings, handleCloseSettings, setSessionAndBreakL
                             <Form.Label htmlFor="SessionLoopMode">Pick Session Mode</Form.Label>
                             <Form.Select size="sm" name='SessionLoopMode' defaultValue={'not Loop'}>
                                 <option value='Loop'>Loop</option>
-                                <option value='not Loop'>not Loop</option>
+                                <option value='not Loop'>linear</option>
                             </Form.Select>
                         </Form.Group>
                     </Row>

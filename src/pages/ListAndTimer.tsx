@@ -17,25 +17,25 @@ export function ListAndTimer(){
         pauseTimer, resumeTimer, changeTimerModes,
         handleCloseSettings, showSettings, handleShowSettings,
         setSessionAndBreakLen,sessionsLoop,
-        setSessionLoopMode, sessionLen, breakLen } = PomodoroTimerHook();
+        setSessionLoopMode, sessionLen, breakLen, setTimerTime } = PomodoroTimerHook();
 
     const {todoList, changeStatusTodo,
-        changeStatusTodosEdit, addTodo, editTask, 
-        progressValue, deleteTodo}
+         addTodo, editTask, 
+        progressValue, deleteTodo, updateTodosList}
         = TodosListHook()
     
-    const [lastSessionsRate, setLastSessionsRate] = useState([])
+    // const [lastSessionsRate, setLastSessionsRate] = useState([])
 
-    function getSessionStats(){
+    // function getSessionStats(){
         
-    }
+    // }
     
     
 
     return (
         <div className="ListAndTimer" >
 
-            <TodoPomodoroHeader changeStatusTodosEdit={changeStatusTodosEdit} handleShowSettings={handleShowSettings}/>
+            <TodoPomodoroHeader handleShowSettings={handleShowSettings}/>
 
             <PomodoroTimer timer={timer}
              timerMode={timerMode}
@@ -45,7 +45,12 @@ export function ListAndTimer(){
              pauseTimer={pauseTimer}
              resumeTimer={resumeTimer}
              changeTimerModes={changeTimerModes}
-             handleShowSettings={handleShowSettings} progressValue={progressValue} sessionsLoop={sessionsLoop} sessionLen={sessionLen} breakLen={breakLen}
+             handleShowSettings={handleShowSettings}
+              progressValue={progressValue}
+               sessionsLoop={sessionsLoop}
+                sessionLen={sessionLen} breakLen={breakLen}
+                setTimerTime={setTimerTime}
+
              />
 
             
@@ -67,7 +72,7 @@ export function ListAndTimer(){
                 changeStatusTodo={changeStatusTodo}
                  addTodo={addTodo}
                   editTask={editTask}
-                  deleteTodo={deleteTodo}/>
+                  deleteTodo={deleteTodo} updateTodosList={updateTodosList}/>
             
 
 
