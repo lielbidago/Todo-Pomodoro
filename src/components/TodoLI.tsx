@@ -19,9 +19,10 @@ export function TodoLI(props: TodoLIProps){
     function onTaskEnter(event: React.KeyboardEvent<HTMLDivElement>){
         
         if(event.key === 'Enter'){
-            if(inputRef.current.value!==''){
+            if(inputRef.current.value !=='' && inputRef.current.value!==' '){
                 editTask(id, inputRef.current.value);
             }
+
             setShowInput(false);
 
         }

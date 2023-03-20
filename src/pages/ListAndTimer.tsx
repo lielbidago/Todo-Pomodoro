@@ -21,14 +21,14 @@ export function ListAndTimer(){
 
     const {todoList, changeStatusTodo,
          addTodo, editTask, 
-        progressValue, deleteTodo, updateTodosList}
+        progressValue, deleteTodo, updateTodosList, completedTasksCount, updateCompletedTasks}
         = TodosListHook()
     
-    // const [lastSessionsRate, setLastSessionsRate] = useState([])
+    const [lastSessionsRate, setLastSessionsRate] = useState([])
 
-    // function getSessionStats(){
+    function getSessionStats(){
         
-    // }
+    }
     
     
 
@@ -72,7 +72,8 @@ export function ListAndTimer(){
                 changeStatusTodo={changeStatusTodo}
                  addTodo={addTodo}
                   editTask={editTask}
-                  deleteTodo={deleteTodo} updateTodosList={updateTodosList}/>
+                  deleteTodo={deleteTodo} updateTodosList={updateTodosList}
+                   completedTasksCount={completedTasksCount} updateCompletedTasks={updateCompletedTasks}/>
             
 
 

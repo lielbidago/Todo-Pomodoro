@@ -8,12 +8,14 @@ interface TodoPomodoListProps{
     addTodo(td:string):void,
     editTask(TaskId:number, newTask:string):void,
     deleteTodo(taskID:number):void
-    updateTodosList():void
+    updateTodosList():void,
+    completedTasksCount: number,
+    updateCompletedTasks():void
 }
 
 export function TodoPomodoList(props: TodoPomodoListProps){
     
-    const {todoList, changeStatusTodo, addTodo, editTask, deleteTodo, updateTodosList} = props
+    const {todoList, changeStatusTodo, addTodo, editTask, deleteTodo, updateTodosList, completedTasksCount, updateCompletedTasks} = props
     const inputRef = useRef(null);
 
     function onTaskEnter(event: React.KeyboardEvent<HTMLDivElement>){
@@ -37,6 +39,12 @@ export function TodoPomodoList(props: TodoPomodoListProps){
         updateTodosList()
     }, [])
 
+    useEffect(()=>{
+        updateCompletedTasks()
+    }, todoList)
+
+
+
     const dotsColor1 = localStorage.getItem('theme1');
 
     // const dotsColor2 = localStorage.getItem('theme2');
@@ -52,6 +60,14 @@ export function TodoPomodoList(props: TodoPomodoListProps){
             <ul className="my-todos">
                 {todoList.map((td:itodoLi)=> (<TodoLI todo={td} key={td.id} changeStatusTodo={changeStatusTodo} editTask={editTask} deleteTodo={deleteTodo}/>))}
             </ul>
+            <div className="todos-footer">
+                <div className="completed"><p>completed: {completedTasksCount}</p></div>
+                <div className="all">all:{todoList.length}</div>
+                <div className="export-to-excel">
+                    <button type="button" className="btn btn-outline-dark">export to excel</button>
+                </div>
+                
+            </div>
         </div>
     )
 }
