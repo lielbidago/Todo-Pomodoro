@@ -26,7 +26,7 @@ export function TodosListHook(){
     const [ todoList, setTodoList ] = useState([{title:'do something', id:Date.now(), completed: false}]);
     const [completedTasksCount, setCompletedTasksCount] = useState(0)
     // const [editListStatus, setEditListStatus] = useState(false)
-
+    // localStorage.setItem('todoList', JSON.stringify(todoList));
 
 
     function updateTodosList(){

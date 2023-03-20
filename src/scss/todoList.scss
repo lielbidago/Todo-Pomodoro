@@ -16,6 +16,7 @@
     // grid-template-columns: 1fr;
     // grid-template-rows: 16% 10% 60% 14% ;
 
+  
 
   .EnterTodo > * {
     display: inline-block;
@@ -34,21 +35,32 @@
     // border-radius: 21px 13px 0px 0px;
     margin-top: 2%;
     width: 95%;
+    text-align: center;
+    padding: 3%;
   }
-}
 
-.todos-footer{
+  .my-todos{
+    height: 59%;
+    overflow-y: scroll; 
+  }
+
+  .todos-footer{
     display: flex;
     flex-direction: row;
     justify-content:space-around;
-    position:sticky;
+
+    position: sticky;
     bottom:0;
-    
+
     background-color: white;
-    border-top:rgb(184, 184, 184) solid 1px;
+    // border-top:rgb(184, 184, 184) solid 1px;
     padding:1%;
 
 }
+
+}
+
+
 
 .TodoPomodoroList::-webkit-scrollbar {
     display: none; /* for Chrome, Safari, and Opera */
@@ -92,15 +104,11 @@
       padding: 0 2%;
       border-radius: 50px;
     }
-
-
-  
 }
   
 
 
 .todos-title{
-    text-align: center;
-    padding: 3%;
+
   
 }
