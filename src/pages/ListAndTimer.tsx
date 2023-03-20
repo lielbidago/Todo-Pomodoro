@@ -17,7 +17,8 @@ export function ListAndTimer(){
         pauseTimer, resumeTimer, changeTimerModes,
         handleCloseSettings, showSettings, handleShowSettings,
         setSessionAndBreakLen,sessionsLoop,
-        setSessionLoopMode, sessionLen, breakLen, setTimerTime, updateSessionAndBreakLen } = PomodoroTimerHook();
+        setSessionLoopMode, sessionLen, breakLen, setTimerTime,
+         updateSessionAndBreakLen, timerBell, toggleSoundOn, soundOn } = PomodoroTimerHook();
 
     const {todoList, changeStatusTodo,
          addTodo, editTask, 
@@ -30,6 +31,7 @@ export function ListAndTimer(){
         
     }
     
+
     
 
     return (
@@ -51,6 +53,9 @@ export function ListAndTimer(){
                 sessionLen={sessionLen} breakLen={breakLen}
                 setTimerTime={setTimerTime}
                 updateSessionAndBreakLen={updateSessionAndBreakLen}
+                timerBell={timerBell}
+                soundOn={soundOn}
+                toggleSoundOn = {toggleSoundOn}
 
              />
 

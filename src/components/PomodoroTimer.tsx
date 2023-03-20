@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import soundbell from "../assets/achievementBell.wav";
 
 
 interface PomodoroTimer{
@@ -16,7 +17,10 @@ interface PomodoroTimer{
     sessionLen:number,
     breakLen:number, 
     setTimerTime():void,
-    updateSessionAndBreakLen():void 
+    updateSessionAndBreakLen():void,
+    timerBell: HTMLAudioElement,
+    toggleSoundOn():void,
+    soundOn:boolean
 }
 
 function formatTimer(timer: number){
@@ -33,10 +37,14 @@ function formatTimer(timer: number){
 export function PomodoroTimer(props:PomodoroTimer){
     
     const {timer, timerMode, startTimer, timerStatus,
-        changeTime, pauseTimer, resumeTimer, changeTimerModes, 
-        sessionsLoop, sessionLen, breakLen, setTimerTime, updateSessionAndBreakLen } = props
+    changeTime, pauseTimer, resumeTimer, changeTimerModes, 
+    sessionsLoop, sessionLen, breakLen,
+     setTimerTime, updateSessionAndBreakLen, timerBell, toggleSoundOn, soundOn }
+    = props
     
-
+    function playBell(){
+        timerBell.play()
+    }
 
     useEffect(()=>{
         updateSessionAndBreakLen()
@@ -49,8 +57,11 @@ export function PomodoroTimer(props:PomodoroTimer){
     useEffect(()=>{
         
         if(timer === 0 && timerStatus){
-
+            if(soundOn){
+                playBell()
+            }
             pauseTimer()
+            
 
             if(timerMode==='Pomodoro Break'){
                 changeTimerModes('Pomodoro Session')
@@ -106,7 +117,15 @@ export function PomodoroTimer(props:PomodoroTimer){
                     <button className='btn btn-outline-light' onClick={resumeTimer}>resume</button>}
                     
                     <button className='btn btn-outline-light' onClick={startTimer}>{timerStatus?'restart':'start'}</button>
-                 </div>
+                </div>
+                <div className="sound">
+                    <p>sound</p>
+                        <label className="switch">
+                            <input type='checkbox' checked={soundOn} onChange={()=>{toggleSoundOn()}}></input>
+                            <span className="slider round"></span>
+                        </label>
+                </div>
+
             </div>
         </div>
     );
