@@ -35,15 +35,14 @@
     margin-top: 2%;
     width: 95%;
   }
-
 }
 
 .todos-footer{
     display: flex;
     flex-direction: row;
     justify-content:space-around;
-    // position:absolute;
-    // bottom:0;
+    position:sticky;
+    bottom:0;
     
     background-color: white;
     border-top:rgb(184, 184, 184) solid 1px;
