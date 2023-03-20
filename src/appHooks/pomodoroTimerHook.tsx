@@ -14,6 +14,18 @@ export function PomodoroTimerHook(){
     const [timerMode, setTimerMode] = useState('Pomodoro Session') // or Pomodoro Break
     const [timerStatus, setTimerStatus] = useState(false)
 
+    function updateSessionAndBreakLen(){
+        console.log('entered updateSessionAndBreakLen()')
+        if(localStorage.getItem('sessionLen')){
+            console.log('entered updateSessionAndBreakLen() > sessionLen')
+
+            setSessionLen(Number(localStorage.getItem('sessionLen')))
+        }
+        if(localStorage.getItem('breakLen')){
+            setBreakLen(Number(localStorage.getItem('breakLen')))
+        }
+
+    }
 
     function setTimerTime(){
         if(timerMode === 'Pomodoro Session'){
@@ -35,13 +47,20 @@ export function PomodoroTimerHook(){
 
     function setSessionAndBreakLen(sessionLenStr:string, breakLenStr:string){
         
-        setSessionLen(Number(sessionLenStr)*60);
-        setBreakLen(Number(breakLenStr)*60);
+        const sessionLen = Number(sessionLenStr)*60;
+        const breakLen = Number(breakLenStr)*60;
+        
+        setSessionLen(sessionLen);
+        localStorage.setItem('sessionLen', sessionLen.toString());
+        setBreakLen(breakLen);
+        localStorage.setItem('breakLen', breakLen.toString());
 
         if(timerMode === 'Pomodoro Session'){
-            setTimer(Number(sessionLenStr)*60)
+            setTimer(sessionLen)
+            
         }else if (timerMode === 'Pomodoro Break'){
-            setTimer(Number(breakLenStr)*60)
+            setTimer(breakLen)
+            
         }
 
     }
@@ -87,7 +106,8 @@ export function PomodoroTimerHook(){
         setSessionAndBreakLen,
         sessionsLoop,
         setTimerTime,
-        setSessionLoopMode
+        setSessionLoopMode,
+        updateSessionAndBreakLen
     }
 
 }

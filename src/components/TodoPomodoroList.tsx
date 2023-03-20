@@ -41,7 +41,7 @@ export function TodoPomodoList(props: TodoPomodoListProps){
 
     useEffect(()=>{
         updateCompletedTasks()
-    }, todoList)
+    }, [todoList])
 
 
 

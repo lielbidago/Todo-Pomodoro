@@ -6,7 +6,7 @@ import {TodosListHook} from '../appHooks/todoListHook'
 import { Settings } from '../components/Settings';
 import { ProgressBarP } from '../components/prograssBar';
 import { CompletionForcast } from '../components/CompletionForcast';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 
@@ -17,7 +17,7 @@ export function ListAndTimer(){
         pauseTimer, resumeTimer, changeTimerModes,
         handleCloseSettings, showSettings, handleShowSettings,
         setSessionAndBreakLen,sessionsLoop,
-        setSessionLoopMode, sessionLen, breakLen, setTimerTime } = PomodoroTimerHook();
+        setSessionLoopMode, sessionLen, breakLen, setTimerTime, updateSessionAndBreakLen } = PomodoroTimerHook();
 
     const {todoList, changeStatusTodo,
          addTodo, editTask, 
@@ -50,6 +50,7 @@ export function ListAndTimer(){
                sessionsLoop={sessionsLoop}
                 sessionLen={sessionLen} breakLen={breakLen}
                 setTimerTime={setTimerTime}
+                updateSessionAndBreakLen={updateSessionAndBreakLen}
 
              />
 
@@ -73,7 +74,8 @@ export function ListAndTimer(){
                  addTodo={addTodo}
                   editTask={editTask}
                   deleteTodo={deleteTodo} updateTodosList={updateTodosList}
-                   completedTasksCount={completedTasksCount} updateCompletedTasks={updateCompletedTasks}/>
+                   completedTasksCount={completedTasksCount}
+                    updateCompletedTasks={updateCompletedTasks}/>
             
 
 

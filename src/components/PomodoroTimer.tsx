@@ -15,7 +15,8 @@ interface PomodoroTimer{
     sessionsLoop:boolean,
     sessionLen:number,
     breakLen:number, 
-    setTimerTime():void   
+    setTimerTime():void,
+    updateSessionAndBreakLen():void 
 }
 
 function formatTimer(timer: number){
@@ -33,7 +34,17 @@ export function PomodoroTimer(props:PomodoroTimer){
     
     const {timer, timerMode, startTimer, timerStatus,
         changeTime, pauseTimer, resumeTimer, changeTimerModes, 
-        sessionsLoop, sessionLen, breakLen, setTimerTime } = props
+        sessionsLoop, sessionLen, breakLen, setTimerTime, updateSessionAndBreakLen } = props
+    
+
+
+    useEffect(()=>{
+        updateSessionAndBreakLen()
+    }, []);
+
+    useEffect(()=>{
+        setTimerTime()
+    }, [sessionLen, breakLen]);
 
     useEffect(()=>{
         
@@ -58,13 +69,15 @@ export function PomodoroTimer(props:PomodoroTimer){
         if(timerStatus){
             const interval = setInterval(() => {
                 changeTime()
-            }, 1000);
+        }, 1000);
 
             
             return () => {clearInterval(interval)};
         }
         
-    }, [timer, timerStatus, sessionLen, breakLen ])
+    }, [timer, timerStatus])
+
+
 
     useEffect(()=>{
         setTimerTime()
