@@ -12,7 +12,7 @@
 }
 
 .timer{
-    padding: 5%;
+    padding: 10%;
     height: 80%;
     margin: 0% 5% 3% 5%;
     min-width: min-content;
@@ -49,6 +49,12 @@
     display: flex;
     justify-content: flex-end;
     justify-self: end;
+    margin-top: 15%;
+    margin-left: 20%;
+
+    p{
+        display: inline-block;
+    }
     // position: relative;
     // bottom: 30px;
     // right: 0;
