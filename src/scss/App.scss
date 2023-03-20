@@ -83,39 +83,7 @@ footer{
 
 }
 
-.TodoPomodoroList{
-    grid-area: TodoPomodoroList;
 
-    background: rgb(255, 255, 255);      
-    justify-self: stretch;
-    align-self: stretch;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.091);
-    text-align: center;
-    -ms-overflow-style: none; /* for Internet Explorer, Edge */
-    scrollbar-width: none; /* for Firefox */
-    overflow-y: scroll; 
-    border-radius: 0px 0px 18px 22px;
-
-  .EnterTodo > * {
-    display: inline-block;
-    padding:1%;
-    margin:0 1%;
-    box-shadow:0 0 10px 2px rgba(0, 0, 0, 0.166);
-    border: 0;
-
-  }
-  .EnterTodo{
-    margin-bottom: 2%;
-  }
-  .todos-title{
-    border-top: 15px dotted #9393938d;
-    margin-left: 2%;
-    // border-radius: 21px 13px 0px 0px;
-    margin-top: 2%;
-    width: 95%;
-  }
-
-}
 
 .fa{
   color: white;

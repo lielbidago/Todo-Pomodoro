@@ -63,15 +63,14 @@ export function PomodoroTimer(props:PomodoroTimer){
             
             return () => {clearInterval(interval)};
         }
-
-        
-
         
     }, [timer, timerStatus, sessionLen, breakLen ])
 
     useEffect(()=>{
         setTimerTime()
     }, [timerMode])
+
+
 
 
     function handleModeChange(event: React.MouseEvent<HTMLElement>){

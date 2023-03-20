@@ -24,6 +24,7 @@ export function TodosListHook(){
     // {title:'do something 12', id:Date.now()+10, completed: false}]
     
     const [ todoList, setTodoList ] = useState([{title:'do something', id:Date.now(), completed: false}]);
+    const [completedTasksCount, setCompletedTasksCount] = useState(0)
     // const [editListStatus, setEditListStatus] = useState(false)
 
 
@@ -71,10 +72,12 @@ export function TodosListHook(){
     }
 
     function progressValue(){
-        
         let completed = todoList.filter((td)=>td.completed).length;
         return Math.round((completed/todoList.length)*100)
+    }
 
+    function updateCompletedTasks(){
+        setCompletedTasksCount(todoList.filter((td) => (td.completed)).length) 
     }
 
 
@@ -88,7 +91,9 @@ export function TodosListHook(){
         // changeStatusTodosEdit,
         editTask,
         progressValue,
-        updateTodosList
+        updateTodosList,
+        completedTasksCount,
+        updateCompletedTasks
     }
 
 }
