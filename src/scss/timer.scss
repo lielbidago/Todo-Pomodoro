@@ -1,0 +1,30 @@
+.pomodoro-timer{
+    grid-area: pomodoro-timer;
+    // min-width: min-content;
+    // min-height: min-content;
+    display: flex;
+    flex-direction: column;
+    
+    button{
+      margin: 1%;
+    }
+      
+}
+
+.timer{
+    padding: 14%;
+    margin: 0% 5% 3% 5%;
+    min-width: min-content;
+    min-height: min-content;
+    max-width: 80%;
+
+    text-align: center;
+    background: rgb(163, 163, 163);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.308) 0%, rgba(1, 0, 0, 0.148) 100%);
+    border-radius: 5%;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+
+    .timer-title:hover{
+        font-weight: bold;
+    }
+}
