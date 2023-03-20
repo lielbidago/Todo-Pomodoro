@@ -2,8 +2,8 @@ import { useState } from "react";
 
 
 export function AppHooks(){
-    const [customeTheme1, setCustomeTheme1] = useState('');
-    const [customeTheme2, setCustomeTheme2] = useState('')
+    const [customeTheme1, setCustomeTheme1] = useState('#7394da');
+    const [customeTheme2, setCustomeTheme2] = useState('#bfebe1');
     
     function getCustomeThemes(theme1: string, theme2: string,){
         setCustomeTheme1(theme1);
