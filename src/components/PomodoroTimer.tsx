@@ -110,16 +110,18 @@ export function PomodoroTimer(props:PomodoroTimer){
     return (
         <div className="pomodoro-timer">
             <div className="timer">
-                <h5 onDoubleClick={handleModeChange} className="timer-title">{timerMode}</h5>
-                <h2 className="time">{formatTimer(timer)}</h2>
-                <div className="timerButtons">
-                    {timerStatus? <button className='btn btn-outline-light' onClick={pauseTimer}>pause</button>: 
-                    <button className='btn btn-outline-light' onClick={resumeTimer}>resume</button>}
-                    
-                    <button className='btn btn-outline-light' onClick={startTimer}>{timerStatus?'restart':'start'}</button>
+                <div className="timer-a">
+                    <h5 onDoubleClick={handleModeChange} className="timer-title">{timerMode}</h5>
+                    <h2 className="time">{formatTimer(timer)}</h2>
+                    <div className="timerButtons">
+                        {timerStatus? <button className='btn btn-outline-light' onClick={pauseTimer}>pause</button>: 
+                        <button className='btn btn-outline-light' onClick={resumeTimer}>resume</button>}
+                        
+                        <button className='btn btn-outline-light' onClick={startTimer}>{timerStatus?'restart':'start'}</button>
+                    </div>
                 </div>
                 <div className="sound">
-                    <p>sound</p>
+                sound
                         <label className="switch">
                             <input type='checkbox' checked={soundOn} onChange={()=>{toggleSoundOn()}}></input>
                             <span className="slider round"></span>

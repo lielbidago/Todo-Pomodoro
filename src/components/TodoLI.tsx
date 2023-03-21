@@ -36,7 +36,7 @@ export function TodoLI(props: TodoLIProps){
                 <label onDoubleClick={()=>{setShowInput(true)}}>{title}</label> 
                 <button className="deleteTodo" onClick={()=>deleteTodo(id)}>&times;</button>
             </div>
-            : <input type='text' placeholder={title} ref={inputRef} autoFocus onKeyUp={onTaskEnter}></input>}
+            : <input type='text' defaultValue={title} ref={inputRef} autoFocus onKeyUp={onTaskEnter}></input>}
         </li>
     )
 }

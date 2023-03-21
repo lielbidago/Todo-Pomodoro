@@ -61,7 +61,7 @@ export function TodoPomodoList(props: TodoPomodoListProps){
                 {todoList.map((td:itodoLi)=> (<TodoLI todo={td} key={td.id} changeStatusTodo={changeStatusTodo} editTask={editTask} deleteTodo={deleteTodo}/>))}
             </ul>
             <div className="todos-footer">
-                <div className="completed"><p>completed: {completedTasksCount}</p></div>
+                <div className="completed">completed: {completedTasksCount}</div>
                 <div className="all">all:{todoList.length}</div>
                 <div className="export-to-excel">
                     <button type="button" className="btn btn-outline-dark">export to excel</button>

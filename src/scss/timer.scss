@@ -12,12 +12,13 @@
 }
 
 .timer{
-    padding: 10%;
-    height: 80%;
+    padding: 1% 0;
+    // height: 100%;
+    width: 80%;
     margin: 0% 5% 3% 5%;
     min-width: min-content;
     min-height: min-content;
-    max-width: 80%;
+    max-width: 100%;
 
     text-align: center;
     background: rgb(163, 163, 163);
@@ -25,45 +26,29 @@
     border-radius: 5%;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 
-    .timer-title:hover{
+    .timer-a{
+      padding: 15% 10%;
+      .timer-title:hover{
         font-weight: bold;
+      }
     }
+
 }
-
-// .sound{
-//     content:'🕨';
-//     padding:1%;
-
-//     border: solid 1px black;
-// }
-
-// .sound
-// input:checked+label::after{
-//     content:'🕪';
-//     background-color: aqua;
-// }
-
-/* The switch - the box around the slider */
 
 .sound{
-    display: flex;
-    justify-content: flex-end;
-    justify-self: end;
-    margin-top: 15%;
-    margin-left: 20%;
+    text-align: end;
+    margin-right: 4%;
+    margin-bottom: 2%;
+    font-weight: bold;
 
-    p{
-        display: inline-block;
-    }
-    // position: relative;
-    // bottom: 30px;
-    // right: 0;
 }
+
 .switch {
-    position: relative;
-    display: inline-block;
-    width: 30px;
-    height: 17px;
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 17px;
+  margin-left: 1%;
   }
   
   /* Hide default HTML checkbox */
@@ -93,13 +78,13 @@
     width: 13px;
     left: 0.5px;
     bottom: 0.5px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.765);
     -webkit-transition: .4s;
     transition: .4s;
   }
   
   input:checked + .slider {
-    background-color: #000000;
+    background-color: #0000006b;
   }
   
   input:focus + .slider {
