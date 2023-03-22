@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 export interface itodoLi{
-    title: string,
+    task: string,
     id: number
     completed: boolean
 }
@@ -23,7 +23,7 @@ export function TodosListHook(){
     // {title:'do something 11', id:Date.now()+9, completed: false},
     // {title:'do something 12', id:Date.now()+10, completed: false}]
     
-    const [ todoList, setTodoList ] = useState([{title:'do something', id:Date.now(), completed: false}]);
+    const [ todoList, setTodoList ] = useState([{task:'do something', id:Date.now(), completed: false}]);
     const [completedTasksCount, setCompletedTasksCount] = useState(0);
     const [todosTitle, setTodosTitle] = useState('My Todos');
 
@@ -55,7 +55,7 @@ export function TodosListHook(){
     function addTodo(task: string){
         const newTodoList: itodoLi[] = todoList.map((td)=>td)
         newTodoList.push({
-            title: task,
+            task: task,
             id: Date.now(),
             completed: false
         })
@@ -78,7 +78,7 @@ export function TodosListHook(){
 
 
     function editTask(TaskId:number, newTask:string){
-        const newTodoList: itodoLi[] = todoList.map((td) => (td.id === TaskId ? {...td, completed:false, title:newTask}: td ))
+        const newTodoList: itodoLi[] = todoList.map((td) => (td.id === TaskId ? {...td, completed:false, task:newTask}: td ))
         setTodoList(newTodoList)
         localStorage.setItem('todoList', JSON.stringify(newTodoList));
     }
