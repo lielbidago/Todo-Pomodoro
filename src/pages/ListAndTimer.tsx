@@ -22,7 +22,9 @@ export function ListAndTimer(){
 
     const {todoList, changeStatusTodo,
          addTodo, editTask, 
-        progressValue, deleteTodo, updateTodosList, completedTasksCount, updateCompletedTasks}
+        progressValue, deleteTodo,todosTitle,
+        changeTodosTitle, updateTodosList
+        , completedTasksCount, updateCompletedTasks, updateTodosTitle}
         = TodosListHook()
     
     const [lastSessionsRate, setLastSessionsRate] = useState([])
@@ -60,15 +62,6 @@ export function ListAndTimer(){
              />
 
             
-
-            {/* {editListStatus?
-                <TodosEditModal todoListAPI={{addTodo, changeStatusTodosEdit, todoList, changeStatusTodo, editTask}} />:
-                <TodoPomodoList todoList={todoList} 
-                changeStatusTodo={changeStatusTodo}
-                 addTodo={addTodo}
-                  editTask={editTask}
-                  deleteTodo={deleteTodo}/>} */}
-            
             <div className="updates">
                 <ProgressBarP progressValue={progressValue()}/>
                 <CompletionForcast/>
@@ -80,7 +73,10 @@ export function ListAndTimer(){
                   editTask={editTask}
                   deleteTodo={deleteTodo} updateTodosList={updateTodosList}
                    completedTasksCount={completedTasksCount}
-                    updateCompletedTasks={updateCompletedTasks}/>
+                    updateCompletedTasks={updateCompletedTasks}
+                    todosTitle={todosTitle} changeTodosTitle={changeTodosTitle}
+                    updateTodosTitle={updateTodosTitle}
+                    />
             
 
 

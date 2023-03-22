@@ -24,15 +24,31 @@ export function TodosListHook(){
     // {title:'do something 12', id:Date.now()+10, completed: false}]
     
     const [ todoList, setTodoList ] = useState([{title:'do something', id:Date.now(), completed: false}]);
-    const [completedTasksCount, setCompletedTasksCount] = useState(0)
-    // const [editListStatus, setEditListStatus] = useState(false)
-    // localStorage.setItem('todoList', JSON.stringify(todoList));
+    const [completedTasksCount, setCompletedTasksCount] = useState(0);
+    const [todosTitle, setTodosTitle] = useState('My Todos');
+
+    
 
 
     function updateTodosList(){
-        if(localStorage.getItem('todoList')){
-            setTodoList(JSON.parse(localStorage.getItem('todoList')))
+        const localStoragelist = localStorage.getItem('todoList')
+        if(localStoragelist){
+            setTodoList(JSON.parse(localStoragelist))
         }
+    }
+
+    function updateTodosTitle(){
+        const localStorageTitle = localStorage.getItem('todosTitle')
+        if(localStorageTitle){
+            setTodosTitle(localStorageTitle)
+        }
+    }
+
+    
+
+    function changeTodosTitle(newName:string){
+        setTodosTitle(newName);
+        localStorage.setItem('todosTitle', newName)
     }
 
 
@@ -56,14 +72,10 @@ export function TodosListHook(){
 
     function changeStatusTodo(taskID: number){
         const newTodoList: itodoLi[] = todoList.map((td) => (td.id === taskID ? {...td, completed:!td.completed}: td ))
-        // console.log(`changed status of todo ${taskID}`)
         setTodoList(newTodoList);
         localStorage.setItem('todoList', JSON.stringify(newTodoList));
     }
 
-    // function changeStatusTodosEdit(status: boolean){
-    //     setEditListStatus(status)
-    // }
 
     function editTask(TaskId:number, newTask:string){
         const newTodoList: itodoLi[] = todoList.map((td) => (td.id === TaskId ? {...td, completed:false, title:newTask}: td ))
@@ -87,13 +99,14 @@ export function TodosListHook(){
         addTodo,
         deleteTodo,
         changeStatusTodo,
-        // editListStatus,
-        // changeStatusTodosEdit,
         editTask,
         progressValue,
         updateTodosList,
         completedTasksCount,
-        updateCompletedTasks
+        updateCompletedTasks,
+        todosTitle,
+        changeTodosTitle,
+        updateTodosTitle
     }
 
 }
