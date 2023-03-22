@@ -93,7 +93,7 @@ export function TodoPomodoList(props: TodoPomodoListProps){
                 <h4 onDoubleClick={()=>{setTitleChange(true)}}>{todosTitle}</h4>}
                 </div>
             <div className="EnterTodo">
-                <input ref={inputRef} autoFocus placeholder={'enter a task here!'} onKeyUp={onTaskEnter}/>
+                <input ref={inputRef} autoFocus placeholder={'Enter a task here...'} onKeyUp={onTaskEnter}/>
                 <button type="button" className="btn btn-outline-dark" onClick={onEnterTask}>add task</button>
             </div>
             <ul className="my-todos">
