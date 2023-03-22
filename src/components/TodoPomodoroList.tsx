@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { itodoLi } from "../appHooks/todoListHook"
 import { TodoLI } from "./TodoLI"
 
@@ -11,12 +11,26 @@ interface TodoPomodoListProps{
     updateTodosList():void,
     completedTasksCount: number,
     updateCompletedTasks():void
+    todosTitle:string,
+    changeTodosTitle(newName:string):void,
+    updateTodosTitle():void
+
 }
 
 export function TodoPomodoList(props: TodoPomodoListProps){
     
-    const {todoList, changeStatusTodo, addTodo, editTask, deleteTodo, updateTodosList, completedTasksCount, updateCompletedTasks} = props
+    const {todoList, changeStatusTodo, addTodo, editTask,
+         deleteTodo, updateTodosList, completedTasksCount, updateCompletedTasks,
+         changeTodosTitle, todosTitle, updateTodosTitle} = props
+
     const inputRef = useRef(null);
+
+    const [titleChange, setTitleChange]=useState(false)
+    const titleRef = useRef(null);
+
+
+
+    const dotsColor1 = localStorage.getItem('theme1');
 
     function onTaskEnter(event: React.KeyboardEvent<HTMLDivElement>){
         if(event.key === 'Enter'){
@@ -35,8 +49,19 @@ export function TodoPomodoList(props: TodoPomodoListProps){
         }
     }
 
+    function handleTitleChange(event: React.KeyboardEvent<HTMLDivElement>){
+
+        if(event.key === 'Enter'){
+            if(titleRef.current.value!=='' && titleRef.current.value!==' '){
+                changeTodosTitle(titleRef.current.value);
+                setTitleChange(false);
+            }
+        }
+    }
+
     useEffect(()=>{
         updateTodosList()
+        updateTodosTitle()
     }, [])
 
     useEffect(()=>{
@@ -45,14 +70,16 @@ export function TodoPomodoList(props: TodoPomodoListProps){
 
 
 
-    const dotsColor1 = localStorage.getItem('theme1');
 
     // const dotsColor2 = localStorage.getItem('theme2');
     // const gradient = {borderImage: `linear-gradient(90deg, ${dotsColor1}, ${dotsColor2}) 1`}
 
     return (
         <div className="TodoPomodoroList">
-            <div className="todos-title" style={{borderTopColor: `${dotsColor1}`}}><h4 >My Todos</h4></div>
+            <div className="todos-title" style={{borderTopColor: `${dotsColor1}`}}>
+                {titleChange?<input type='text' ref={titleRef} onKeyUp={handleTitleChange}></input>:
+                <h4 onDoubleClick={()=>{setTitleChange(true)}}>{todosTitle}</h4>}
+                </div>
             <div className="EnterTodo">
                 <input ref={inputRef} autoFocus placeholder={'enter a task here!'} onKeyUp={onTaskEnter}/>
                 <button type="button" className="btn btn-outline-dark" onClick={onEnterTask}>add task</button>
