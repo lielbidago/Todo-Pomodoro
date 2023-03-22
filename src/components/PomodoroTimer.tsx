@@ -121,7 +121,7 @@ export function PomodoroTimer(props:PomodoroTimer){
                     </div>
                 </div>
                 <div className="sound">
-                sound
+                🕪
                         <label className="switch">
                             <input type='checkbox' checked={soundOn} onChange={()=>{toggleSoundOn()}}></input>
                             <span className="slider round"></span>
