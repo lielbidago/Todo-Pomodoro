@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { itodoLi } from "../appHooks/todoListHook"
 import { TodoLI } from "./TodoLI"
+import * as XLSX from 'xlsx';
 
 interface TodoPomodoListProps{
     todoList: itodoLi[]
@@ -25,11 +26,8 @@ export function TodoPomodoList(props: TodoPomodoListProps){
 
     const inputRef = useRef(null);
 
-    const [titleChange, setTitleChange]=useState(false)
+    const [titleChange, setTitleChange]=useState(false);
     const titleRef = useRef(null);
-
-
-
     const dotsColor1 = localStorage.getItem('theme1');
 
     function onTaskEnter(event: React.KeyboardEvent<HTMLDivElement>){
@@ -38,7 +36,6 @@ export function TodoPomodoList(props: TodoPomodoListProps){
                 addTodo(inputRef.current.value);
                 inputRef.current.value = "";
             }
-
         }
     }
 
@@ -50,7 +47,6 @@ export function TodoPomodoList(props: TodoPomodoListProps){
     }
 
     function handleTitleChange(event: React.KeyboardEvent<HTMLDivElement>){
-
         if(event.key === 'Enter'){
             if(titleRef.current.value!=='' && titleRef.current.value!==' '){
                 changeTodosTitle(titleRef.current.value);
@@ -58,6 +54,22 @@ export function TodoPomodoList(props: TodoPomodoListProps){
             }
         }
     }
+
+    function exportTodoListFile(){
+
+        const workbook = XLSX.utils.book_new()
+
+        const exportedTodos = todoList.map((td)=>{
+            const {task, completed} = td;
+            return {task, completed};
+        })
+        const worksheet = XLSX.utils.json_to_sheet(exportedTodos)
+
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'TodoList')
+
+        XLSX.writeFile(workbook, 'myTodos.xlsx')
+      
+    };
 
     useEffect(()=>{
         updateTodosList()
@@ -91,7 +103,7 @@ export function TodoPomodoList(props: TodoPomodoListProps){
                 <div className="completed">completed: {completedTasksCount}</div>
                 <div className="all">all:{todoList.length}</div>
                 <div className="export-to-excel">
-                    <button type="button" className="btn btn-outline-dark">export to excel</button>
+                    <button type="button" className="btn btn-outline-dark" onClick={()=>{exportTodoListFile()}}>export to excel</button>
                 </div>
                 
             </div>
