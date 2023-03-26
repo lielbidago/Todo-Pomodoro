@@ -27,14 +27,28 @@ export function ListAndTimer(){
         , completedTasksCount, updateCompletedTasks, updateTodosTitle}
         = TodosListHook()
     
-    const [lastSessionsRate, setLastSessionsRate] = useState([])
 
-    function getSessionStats(){
-        
+    const [completedTasksCounter, setCompletedTasksCounter] = useState(0)
+    const [overallTaskRate, setOverallTaskRate] = useState(0)
+    const [sessionNum, setSessionNum] = useState(0)
+    
+
+    function setLastSessionTaskCount(){
+        setCompletedTasksCounter(completedTasksCount)
+
     }
-    
 
-    
+    function calculateCurSessionRate(){
+        const completedTasksCurRate = (completedTasksCount - completedTasksCounter)/sessionLen
+        setOverallTaskRate((overallTaskRate + completedTasksCurRate)/(sessionNum+1))
+        setSessionNum(sessionNum + 1)
+
+    }
+
+
+    function CompletionForcastEval(){
+        return Math.round((todoList.length - completedTasksCount)/(overallTaskRate*sessionLen))
+    }
 
     return (
         <div className="ListAndTimer" >
@@ -58,13 +72,15 @@ export function ListAndTimer(){
                 timerBell={timerBell}
                 soundOn={soundOn}
                 toggleSoundOn = {toggleSoundOn}
+                setLastSessionTaskCount={setLastSessionTaskCount}
+                calculateCurSessionRate={calculateCurSessionRate}
 
              />
 
             
             <div className="updates">
                 <ProgressBarP progressValue={progressValue()}/>
-                <CompletionForcast/>
+                <CompletionForcast CompletionForcastEval={CompletionForcastEval}/>
             </div>
 
             <TodoPomodoList todoList={todoList} 

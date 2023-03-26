@@ -96,12 +96,14 @@ export function TodoPomodoList(props: TodoPomodoListProps){
                 <input ref={inputRef} autoFocus placeholder={'Enter a task here...'} onKeyUp={onTaskEnter}/>
                 <button type="button" className="btn btn-outline-dark" onClick={onEnterTask}>add task</button>
             </div>
-            <ul className="my-todos">
+            <div className="my-todos" >
+            <ul >
                 {todoList.map((td:itodoLi)=> (<TodoLI todo={td} key={td.id} changeStatusTodo={changeStatusTodo} editTask={editTask} deleteTodo={deleteTodo}/>))}
-            </ul>
+            </ul>                
+            </div>
             <div className="todos-footer">
                 <div className="completed">completed: {completedTasksCount}</div>
-                <div className="all">all:{todoList.length}</div>
+                <div className="all">all: {todoList.length}</div>
                 <div className="export-to-excel">
                     <button type="button" className="btn btn-outline-dark" onClick={()=>{exportTodoListFile()}}>export to excel</button>
                 </div>
