@@ -20,7 +20,9 @@ interface PomodoroTimer{
     updateSessionAndBreakLen():void,
     timerBell: HTMLAudioElement,
     toggleSoundOn():void,
-    soundOn:boolean
+    soundOn:boolean, 
+    setLastSessionTaskCount():void,
+    calculateCurSessionRate():void
 }
 
 function formatTimer(timer: number){
@@ -39,7 +41,8 @@ export function PomodoroTimer(props:PomodoroTimer){
     const {timer, timerMode, startTimer, timerStatus,
     changeTime, pauseTimer, resumeTimer, changeTimerModes, 
     sessionsLoop, sessionLen, breakLen,
-     setTimerTime, updateSessionAndBreakLen, timerBell, toggleSoundOn, soundOn }
+     setTimerTime, updateSessionAndBreakLen, timerBell, toggleSoundOn,
+      soundOn, setLastSessionTaskCount, calculateCurSessionRate }
     = props
     
     function playBell(){
@@ -57,9 +60,11 @@ export function PomodoroTimer(props:PomodoroTimer){
     useEffect(()=>{
         
         if(timer === 0 && timerStatus){
+
             if(soundOn){
                 playBell()
             }
+            calculateCurSessionRate()
             pauseTimer()
             
 
@@ -73,7 +78,6 @@ export function PomodoroTimer(props:PomodoroTimer){
             if(sessionsLoop){
                 startTimer();
             }
-
 
         }
 
@@ -107,6 +111,11 @@ export function PomodoroTimer(props:PomodoroTimer){
         }
     }
 
+    function handleStartTimer(event: React.MouseEvent<HTMLElement>){
+        setLastSessionTaskCount()
+        startTimer()
+    }
+
     return (
         <div className="pomodoro-timer">
             <div className="timer">
@@ -117,11 +126,11 @@ export function PomodoroTimer(props:PomodoroTimer){
                         {timerStatus? <button className='btn btn-outline-light' onClick={pauseTimer}>pause</button>: 
                         <button className='btn btn-outline-light' onClick={resumeTimer}>resume</button>}
                         
-                        <button className='btn btn-outline-light' onClick={startTimer}>{timerStatus?'restart':'start'}</button>
+                        <button className='btn btn-outline-light' onClick={handleStartTimer}>{timerStatus?'restart':'start'}</button>
                     </div>
                 </div>
                 <div className="sound">
-                🕪
+                🕭
                         <label className="switch">
                             <input type='checkbox' checked={soundOn} onChange={()=>{toggleSoundOn()}}></input>
                             <span className="slider round"></span>
