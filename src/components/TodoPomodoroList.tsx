@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { itodoLi } from "../appHooks/todoListHook"
 import { TodoLI } from "./TodoLI"
 import * as XLSX from 'xlsx';
@@ -14,7 +14,8 @@ interface TodoPomodoListProps{
     updateCompletedTasks():void
     todosTitle:string,
     changeTodosTitle(newName:string):void,
-    updateTodosTitle():void
+    updateTodosTitle():void,
+    handleItemOrderChange(fromIndex:number, toIndex:number):void
 
 }
 
@@ -22,9 +23,10 @@ export function TodoPomodoList(props: TodoPomodoListProps){
     
     const {todoList, changeStatusTodo, addTodo, editTask,
          deleteTodo, updateTodosList, completedTasksCount, updateCompletedTasks,
-         changeTodosTitle, todosTitle, updateTodosTitle} = props
+         changeTodosTitle, todosTitle, updateTodosTitle, handleItemOrderChange} = props
 
     const inputRef = useRef(null);
+
 
     const [titleChange, setTitleChange]=useState(false);
     const titleRef = useRef(null);
@@ -71,6 +73,25 @@ export function TodoPomodoList(props: TodoPomodoListProps){
       
     };
 
+    const draggedItemRef = useRef(null);
+    const draggedOverItemRef = useRef(null);
+
+    function onDragStart(e:React.DragEvent<HTMLDivElement>, index:number){
+        draggedItemRef.current = index
+    }
+
+    function onDragEnter(e:React.DragEvent<HTMLDivElement>, index:number){
+        draggedOverItemRef.current = index
+    }
+
+
+    function onDragEnd(e:React.DragEvent<HTMLDivElement>, index:number){
+        handleItemOrderChange(draggedItemRef.current,draggedOverItemRef.current)
+        draggedItemRef.current = null
+        draggedOverItemRef.current = null
+
+    }
+
     useEffect(()=>{
         updateTodosList()
         updateTodosTitle()
@@ -80,7 +101,7 @@ export function TodoPomodoList(props: TodoPomodoListProps){
         updateCompletedTasks()
     }, [todoList])
 
-
+    
 
 
     // const dotsColor2 = localStorage.getItem('theme2');
@@ -98,7 +119,10 @@ export function TodoPomodoList(props: TodoPomodoListProps){
             </div>
             <div className="my-todos" >
             <ul >
-                {todoList.map((td:itodoLi)=> (<TodoLI todo={td} key={td.id} changeStatusTodo={changeStatusTodo} editTask={editTask} deleteTodo={deleteTodo}/>))}
+                {todoList.map((td:itodoLi, index)=> 
+                (<TodoLI todo={td} key={index} changeStatusTodo={changeStatusTodo}
+                  editTask={editTask} deleteTodo={deleteTodo} 
+                  onDragStart={(e)=>onDragStart(e,index)} onDragEnter={(e)=>onDragEnter(e,index)} onDragEnd={(e)=>onDragEnd(e,index)}/>))}
             </ul>                
             </div>
             <div className="todos-footer">

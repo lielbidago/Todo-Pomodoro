@@ -92,6 +92,13 @@ export function TodosListHook(){
         setCompletedTasksCount(todoList.filter((td) => (td.completed)).length) 
     }
 
+    function handleItemOrderChange(fromIndex:number, toIndex:number){
+        const newTodoList = [...todoList]
+        const draggedItem = newTodoList.splice(fromIndex, 1)[0] //delete draggedItem from list and save it
+        newTodoList.splice(toIndex, 0, draggedItem) // insert draggedItem in the index: toIndex
+        setTodoList(newTodoList)
+    }
+
 
     return {
         todoList,
@@ -106,7 +113,8 @@ export function TodosListHook(){
         updateCompletedTasks,
         todosTitle,
         changeTodosTitle,
-        updateTodosTitle
+        updateTodosTitle,
+        handleItemOrderChange
     }
 
 }
