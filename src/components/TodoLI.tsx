@@ -5,11 +5,14 @@ interface TodoLIProps{
     changeStatusTodo(TaskId:number),
     todo: {id: number, completed: boolean, task:string},
     editTask(TaskId:number, newTask:string):void,
-    deleteTodo(taskID:number):void
+    deleteTodo(taskID:number):void,
+    onDragStart,
+    onDragEnter
+    onDragEnd
 }
 
 export function TodoLI(props: TodoLIProps){
-    const {changeStatusTodo, editTask, deleteTodo} = props
+    const {changeStatusTodo, editTask, deleteTodo, onDragEnter, onDragStart, onDragEnd} = props
     const {id, completed, task} = props.todo
 
     const [showInput, setShowInput] = useState(false)
@@ -29,7 +32,8 @@ export function TodoLI(props: TodoLIProps){
     }
 
     return (
-        <li className="Todo-li" draggable id={'li-'+ id.toString()}>
+        <li className="Todo-li" draggable onDragStart={onDragStart} onDragEnter={onDragEnter}
+         onDragEnd={onDragEnd} onDragOver={(e)=> e.preventDefault()} id={'li-'+ id.toString()}>
             {!showInput? 
             <div className='checkbox-wrapper-11'>
                 <input className="toggle" type="checkbox" checked={completed} onChange = {()=>changeStatusTodo(id)}></input>

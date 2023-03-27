@@ -24,7 +24,7 @@ export function ListAndTimer(){
          addTodo, editTask, 
         progressValue, deleteTodo,todosTitle,
         changeTodosTitle, updateTodosList
-        , completedTasksCount, updateCompletedTasks, updateTodosTitle}
+        , completedTasksCount, updateCompletedTasks, updateTodosTitle, handleItemOrderChange}
         = TodosListHook()
     
 
@@ -103,8 +103,8 @@ export function ListAndTimer(){
                     updateCompletedTasks={updateCompletedTasks}
                     todosTitle={todosTitle} changeTodosTitle={changeTodosTitle}
                     updateTodosTitle={updateTodosTitle}
-                    />
-            
+                    handleItemOrderChange = {handleItemOrderChange}
+            />
 
 
             <Settings setSessionLoopMode={setSessionLoopMode} showSettings={showSettings} handleCloseSettings={handleCloseSettings} setSessionAndBreakLen={setSessionAndBreakLen}/>
