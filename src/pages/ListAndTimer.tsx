@@ -39,15 +39,29 @@ export function ListAndTimer(){
     }
 
     function calculateCurSessionRate(){
-        const completedTasksCurRate = (completedTasksCount - completedTasksCounter)/sessionLen
-        setOverallTaskRate((overallTaskRate + completedTasksCurRate)/(sessionNum+1))
+        // const completedTasksCurRate = (completedTasksCount - completedTasksCounter)/sessionLen
+        // setOverallTaskRate((overallTaskRate + completedTasksCurRate)/(sessionNum+1))
+        // setSessionNum(sessionNum + 1)
+
+        const completedTasks = completedTasksCount - completedTasksCounter
+        const cur_sum = overallTaskRate * sessionNum
+        const new_sum = cur_sum + completedTasks
+
+        setOverallTaskRate(new_sum/(sessionNum+1))
         setSessionNum(sessionNum + 1)
 
     }
 
 
     function CompletionForcastEval(){
-        return Math.round((todoList.length - completedTasksCount)/(overallTaskRate*sessionLen))
+        const forcast = Math.round(((todoList.length - completedTasksCount)/overallTaskRate)*(sessionLen/60))
+        
+        if (forcast===Infinity){
+            return '...'
+        }else{
+            return forcast
+        }
+
     }
 
     return (

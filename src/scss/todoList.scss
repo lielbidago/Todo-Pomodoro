@@ -20,14 +20,14 @@
                         "todos"
                         "todos-footer";
                       
-
+  
   .EnterTodo > * {
     display: inline-block;
     padding:1%;
     margin:0 2%;
     box-shadow:0 0 10px 1px rgba(0, 0, 0, 0.166);
     border: 0;
-
+    
   }
   .EnterTodo{
     grid-area: enterTodo;
@@ -90,11 +90,6 @@
     width: 100%;
     border-radius: 0px 0px 18px 22px;
     margin-bottom: 0;
-
-
-
-
-
 }
 
 }
@@ -108,6 +103,7 @@
     border-bottom: 1px solid rgb(184, 184, 184);
     width:90%;
     max-width: 90%;
+    cursor: move;
   
   
     input[type=text]{
