@@ -1,11 +1,11 @@
 
 import { useState, useRef, useContext } from 'react';
 import { Button, Offcanvas, Form, InputGroup, Col, Row  } from 'react-bootstrap';
-import {appContext} from '../context/appContext'
+import {themeContext} from '../context/themeContext'
 
 export function Settings({showSettings, handleCloseSettings, setSessionAndBreakLen, setSessionLoopMode}){
     
-    const {getCustomeThemes} = useContext(appContext);
+    const {getCustomeThemes} = useContext(themeContext);
     const formRef = useRef(null)
     
     function submitForm(event: React.FormEvent<HTMLFormElement>): void {

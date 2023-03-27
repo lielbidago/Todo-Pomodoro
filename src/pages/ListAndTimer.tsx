@@ -39,9 +39,6 @@ export function ListAndTimer(){
     }
 
     function calculateCurSessionRate(){
-        // const completedTasksCurRate = (completedTasksCount - completedTasksCounter)/sessionLen
-        // setOverallTaskRate((overallTaskRate + completedTasksCurRate)/(sessionNum+1))
-        // setSessionNum(sessionNum + 1)
 
         const completedTasks = completedTasksCount - completedTasksCounter
         const cur_sum = overallTaskRate * sessionNum
@@ -56,7 +53,7 @@ export function ListAndTimer(){
     function CompletionForcastEval(){
         const forcast = Math.round(((todoList.length - completedTasksCount)/overallTaskRate)*(sessionLen/60))
         
-        if (forcast===Infinity){
+        if (forcast===Infinity || Number.isNaN(forcast)){
             return '...'
         }else{
             return forcast
