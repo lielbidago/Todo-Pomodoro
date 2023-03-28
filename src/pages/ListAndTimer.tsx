@@ -95,7 +95,7 @@ export function ListAndTimer(){
             
             <div className="updates">
                 <ProgressBarP progressValue={progressValue()} buttonColor={buttonColor}/>
-                <CompletionForcast CompletionForcastEval={CompletionForcastEval}/>
+                <CompletionForcast CompletionForcastEval={CompletionForcastEval} buttonColor={buttonColor}/>
             </div>
 
             <TodoPomodoList todoList={todoList} 
