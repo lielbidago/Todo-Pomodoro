@@ -1,8 +1,8 @@
 
-export function Footer(){
+export function Footer({buttonColor}){
     return (
         <footer>
-            <div className="main-footer">
+            <div className="main-footer" style={{color:buttonColor==='light'? 'white':'black'}}>
             This website was made by Liel Bidago,
             check out my other projects here:&nbsp;&nbsp;  
             <a href="https://github.com/lielbidago" className="fa fa-github"></a>&nbsp;

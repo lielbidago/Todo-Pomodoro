@@ -1,14 +1,15 @@
 import { ProgressBar } from "react-bootstrap";
 
 interface prograssBarProps{
-    progressValue: number
+    progressValue: number,
+    buttonColor:string
 }
 
 export function ProgressBarP(props: prograssBarProps){
     
-    const {progressValue} = props;
+    const {progressValue, buttonColor} = props;
     
-    return <div className="ProgressBarP">
+    return <div className={`ProgressBarP ${buttonColor}`}>
         <h6>Your progress</h6>
         <ProgressBar variant='' now={progressValue} label={`${progressValue}%`}/>
         </div>

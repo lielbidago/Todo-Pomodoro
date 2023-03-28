@@ -21,6 +21,7 @@ export function Settings({showSettings, handleCloseSettings, setSessionAndBreakL
         
         getCustomeThemes(payload.color1, payload.color2);
         
+        
         if(payload.SessionLoopMode === 'Loop'){
             setSessionLoopMode(true);
         }else{
@@ -32,6 +33,7 @@ export function Settings({showSettings, handleCloseSettings, setSessionAndBreakL
 
     const customeTheme1 = localStorage.getItem('theme1');
     const customeTheme2 = localStorage.getItem('theme2');
+    // setButtonColor(getButtonsColor(localStorage.getItem('theme1'), localStorage.getItem('theme2')))
 
     return (
         <>
@@ -45,7 +47,7 @@ export function Settings({showSettings, handleCloseSettings, setSessionAndBreakL
                     <Row>
                         <Col xs={7}>
                             <Form.Group className='mb-3'>
-                                <Form.Label>Set session/break lengths (minutes):</Form.Label>                        
+                                <Form.Label>Set session/break lengths (in minutes):</Form.Label>                        
                                 <InputGroup size="sm" className="mb-3">
                                     <InputGroup.Text id="inputGroup-sizing-sm">Session</InputGroup.Text>
                                     <Form.Control
@@ -101,7 +103,7 @@ export function Settings({showSettings, handleCloseSettings, setSessionAndBreakL
                     </Row>
                     
                     
-                    <Button variant="dark" size="sm" type="submit">Submit</Button>
+                    <Button variant="dark" size="sm" type="submit">Save</Button>
                 </Form>
             </Offcanvas.Body>
             </Offcanvas>
