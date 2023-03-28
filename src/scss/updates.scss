@@ -1,48 +1,61 @@
 .updates{
-    display: flex;
-    grid-area: updates;
-    flex-direction: row-reverse;
-    margin: 0% 10% 2% 10%;
-  
-    .CompletionForcast{
-      padding:1% 3%;
-      height: fit-content;
-      font-size:smaller;
-      font-weight: bold;
-      text-align: center;
-      
-      background-color: rgba(255, 255, 255, 0.212);
-      border-radius: 30px;
-      box-shadow: 0 3px 5px rgb(0 0 0 / 0.2);
-  
-  
-      h4{
-        margin-bottom: 0;
-      }
-    }
-  
-    .ProgressBarP{
-  
-      padding:1%;
-      width: 50%;
-      margin:0% 7% ;
-      align-self: top;
-      
-      
-      h6{
-        font-weight: bold;
-      }
+  display: flex;
+  grid-area: updates;
+  flex-direction: row-reverse;
+  margin: 0% 10% 2% 10%;
+
+  .CompletionForcast{
+    padding:1% 3%;
+    height: fit-content;
+    font-size:smaller;
+    font-weight: bold;
+    text-align: center;
     
+    background-color: rgba(255, 255, 255, 0.338);
+    backdrop-filter: blur(8px) saturate(170%);
+    -webkit-backdrop-filter: blur(8px) saturate(170%);
+    border-radius: 30px;
+    box-shadow: 0 3px 5px rgb(0 0 0 / 0.2);
+
+
+    h4{
+      margin-bottom: 0;
     }
-    .progress{
-      background-color: rgba(255, 255, 255, 0.161) !important;
-      height: 25px !important;
-      box-shadow: 0 3px 5px rgb(0 0 0 / 0.2);
-  
-    }
-    .progress-bar{
-      background: linear-gradient(90deg, rgba(255, 255, 255, 0.059) 0%, rgba(0,0,0,0.16867997198879547) 96%)!important;
-      
-    }
+
+    
   }
+
+  .ProgressBarP{
+
+    padding:1%;
+    width: 50%;
+    margin:0% 7% ;
+    align-self: top;
+    
+    h6{
+      font-weight: bold;
+    }
+
+  }
+  .light{
+    color: white;
+    h6{
+      font-weight: normal;
+    }
+
+  }
+
+  .progress{
+    background-color: rgba(255, 255, 255, 0.161) !important;
+    height: 25px !important;
+    box-shadow: 0 3px 5px rgb(0 0 0 / 0.2);
+    backdrop-filter: blur(8px) saturate(150%);
+    -webkit-backdrop-filter: blur(8px) saturate(150%);
+
+  }
+  .progress-bar{
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.059) 0%, rgba(0,0,0,0.16867997198879547) 96%)!important;
+    
+  }
+}
   

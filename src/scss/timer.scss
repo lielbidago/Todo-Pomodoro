@@ -23,7 +23,9 @@
     text-align: center;
     background: rgb(163, 163, 163);
     background: radial-gradient(circle, rgba(255, 255, 255, 0.308) 0%, rgba(1, 0, 0, 0.148) 100%);
-    border-radius: 5%;
+    backdrop-filter: blur(8px) saturate(150%);
+    -webkit-backdrop-filter: blur(8px) saturate(150%);
+    border-radius: 30px;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 
     .timer-a{

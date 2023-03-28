@@ -22,7 +22,8 @@ interface PomodoroTimer{
     toggleSoundOn():void,
     soundOn:boolean, 
     setLastSessionTaskCount():void,
-    calculateCurSessionRate():void
+    calculateCurSessionRate():void,
+    buttonColor:string
 }
 
 function formatTimer(timer: number){
@@ -42,7 +43,7 @@ export function PomodoroTimer(props:PomodoroTimer){
     changeTime, pauseTimer, resumeTimer, changeTimerModes, 
     sessionsLoop, sessionLen, breakLen,
      setTimerTime, updateSessionAndBreakLen, timerBell, toggleSoundOn,
-      soundOn, setLastSessionTaskCount, calculateCurSessionRate }
+      soundOn, setLastSessionTaskCount, calculateCurSessionRate, buttonColor }
     = props
     
     function playBell(){
@@ -123,10 +124,10 @@ export function PomodoroTimer(props:PomodoroTimer){
                     <h5 onDoubleClick={handleModeChange} className="timer-title">{timerMode}</h5>
                     <h2 className="time">{formatTimer(timer)}</h2>
                     <div className="timerButtons">
-                        {timerStatus? <button className='btn btn-outline-light' onClick={pauseTimer}>pause</button>: 
-                        <button className='btn btn-outline-light' onClick={resumeTimer}>resume</button>}
+                        {timerStatus? <button className={`btn btn-outline-${buttonColor}`} onClick={pauseTimer}>pause</button>: 
+                        <button className={`btn btn-outline-${buttonColor}`} onClick={resumeTimer}>resume</button>}
                         
-                        <button className='btn btn-outline-light' onClick={handleStartTimer}>{timerStatus?'restart':'start'}</button>
+                        <button className={`btn btn-outline-${buttonColor}`} onClick={handleStartTimer}>{timerStatus?'restart':'start'}</button>
                     </div>
                 </div>
                 <div className="sound">

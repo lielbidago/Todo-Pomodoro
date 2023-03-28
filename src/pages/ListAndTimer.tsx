@@ -6,7 +6,8 @@ import {TodosListHook} from '../appHooks/todoListHook'
 import { Settings } from '../components/Settings';
 import { ProgressBarP } from '../components/prograssBar';
 import { CompletionForcast } from '../components/CompletionForcast';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { themeContext } from '../context/themeContext';
 
 
 
@@ -26,6 +27,8 @@ export function ListAndTimer(){
         changeTodosTitle, updateTodosList
         , completedTasksCount, updateCompletedTasks, updateTodosTitle, handleItemOrderChange}
         = TodosListHook()
+
+    const {buttonColor, setButtonColor} = useContext(themeContext)
     
 
     const [completedTasksCounter, setCompletedTasksCounter] = useState(0)
@@ -64,7 +67,7 @@ export function ListAndTimer(){
     return (
         <div className="ListAndTimer" >
 
-            <TodoPomodoroHeader handleShowSettings={handleShowSettings}/>
+            <TodoPomodoroHeader handleShowSettings={handleShowSettings} buttonColor={buttonColor}/>
 
             <PomodoroTimer timer={timer}
              timerMode={timerMode}
@@ -85,12 +88,13 @@ export function ListAndTimer(){
                 toggleSoundOn = {toggleSoundOn}
                 setLastSessionTaskCount={setLastSessionTaskCount}
                 calculateCurSessionRate={calculateCurSessionRate}
+                buttonColor={buttonColor}
 
              />
 
             
             <div className="updates">
-                <ProgressBarP progressValue={progressValue()}/>
+                <ProgressBarP progressValue={progressValue()} buttonColor={buttonColor}/>
                 <CompletionForcast CompletionForcastEval={CompletionForcastEval}/>
             </div>
 
@@ -107,7 +111,8 @@ export function ListAndTimer(){
             />
 
 
-            <Settings setSessionLoopMode={setSessionLoopMode} showSettings={showSettings} handleCloseSettings={handleCloseSettings} setSessionAndBreakLen={setSessionAndBreakLen}/>
+            <Settings setSessionLoopMode={setSessionLoopMode} showSettings={showSettings}
+             handleCloseSettings={handleCloseSettings} setSessionAndBreakLen={setSessionAndBreakLen}/>
              
             
         </div>

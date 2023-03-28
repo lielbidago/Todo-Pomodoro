@@ -126,8 +126,8 @@ export function TodoPomodoList(props: TodoPomodoListProps){
             </ul>                
             </div>
             <div className="todos-footer">
-                <div className="completed">completed: {completedTasksCount}</div>
-                <div className="all">all: {todoList.length}</div>
+                <div className="completed"><div className="bold">completed:</div> {completedTasksCount}</div>
+                <div className="all"><div className="bold">all:</div> {todoList.length}</div>
                 <div className="export-to-excel">
                     <button type="button" className="btn btn-outline-dark" onClick={()=>{exportTodoListFile()}}>export to excel</button>
                 </div>
