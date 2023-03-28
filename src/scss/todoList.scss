@@ -29,6 +29,20 @@
     border: 0;
     
   }
+
+  .filter{
+    border-radius: 10px;
+    background-color: white;
+    border:1px;
+    padding:0;
+  }
+
+  .filter:hover{
+    background-color: black;
+    svg{
+      filter: invert(48%) saturate(2476%) hue-rotate(86deg) brightness(190%) contrast(119%);
+    }
+  }
   .EnterTodo{
     grid-area: enterTodo;
     margin-bottom: 2%;
