@@ -28,7 +28,7 @@ export function ListAndTimer(){
         , completedTasksCount, updateCompletedTasks, updateTodosTitle, handleItemOrderChange}
         = TodosListHook()
 
-    const {buttonColor, setButtonColor} = useContext(themeContext)
+    const {buttonColor, setButtonColor, customeTheme1, customeTheme2} = useContext(themeContext)
     
 
     const [completedTasksCounter, setCompletedTasksCounter] = useState(0)
@@ -111,8 +111,12 @@ export function ListAndTimer(){
             />
 
 
-            <Settings setSessionLoopMode={setSessionLoopMode} showSettings={showSettings}
-             handleCloseSettings={handleCloseSettings} setSessionAndBreakLen={setSessionAndBreakLen}/>
+            <Settings 
+             setSessionLoopMode={setSessionLoopMode} showSettings={showSettings}
+             handleCloseSettings={handleCloseSettings} 
+             setSessionAndBreakLen={setSessionAndBreakLen}
+             customeTheme1={customeTheme1}
+             customeTheme2={customeTheme2} />
              
             
         </div>

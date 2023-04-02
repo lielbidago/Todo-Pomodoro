@@ -3,7 +3,7 @@ import { useState, useRef, useContext } from 'react';
 import { Button, Offcanvas, Form, InputGroup, Col, Row  } from 'react-bootstrap';
 import {themeContext} from '../context/themeContext'
 
-export function Settings({showSettings, handleCloseSettings, setSessionAndBreakLen, setSessionLoopMode}){
+export function Settings({showSettings, handleCloseSettings, setSessionAndBreakLen, setSessionLoopMode, customeTheme1, customeTheme2}){
     
     const {getCustomeThemes} = useContext(themeContext);
     const formRef = useRef(null)
@@ -31,8 +31,8 @@ export function Settings({showSettings, handleCloseSettings, setSessionAndBreakL
         handleCloseSettings()
     }
 
-    const customeTheme1 = localStorage.getItem('theme1');
-    const customeTheme2 = localStorage.getItem('theme2');
+    // const customeTheme1 = localStorage.getItem('theme1');
+    // const customeTheme2 = localStorage.getItem('theme2');
     // setButtonColor(getButtonsColor(localStorage.getItem('theme1'), localStorage.getItem('theme2')))
 
     return (

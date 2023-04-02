@@ -1,6 +1,4 @@
-export function customeBackground(){
-    const customeTheme1 = localStorage.getItem('theme1');
-    const customeTheme2 = localStorage.getItem('theme2');
+export function customeBackground(customeTheme1:string,customeTheme2:string){
     
     return ({background: `radial-gradient(circle, ${customeTheme1} 0%, ${customeTheme2} 100%)`})
     
@@ -15,20 +13,13 @@ function hexToRgb(hex:string){
 }
 
 function CalculateLuminance(rgbcolor:{r:number,g:number,b:number}){
-    return 0.2126*rgbcolor['r'] + 0.7152*rgbcolor['g'] + 0.0722*rgbcolor['b']
+    return 0.2126 * rgbcolor['r'] + 0.7152 * rgbcolor['g'] + 0.0722 * rgbcolor['b']
 }
 
 export function getButtonsColor(color1:string, color2:string){
-    // if color1: light and color2: dark => light
-    // if color1: dark and color2: light => light
-    // if color1: dark and color2: dark => light
-    // if color1: light and color2: light => dark
-
-
 
     const color1rgb = hexToRgb(color1);
     const color2rgb = hexToRgb(color2);
-
 
 
     if (CalculateLuminance(color1rgb)<140 || CalculateLuminance(color2rgb)<140){
