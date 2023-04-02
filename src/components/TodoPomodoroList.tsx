@@ -104,9 +104,6 @@ export function TodoPomodoList(props: TodoPomodoListProps){
         setTodosFilter(filter)
     }
 
-    // const dotsColor2 = localStorage.getItem('theme2');
-    // const gradient = {borderImage: `linear-gradient(90deg, ${dotsColor1}, ${dotsColor2}) 1`}
-
     return (
         <div className="TodoPomodoroList">
             <div className="todos-title" style={{borderTopColor: `${dotsColor1}`}}>
@@ -114,7 +111,6 @@ export function TodoPomodoList(props: TodoPomodoListProps){
                 <h4 onDoubleClick={()=>{setTitleChange(true)}}>{todosTitle}</h4>}
                 </div>
             <div className="EnterTodo">
-                {/* <button className="filter"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z"></path></svg></button> */}
                 <FilterDropDown handleFilterTodos={handleFilterTodos}/>
                 <input ref={inputRef} autoFocus placeholder={'Enter a task here...'} onKeyUp={onTaskEnter}/>
                 <button type="button" className="btn btn-outline-dark" onClick={onEnterTask}>add task</button>

@@ -38,20 +38,23 @@
   }
 
   .filter:hover{
-    background-color: black;
-    svg{
-      filter: invert(48%) saturate(2476%) hue-rotate(86deg) brightness(190%) contrast(119%);
+    .dropend{
+      background-color: black;
+      border-radius: 10px;
+      .dropdown-toggle::after, svg{
+        filter: invert(48%) saturate(2476%) hue-rotate(86deg) brightness(190%) contrast(119%);
+      }
     }
+    
+
   }
   .EnterTodo{
     grid-area: enterTodo;
     margin-bottom: 2%;
     input{
-      // border:0;
       width:60%;
       border-radius: 10px;
-      // box-shadow:0 0 8px 1px rgba(0, 0, 0, 0.166);
-      // border-bottom:solid 1px rgb(216, 216, 216) ;
+
     }
 
   }
@@ -66,7 +69,6 @@
   }
 
   .my-todos{
-    // height: 63%;
     grid-area: todos;
     overflow-y: scroll; 
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
@@ -147,8 +149,6 @@
       font-weight: bold;
       font-size: larger;
       color: grey;
-      // position:absolute;
-      // right:0;
       
     }
   

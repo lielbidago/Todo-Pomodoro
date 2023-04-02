@@ -100,15 +100,10 @@ footer{
     font-size: medium;
   }
 
-  // .timer{
-  //   height: 70%;
-  // }
-
   .todos-title{
     border-top: 19px dotted #9393938d;
-    // border-radius: 21px 13px 0px 0px;
     margin-top: 3%;
-    // width: 95%;
+
   }
   
   .ListAndTimer{
@@ -128,20 +123,10 @@ footer{
     padding: 0;
     min-width: 282px;
     height: 100%;
-
-    // display: flex;
-    // flex-direction: column;
-    // align-self: stretch;
-    
   }
 
   .ListAndTimer{
-
-    // display: flex;
-    // flex-direction: column;
-    // height: max-content;
     display: block;
-    
   }
 
   .TodoPomodoroHeader{
@@ -165,12 +150,18 @@ footer{
   .TodoPomodoroList{
     margin: 2%;
     height: 50%;
+    max-height: 100dvh;
     min-height: 500px;
     margin-bottom: 5%;
+    grid-template-rows: 15% minmax(8%,15%) auto 10%;
 
     .todos-footer{
       position: relative;
       bottom: 0%;
+    }
+
+    .EnterTodo{
+      height:fit-content
     }
 
   }
