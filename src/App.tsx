@@ -24,16 +24,30 @@ function App() {
       localStorage.setItem('theme2', theme2);
   }
 
+  function setThemeColors(){
+    
+    const c1 = localStorage.getItem('theme1')
+    const c2 = localStorage.getItem('theme2')
+
+    if(c1){
+      setCustomeTheme1(c1)
+    }
+    if(c2){
+      setCustomeTheme2(c2)
+    }
+
+  }
+
   useEffect(()=>{
-    console.log(getButtonsColor(localStorage.getItem('theme1'), localStorage.getItem('theme2')))
-    setButtonColor(getButtonsColor(localStorage.getItem('theme1'), localStorage.getItem('theme2')))
+    setThemeColors()
+    setButtonColor(getButtonsColor(customeTheme1, customeTheme2))
   },[customeTheme1, customeTheme2])
   
   return (
     <themeContext.Provider value={{customeTheme1, customeTheme2, getCustomeThemes, buttonColor, setButtonColor} }>
     <Routes>
-      <Route path='*' element={<div className='app-screen' style={customeBackground()}><WelcomePage/><Footer buttonColor={buttonColor}/></div>}/>
-      <Route path='todos-and-pomodoro' element={<div className='app-screen' style={customeBackground()}><ListAndTimer/><Footer buttonColor={buttonColor}/></div>}/>
+      <Route path='*' element={<div className='app-screen' style={customeBackground(customeTheme1, customeTheme2)}><WelcomePage/><Footer buttonColor={buttonColor}/></div>}/>
+      <Route path='todos-and-pomodoro' element={<div className='app-screen' style={customeBackground(customeTheme1, customeTheme2)}><ListAndTimer/><Footer buttonColor={buttonColor}/></div>}/>
     </Routes>
     
     </themeContext.Provider>

@@ -7,7 +7,7 @@ export function WelcomePage(){
 
     
     return (
-        <div className="welcome-page" style={customeBackground()}>
+        <div className="welcome-page" >
             <div className="welcomediv">
                 <h4>Hello, welcome to</h4>
                 <h1>Todo Pomodoro!</h1>
