@@ -1,28 +1,38 @@
 
-import { Button } from "react-bootstrap";
+import { useRef } from "react";
+import { Button, Overlay, Tooltip } from "react-bootstrap";
 
 interface TodoPomodoroHeaderProps{
     handleShowSettings,
-    buttonColor:string
+    buttonColor:string,
+    toggleHelpTips: boolean,
+    setToggleHelpTips(state:boolean):void
 }
 
 export function TodoPomodoroHeader(props:TodoPomodoroHeaderProps){
     
-  const { handleShowSettings, buttonColor} = props;
-
-//   function onOpen(event: React.MouseEvent<HTMLElement>){  
-//     changeStatusTodosEdit(true)
-//   }
-  
+  const { handleShowSettings, buttonColor, setToggleHelpTips, toggleHelpTips} = props;
+  const menuRef = useRef(null)
   return (
-        // <h1 className="TodoPomodoroHeader">Todo Pomodoro</h1>
 
         <nav className="navbar navbar-expand-lg bg-body-tertiary TodoPomodoroHeader">
             <div className="container-fluid">
                 <a className="navbar-brand" href="\"><h4 style={{color:buttonColor==='light'? 'white':'black'}}>Todo Pomodoro</h4></a>
                 <div className="header-button">
-                    {/* <button type="button" className="btn btn-outline-light editTODOS" onClick={onOpen}>edit</button> */}
-                    <Button variant={"outline-"+buttonColor} onClick={handleShowSettings} className="me-2 session-settings">≡</Button>
+                    {/* <Button variant='none' onClick={handleShowSettings} className="me-2 session-settings">≡</Button> */}
+                    <button onClick={()=> setToggleHelpTips(!toggleHelpTips)}
+                     style={{color:buttonColor==='light'? 'white':'black'}} className="me-2 help ">?</button>
+                    <button ref={menuRef} onClick={handleShowSettings} style={{color:buttonColor==='light'? 'white':'black'}} className="me-2 session-settings">≡</button>
+                    <Overlay target={menuRef.current} show={toggleHelpTips} placement='bottom'>
+                        {(props) => (
+                            <Tooltip {...props}>
+                                Menu 
+                                <br/>
+                                and settings
+                            </Tooltip>
+                        )} 
+                    </Overlay>
+                
                 </div>
 
             </div>
@@ -30,35 +40,5 @@ export function TodoPomodoroHeader(props:TodoPomodoroHeaderProps){
         </nav>
     )
 
-    
 
-    // return (
-    //     <nav className="navbar navbar-expand-lg bg-body-tertiary TodoPomodoroHeader">
-    //     <div className="container-fluid">
-    //       <a className="navbar-brand" href="#">Todo Pomodoro</a>
-    //       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" 
-    //       data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" 
-    //       aria-label="Toggle navigation">
-    //         <span className="navbar-toggler-icon"></span>
-    //       </button>
-    //       <button type="button" className="editTODOS" onClick={()=>{changeStatusTodosEdit(true)}}>edit</button>
-
-    //       <div className="collapse navbar-collapse" id="navbarNavDropdown">
-    //         <ul className="navbar-nav">
-    //           <li className="nav-item dropdown">
-    //             <a className="nav-link dropdown-toggle" href="#" role="button" 
-    //             data-bs-toggle="dropdown" aria-expanded="false">
-    //               Menu
-    //             </a>
-    //             <ul className="dropdown-menu">
-    //               <li><a className="dropdown-item" href="#">Action</a></li>
-    //               <li><a className="dropdown-item" href="#">Another action</a></li>
-    //               <li><a className="dropdown-item" href="#">Something else here</a></li>
-    //             </ul>
-    //           </li>
-    //         </ul>
-    //       </div>
-    //     </div>
-    //   </nav>
-    // );
 }

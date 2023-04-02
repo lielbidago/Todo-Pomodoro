@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { Overlay, Tooltip } from "react-bootstrap";
 import soundbell from "../assets/achievementBell.wav";
 
 
@@ -23,7 +24,8 @@ interface PomodoroTimer{
     soundOn:boolean, 
     setLastSessionTaskCount():void,
     calculateCurSessionRate():void,
-    buttonColor:string
+    buttonColor:string,
+    toggleHelpTips: boolean
 }
 
 function formatTimer(timer: number){
@@ -43,7 +45,8 @@ export function PomodoroTimer(props:PomodoroTimer){
     changeTime, pauseTimer, resumeTimer, changeTimerModes, 
     sessionsLoop, sessionLen, breakLen,
      setTimerTime, updateSessionAndBreakLen, timerBell, toggleSoundOn,
-      soundOn, setLastSessionTaskCount, calculateCurSessionRate, buttonColor }
+      soundOn, setLastSessionTaskCount, calculateCurSessionRate, buttonColor,
+      toggleHelpTips }
     = props
     
     function playBell(){
@@ -117,11 +120,22 @@ export function PomodoroTimer(props:PomodoroTimer){
         startTimer()
     }
 
+    const sessionTitleRef = useRef(null)
+    const soundRef = useRef(null)
+
+
     return (
         <div className="pomodoro-timer">
             <div className="timer">
                 <div className="timer-a">
-                    <h5 onDoubleClick={handleModeChange} className="timer-title">{timerMode}</h5>
+                    <h5 onDoubleClick={handleModeChange} className="timer-title" ref={sessionTitleRef}>{timerMode}</h5>
+                    <Overlay target={sessionTitleRef.current} show={toggleHelpTips} placement='top'>
+                        {(props) => (
+                            <Tooltip {...props}>
+                                title of the session,<br/> double click to change session mode
+                            </Tooltip>
+                        )} 
+                    </Overlay>
                     <h2 className="time">{formatTimer(timer)}</h2>
                     <div className="timerButtons">
                         {timerStatus? <button className={`btn btn-outline-${buttonColor}`} onClick={pauseTimer}>pause</button>: 
@@ -130,13 +144,20 @@ export function PomodoroTimer(props:PomodoroTimer){
                         <button className={`btn btn-outline-${buttonColor}`} onClick={handleStartTimer}>{timerStatus?'restart':'start'}</button>
                     </div>
                 </div>
-                <div className="sound">
+                <div className="sound" >
                 🕭
-                        <label className="switch">
+                        <label className="switch" ref={soundRef}>
                             <input type='checkbox' checked={soundOn} onChange={()=>{toggleSoundOn()}}></input>
                             <span className="slider round"></span>
                         </label>
                 </div>
+                <Overlay target={soundRef.current} show={toggleHelpTips} placement='top'>
+                        {(props) => (
+                            <Tooltip {...props}>
+                                a bell would notify when the time is up
+                            </Tooltip>
+                        )} 
+                    </Overlay>
 
             </div>
         </div>

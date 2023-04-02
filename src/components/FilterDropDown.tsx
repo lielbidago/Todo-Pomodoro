@@ -2,12 +2,12 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
 
-export default function FilterDropDown({handleFilterTodos}) {
+export default function FilterDropDown({handleFilterTodos, FilterDropDownRef}) {
   
   
     return (
     <>
-      <div className="mb-2 filter">
+      <div className="mb-2 filter" ref={FilterDropDownRef}>
             <DropdownButton
               key={'end'}
               id={`dropdown-button-drop-end`}
