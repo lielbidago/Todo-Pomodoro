@@ -58,6 +58,23 @@ footer{
   }
 
 }
+.session-settings, .help{
+  background-color: transparent;
+  border-radius: 5px;
+  border: none;
+  transform: scale(1.5);
+  
+}
+.session-settings:hover{
+  // background-color: #ffffff59;
+  box-shadow: 2px 1px 4px 0px rgba(0, 0, 0, 0.274);
+}
+
+.modal-open .offcanvas{
+  background-color: rgba(255, 255, 255, 0.498);
+  backdrop-filter: blur(8px) saturate(200%);
+  -webkit-backdrop-filter: blur(15px) saturate(200%);
+}
 
 .ListAndTimer{
     display: grid;

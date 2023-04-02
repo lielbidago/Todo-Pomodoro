@@ -1,9 +1,4 @@
 
-// html, body {
-//     margin:0;
-//     height:100%;
-//     overflow:hidden;
-// }
 .welcome-page{
     display: flex;
     flex-direction: column;
@@ -29,13 +24,8 @@
 
 }
 
+.welcomediv{
+    animation:welcomediv .9s cubic-bezier(.47,0.000,.745,.715) both
+}
 
-// .welcome-page .welcomediv{
-
-//     transform: translateY(-70%);
-//     visibility: hidden;
-// }
-
-
-
-
+@keyframes welcomediv{0%{transform:scale(2);filter:blur(4px);opacity:0}100%{transform:scale(1);filter:blur(0);opacity:1}}

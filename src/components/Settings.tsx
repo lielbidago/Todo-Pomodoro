@@ -31,13 +31,9 @@ export function Settings({showSettings, handleCloseSettings, setSessionAndBreakL
         handleCloseSettings()
     }
 
-    // const customeTheme1 = localStorage.getItem('theme1');
-    // const customeTheme2 = localStorage.getItem('theme2');
-    // setButtonColor(getButtonsColor(localStorage.getItem('theme1'), localStorage.getItem('theme2')))
-
     return (
         <>
-        <Offcanvas show={showSettings} onHide={handleCloseSettings} placement={'start'}>
+        <Offcanvas show={showSettings} onHide={handleCloseSettings} placement={'end'} >
             <Offcanvas.Header closeButton>
                 <Offcanvas.Title>Settings</Offcanvas.Title>
             </Offcanvas.Header>

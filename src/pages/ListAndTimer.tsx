@@ -34,7 +34,7 @@ export function ListAndTimer(){
     const [completedTasksCounter, setCompletedTasksCounter] = useState(0)
     const [overallTaskRate, setOverallTaskRate] = useState(0)
     const [sessionNum, setSessionNum] = useState(0)
-    
+    const [toggleHelpTips, setToggleHelpTips] = useState(false)
 
     function setLastSessionTaskCount(){
         setCompletedTasksCounter(completedTasksCount)
@@ -67,7 +67,7 @@ export function ListAndTimer(){
     return (
         <div className="ListAndTimer" >
 
-            <TodoPomodoroHeader handleShowSettings={handleShowSettings} buttonColor={buttonColor}/>
+            <TodoPomodoroHeader handleShowSettings={handleShowSettings} buttonColor={buttonColor} toggleHelpTips={toggleHelpTips} setToggleHelpTips={setToggleHelpTips}/>
 
             <PomodoroTimer timer={timer}
              timerMode={timerMode}
@@ -89,13 +89,14 @@ export function ListAndTimer(){
                 setLastSessionTaskCount={setLastSessionTaskCount}
                 calculateCurSessionRate={calculateCurSessionRate}
                 buttonColor={buttonColor}
+                toggleHelpTips={toggleHelpTips}
 
              />
 
             
             <div className="updates">
-                <ProgressBarP progressValue={progressValue()} buttonColor={buttonColor}/>
-                <CompletionForcast CompletionForcastEval={CompletionForcastEval} buttonColor={buttonColor}/>
+                <ProgressBarP progressValue={progressValue()} buttonColor={buttonColor} toggleHelpTips={toggleHelpTips}/>
+                <CompletionForcast CompletionForcastEval={CompletionForcastEval} buttonColor={buttonColor} toggleHelpTips={toggleHelpTips}/>
             </div>
 
             <TodoPomodoList todoList={todoList} 
@@ -108,6 +109,7 @@ export function ListAndTimer(){
                     todosTitle={todosTitle} changeTodosTitle={changeTodosTitle}
                     updateTodosTitle={updateTodosTitle}
                     handleItemOrderChange = {handleItemOrderChange}
+                    toggleHelpTips={toggleHelpTips}
             />
 
 

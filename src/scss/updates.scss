@@ -2,11 +2,11 @@
   display: flex;
   grid-area: updates;
   flex-direction: row-reverse;
-  margin: 0% 10% 2% 10%;
+  margin: 0% 10% 2% 0%;
 
   .CompletionForcast{
-    padding:1% 3%;
-    height: fit-content;
+    padding:3% 10%;
+    // height: fit-content;
     font-size:smaller;
     font-weight: bold;
     text-align: center;
