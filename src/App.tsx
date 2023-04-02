@@ -33,7 +33,7 @@ function App() {
     <themeContext.Provider value={{customeTheme1, customeTheme2, getCustomeThemes, buttonColor, setButtonColor} }>
     <Routes>
       <Route path='*' element={<div className='app-screen' style={customeBackground()}><WelcomePage/><Footer buttonColor={buttonColor}/></div>}/>
-      <Route path='Todos-and-pomodoro' element={<div className='app-screen' style={customeBackground()}><ListAndTimer/><Footer buttonColor={buttonColor}/></div>}/>
+      <Route path='todos-and-pomodoro' element={<div className='app-screen' style={customeBackground()}><ListAndTimer/><Footer buttonColor={buttonColor}/></div>}/>
     </Routes>
     
     </themeContext.Provider>
