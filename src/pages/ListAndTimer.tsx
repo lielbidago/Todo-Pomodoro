@@ -124,6 +124,3 @@ export function ListAndTimer(){
         </div>
     )
 }
-
-//<TodosEditModal todoList={todoList}/>
-//<div><button style={{textAlign:'center'}}onClick={()=>changeStatusTodosEdit(false)}>test!!!!</button></div>

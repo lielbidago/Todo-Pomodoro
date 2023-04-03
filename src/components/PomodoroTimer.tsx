@@ -145,11 +145,15 @@ export function PomodoroTimer(props:PomodoroTimer){
                     </div>
                 </div>
                 <div className="sound" >
-                🕭
-                        <label className="switch" ref={soundRef}>
+
+                        {/* <label className="switch" ref={soundRef}>
                             <input type='checkbox' checked={soundOn} onChange={()=>{toggleSoundOn()}}></input>
                             <span className="slider round"></span>
-                        </label>
+                        </label> */}
+
+                        {/* <input type='checkbox' ref={soundRef} checked={soundOn} onChange={()=>{toggleSoundOn()}}></input> */}
+                        {soundOn?<img height='15' ref={soundRef} onClick={()=>{toggleSoundOn()}} src="https://img.icons8.com/metro/26/null/high-volume.png"/>:
+                        <img height='15' ref={soundRef} onClick={()=>{toggleSoundOn()}} src="https://img.icons8.com/metro/26/null/no-audio.png"/>}
                 </div>
                 <Overlay target={soundRef.current} show={toggleHelpTips} placement='top'>
                         {(props) => (
