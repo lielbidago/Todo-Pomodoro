@@ -25,7 +25,9 @@ interface PomodoroTimer{
     setLastSessionTaskCount():void,
     calculateCurSessionRate():void,
     buttonColor:string,
-    toggleHelpTips: boolean
+    toggleHelpTips: boolean,
+    toggleTimerFullScreen():void,
+    timerFullScreen:boolean
 }
 
 function formatTimer(timer: number){
@@ -46,7 +48,7 @@ export function PomodoroTimer(props:PomodoroTimer){
     sessionsLoop, sessionLen, breakLen,
      setTimerTime, updateSessionAndBreakLen, timerBell, toggleSoundOn,
       soundOn, setLastSessionTaskCount, calculateCurSessionRate, buttonColor,
-      toggleHelpTips }
+      toggleHelpTips, toggleTimerFullScreen, timerFullScreen }
     = props
     
     function playBell(){
@@ -144,16 +146,22 @@ export function PomodoroTimer(props:PomodoroTimer){
                         <button className={`btn btn-outline-${buttonColor}`} onClick={handleStartTimer}>{timerStatus?'restart':'start'}</button>
                     </div>
                 </div>
-                <div className="sound" >
+                <div className="timer-footer" >
 
                         {/* <label className="switch" ref={soundRef}>
                             <input type='checkbox' checked={soundOn} onChange={()=>{toggleSoundOn()}}></input>
                             <span className="slider round"></span>
                         </label> */}
+                        <div className="sound">
+                            {soundOn?<img height='15' ref={soundRef} onClick={()=>{toggleSoundOn()}}
+                            src="https://img.icons8.com/metro/26/null/high-volume.png"/>:
+                            <img height='15' ref={soundRef} onClick={()=>{toggleSoundOn()}}
+                            src="https://img.icons8.com/metro/26/null/no-audio.png"/>}
+                        </div>
+                        <div className="timer-full-screen">
+                            <img height='15' onClick={()=>{toggleTimerFullScreen()}} src="https://img.icons8.com/external-inkubators-detailed-outline-inkubators/25/null/external-full-screen-arrows-inkubators-detailed-outline-inkubators-3.png"/>
+                        </div>
 
-                        {/* <input type='checkbox' ref={soundRef} checked={soundOn} onChange={()=>{toggleSoundOn()}}></input> */}
-                        {soundOn?<img height='15' ref={soundRef} onClick={()=>{toggleSoundOn()}} src="https://img.icons8.com/metro/26/null/high-volume.png"/>:
-                        <img height='15' ref={soundRef} onClick={()=>{toggleSoundOn()}} src="https://img.icons8.com/metro/26/null/no-audio.png"/>}
                 </div>
                 <Overlay target={soundRef.current} show={toggleHelpTips} placement='top'>
                         {(props) => (
@@ -161,8 +169,7 @@ export function PomodoroTimer(props:PomodoroTimer){
                                 a bell would notify when the time is up
                             </Tooltip>
                         )} 
-                    </Overlay>
-
+                </Overlay>
             </div>
         </div>
     );

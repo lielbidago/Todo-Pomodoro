@@ -97,7 +97,31 @@ footer{
   
 }
 
+.ListAndTimer.timer-center{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: minmax(auto, 9%) 1fr; //6%
+  font-family: 'Red Hat Display', sans-serif;
+  margin:0 1%;
+  width: 98%;
 
+  // height: 100vh;
+  height: 100%;
+  // height: max-content;
+  gap: 1%;
+  text-align: center;
+  grid-template-areas: 
+  "TodoPomodoroHeader"
+  "pomodoro-timer";
+
+  .pomodoro-timer{
+    align-items: center;
+    .timer{
+      width:60%;
+    }
+  }
+
+}
 
 .TodoPomodoroHeader{
   width: 100%;

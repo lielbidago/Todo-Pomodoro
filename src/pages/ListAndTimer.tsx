@@ -35,7 +35,11 @@ export function ListAndTimer(){
     const [overallTaskRate, setOverallTaskRate] = useState(0)
     const [sessionNum, setSessionNum] = useState(0)
     const [toggleHelpTips, setToggleHelpTips] = useState(false)
+    const [timerFullScreen, setTimerFullScreen] = useState(false)
 
+    function toggleTimerFullScreen(){
+        setTimerFullScreen(!timerFullScreen)
+    }
     function setLastSessionTaskCount(){
         setCompletedTasksCounter(completedTasksCount)
 
@@ -64,6 +68,46 @@ export function ListAndTimer(){
 
     }
 
+    if(timerFullScreen){
+        return (
+            <div className="ListAndTimer timer-center" >
+                <TodoPomodoroHeader handleShowSettings={handleShowSettings} buttonColor={buttonColor} toggleHelpTips={toggleHelpTips} setToggleHelpTips={setToggleHelpTips}/>
+
+                <PomodoroTimer timer={timer}
+                timerMode={timerMode}
+                startTimer={startTimer}
+                timerStatus={timerStatus}
+                changeTime={changeTime}
+                pauseTimer={pauseTimer}
+                resumeTimer={resumeTimer}
+                changeTimerModes={changeTimerModes}
+                handleShowSettings={handleShowSettings}
+                progressValue={progressValue}
+                sessionsLoop={sessionsLoop}
+                    sessionLen={sessionLen} breakLen={breakLen}
+                    setTimerTime={setTimerTime}
+                    updateSessionAndBreakLen={updateSessionAndBreakLen}
+                    timerBell={timerBell}
+                    soundOn={soundOn}
+                    toggleSoundOn = {toggleSoundOn}
+                    setLastSessionTaskCount={setLastSessionTaskCount}
+                    calculateCurSessionRate={calculateCurSessionRate}
+                    buttonColor={buttonColor}
+                    toggleHelpTips={toggleHelpTips}
+                    toggleTimerFullScreen = {toggleTimerFullScreen}
+                    timerFullScreen = {timerFullScreen}
+
+                />
+
+            <Settings 
+             setSessionLoopMode={setSessionLoopMode} showSettings={showSettings}
+             handleCloseSettings={handleCloseSettings} 
+             setSessionAndBreakLen={setSessionAndBreakLen}
+             customeTheme1={customeTheme1}
+             customeTheme2={customeTheme2} />
+            </div>
+        )
+    }
     return (
         <div className="ListAndTimer" >
 
@@ -90,6 +134,8 @@ export function ListAndTimer(){
                 calculateCurSessionRate={calculateCurSessionRate}
                 buttonColor={buttonColor}
                 toggleHelpTips={toggleHelpTips}
+                toggleTimerFullScreen = {toggleTimerFullScreen}
+                timerFullScreen = {timerFullScreen}
 
              />
 
