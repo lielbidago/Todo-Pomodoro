@@ -1,7 +1,5 @@
 export function customeBackground(customeTheme1:string,customeTheme2:string){
-    
     return ({background: `radial-gradient(circle, ${customeTheme1} 0%, ${customeTheme2} 100%)`})
-    
 }
 
 function hexToRgb(hex:string){
