@@ -35,11 +35,7 @@ export function TodoPomodoList(props: TodoPomodoListProps){
     const [titleChange, setTitleChange]=useState(false);
     const titleRef = useRef(null);
     const dotsColor1 = localStorage.getItem('theme1');
-    const [showTodosList, setShowTodosList] = useState(true)
 
-    function toggleShowTodosList(){
-        setShowTodosList(!showTodosList)
-    }
 
     function onTaskEnter(event: React.KeyboardEvent<HTMLDivElement>){
         if(event.key === 'Enter'){
@@ -153,10 +149,6 @@ export function TodoPomodoList(props: TodoPomodoListProps){
                 
             </div>
             <div className="todos-main">
-
-            {/* <div className="hide-todos" onClick={()=>toggleShowTodosList()}>
-                <p>hide me</p>
-            </div> */}
             <div className="my-todos" >
             <ul >  
                 {todosFilter==='all'&&
