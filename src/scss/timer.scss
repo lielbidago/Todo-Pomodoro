@@ -41,12 +41,16 @@
 
 }
 
-.sound{
+.timer-footer{
     text-align: end;
     margin-right: 4%;
     margin-bottom: 2%;
     font-weight: bold;
 
+}
+
+.timer-footer img{
+  cursor: pointer;
 }
 
 .sound > input{
