@@ -69,9 +69,9 @@ export function TodoPomodoList(props: TodoPomodoListProps){
         })
         const worksheet = XLSX.utils.json_to_sheet(exportedTodos)
 
-        XLSX.utils.book_append_sheet(workbook, worksheet, 'TodoList')
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'myTodos')
 
-        XLSX.writeFile(workbook, 'myTodos.xlsx')
+        XLSX.writeFile(workbook, `${todosTitle}.xlsx`)
       
     };
 
@@ -124,7 +124,7 @@ export function TodoPomodoList(props: TodoPomodoListProps){
                     </Tooltip>
                 )} 
                 </Overlay>
-                {titleChange?<input type='text' ref={titleRef} onKeyUp={handleTitleChange}></input>:
+                {titleChange?<input type='text' defaultValue={todosTitle} ref={titleRef} onKeyUp={handleTitleChange}></input>:
                 <h4 onDoubleClick={()=>{setTitleChange(true)}} ref={todosTitleRef}>{todosTitle}</h4>}
             </div>
             <div className="EnterTodo">
