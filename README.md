@@ -149,24 +149,25 @@ This is an example of how to list things you need to use the software and how to
 1. add item to list
 
 <img src="./public/img_examples/todos-example.png"
- width='400' height='500' title="todo-list" />
+ width='350' height='400' title="todo-list" />
 
 2. export list to excel
 
+ ### export list to excel
 <img src="./public/img_examples/excel.png"
- width='500' height='300' title="todo-list-excel" />
+ width='800' height='500' title="todo-list-excel" />
 
 3. filter list
 
 <img src="./public/img_examples/filter-example.png"
- width='300' height='200' title="filter-example" />
+ width='350' height='200' title="filter-example" />
 
 ### Timer
 
 1. start/pause/restart/resume timer
 
 <img src="./public/img_examples/timer.png"
- width='500' height='400' title="timer" />
+ width='550' height='400' title="timer" />
 
 2. disable/activate bell notification
 
@@ -178,20 +179,22 @@ on: <img src="./public/img_examples/bell-on.png"
 3. full screen mode:
 
 <img src="./public/img_examples/timer-full-screen.png"
- width='600' height='400' title="timer" />
+ width='700' height='450' title="timer" />
 
 
  ### Updates
 
  1. #### Complation Forcast
 
+<img src="./public/img_examples/updates.png"
+ width='700' height='200' title="updates" />
+
  (how many sessions will to take the user to complete all of the tasks, based on their 
   completion rate so far)
 
  2. #### Progress Bar
 
-<img src="./public/img_examples/updates.png"
- width='600' height='200' title="updates" />
+
 
 ### Settings
 
@@ -200,15 +203,13 @@ on: <img src="./public/img_examples/bell-on.png"
 3. set session mode (loop/ linear)
 
 <img src="./public/img_examples/settings.png"
- width='400' height='600' title="settings" />
+ width='450' height='600' title="settings" />
 
 ### Help Screen
 <img src="./public/img_examples/help-screen.png"
  width='900' height='500' title="help-screen" />
 
- ### export list to excel
-<img src="./public/img_examples/excel.png"
- width='800' height='500' title="todo-list-excel" />
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
