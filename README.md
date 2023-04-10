@@ -30,7 +30,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/lielbidago/screen">
+  <a href="https://todo-pomodoro-xi.vercel.app">
     <img src="./public/android-chrome-192x192.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -87,7 +87,7 @@ Whether you're a student, a professional, or just someone who wants to be more o
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src="./public/img_examples/screen.png" title="todo-pomodoro-screen" href="https://todo-pomodoro-xi.vercel.app/">
+<img src="./public/img_examples/screen.png" title="todo-pomodoro-screen" >
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
