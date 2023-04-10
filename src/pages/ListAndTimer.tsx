@@ -58,7 +58,11 @@ export function ListAndTimer(){
 
 
     function CompletionForcastEval(){
-        const forcast = Math.round(((todoList.length - completedTasksCount)/overallTaskRate)*(sessionLen/60))
+        let forcast = Math.round(((todoList.length - completedTasksCount)/overallTaskRate)*(sessionLen/60))
+        
+        if(todoList.length - completedTasksCount > 0 && forcast===0){
+            forcast = 1
+        }
         
         if (forcast===Infinity || Number.isNaN(forcast)){
             return '...'

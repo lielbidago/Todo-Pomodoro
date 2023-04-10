@@ -13,7 +13,7 @@ export function ProgressBarP(props: prograssBarProps){
     const pbRef = useRef(null)
     return (
         <div className={`ProgressBarP ${buttonColor}`}>
-            <div ref={pbRef} >
+            <div ref={pbRef} className='PB-container'>
                 <h6>Your progress</h6>
                 <ProgressBar variant='' now={progressValue} label={`${progressValue}%`}/>
             </div>

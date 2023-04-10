@@ -3,11 +3,13 @@
   grid-area: updates;
   flex-direction: row-reverse;
   margin: 0% 10% 2% 0%;
+  height:fit-content;
 
   .CompletionForcast{
     padding:3% 10%;
     // height: fit-content;
-    font-size:smaller;
+    font-size: smaller;
+    // height:100%;
     font-weight: bold;
     text-align: center;
     
@@ -31,9 +33,12 @@
     width: 50%;
     margin:0% 7% ;
     align-self: top;
-    
+    .PB-container{
+      height: 50%;
+    }
     h6{
       font-weight: bold;
+      font-size: 1.1em;
     }
 
   }
@@ -47,7 +52,7 @@
 
   .progress{
     background-color: rgba(255, 255, 255, 0.161) !important;
-    height: 25px !important;
+    height: 50% !important;
     box-shadow: 0 3px 5px rgb(0 0 0 / 0.2);
     backdrop-filter: blur(8px) saturate(150%);
     -webkit-backdrop-filter: blur(8px) saturate(150%);

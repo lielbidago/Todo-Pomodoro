@@ -4,15 +4,18 @@
   grid-area: TodoPomodoroList;
 
   background: rgb(255, 255, 255);      
-  // justify-self: stretch;
-  // align-self: stretch;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.091);
   text-align: center;
+
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
+
   overflow-y: scroll; 
+
   border-radius: 0px 0px 18px 22px;
+  
   position: relative;
+
   display:grid;
   grid-template-columns: auto;
   grid-template-rows: 18% 8% auto 10%;
@@ -84,7 +87,7 @@
   .todos-footer{
     grid-area: todos-footer;
     
-    position: relative;
+    position: absolute;
     bottom:0;
 
     div{
