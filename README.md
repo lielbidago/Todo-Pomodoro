@@ -216,7 +216,7 @@ on: <img src="./public/img_examples/bell-on.png"
 ## Important
 
 It's important to note that since this project was meant to be a front project, that in order to save data from use to use 
-without using a db and server i've used local storage for storage.
+without using a db and server i've used only the local storage to store that data.
 
 
 <!-- ROADMAP -->
