@@ -153,7 +153,6 @@ This is an example of how to list things you need to use the software and how to
 
 2. export list to excel
 
- ### export list to excel
 <img src="./public/img_examples/excel.png"
  width='800' height='500' title="todo-list-excel" />
 
