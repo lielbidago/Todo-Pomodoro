@@ -147,11 +147,6 @@ export function PomodoroTimer(props:PomodoroTimer){
                     </div>
                 </div>
                 <div className="timer-footer" >
-
-                        {/* <label className="switch" ref={soundRef}>
-                            <input type='checkbox' checked={soundOn} onChange={()=>{toggleSoundOn()}}></input>
-                            <span className="slider round"></span>
-                        </label> */}
                         <div className="sound">
                             {soundOn?<img height='15' ref={soundRef} onClick={()=>{toggleSoundOn()}}
                             src="https://img.icons8.com/metro/26/null/high-volume.png"/>:

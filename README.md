@@ -30,7 +30,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/lielbidago/Todo-Pomodoro">
+  <a href="https://github.com/lielbidago/screen">
     <img src="./public/android-chrome-192x192.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -141,18 +141,86 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-### add item to list
-<img src="./public/img_examples/todos-example.png" title="todo-list" />
+### Welcome Page
+<img src="./public/img_examples/welcome.png"
+ width='500' height='300' title="welcome" />
 
-### export to excel
-<img src="./public/img_examples/todos-example.png" title="todo-list" />
+### Todo List
+1. add item to list
+
+<img src="./public/img_examples/todos-example.png"
+ width='400' height='500' title="todo-list" />
+
+2. export list to excel
+
+<img src="./public/img_examples/excel.png"
+ width='500' height='300' title="todo-list-excel" />
+
+3. filter list
+
+<img src="./public/img_examples/filter-example.png"
+ width='300' height='200' title="filter-example" />
+
+### Timer
+
+1. start/pause/restart/resume timer
+
+<img src="./public/img_examples/timer.png"
+ width='500' height='400' title="timer" />
+
+2. disable/activate bell notification
+
+on: <img src="./public/img_examples/bell-on.png"
+    width='40' height='40' title="bell" />
+ to off:  <img src="./public/img_examples/bell-off.png"
+    width='40' height='40' title="bell" />
+
+3. full screen mode:
+
+<img src="./public/img_examples/timer-full-screen.png"
+ width='600' height='400' title="timer" />
+
+
+ ### Updates
+
+ 1. #### Complation Forcast
+
+ (how many sessions will to take the user to complete all of the tasks, based on their 
+  completion rate so far)
+
+ 2. #### Progress Bar
+
+<img src="./public/img_examples/updates.png"
+ width='600' height='200' title="updates" />
+
+### Settings
+
+1. set websites theme colors
+2. set session / break lengths
+3. set session mode (loop/ linear)
+
+<img src="./public/img_examples/settings.png"
+ width='400' height='600' title="settings" />
+
+### Help Screen
+<img src="./public/img_examples/help-screen.png"
+ width='900' height='500' title="help-screen" />
+
+ ### export list to excel
+<img src="./public/img_examples/excel.png"
+ width='800' height='500' title="todo-list-excel" />
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
+## Important
+
+It's important to note that since this project was meant to be a front project, that in order to save data from use to use 
+without using a db and server i've used local storage for storage.
+
 
 <!-- ROADMAP -->
-## Roadmap
+<!-- ## Roadmap
 
 - [ ] Feature 1
 - [ ] Feature 2
@@ -161,7 +229,7 @@ This is an example of how to list things you need to use the software and how to
 
 See the [open issues](https://github.com/lielbidago/Todo-Pomodoro/issues) for a full list of proposed features (and known issues).
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
 
 
@@ -203,14 +271,6 @@ Project Link: [https://github.com/lielbidago/Todo-Pomodoro](https://github.com/l
 
 
 
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 

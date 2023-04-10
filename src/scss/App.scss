@@ -47,9 +47,7 @@ footer{
   font-weight: lighter;
   font-size:medium;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.139);
-  position: relative;
-  bottom: 0;
-  height: 6%;
+  height: fit-content;
   margin-top: 1%;
   
   .main-footer{
@@ -83,16 +81,15 @@ footer{
     margin:0 1%;
     width: 98%;
 
-    // height: 100vh;
+    min-height: 90vhd;
     height: 100%;
-    // height: max-content;
     gap: 1%;
     text-align: center;
     grid-template-areas: 
     "TodoPomodoroHeader TodoPomodoroHeader"
     "TodoPomodoroList pomodoro-timer"
     'TodoPomodoroList updates';
-    // "footer footer";
+
   
 }
 
@@ -126,7 +123,8 @@ footer{
   width: 100%;
   margin:0;
   grid-area: TodoPomodoroHeader;
-  height: fit-content;
+  // height: fit-content;
+  // min-height: fit-content;
 
   h4{
     margin-bottom: 0%;
@@ -139,7 +137,7 @@ footer{
   text-decoration: none;
 }
 
-@media (min-width: 1280px){
+@media (min-width: 1900px){
   body{
     font-size: medium;
   }
@@ -152,12 +150,25 @@ footer{
   
   .ListAndTimer{
     margin-top: 0px;
+    grid-template-rows: minmax(auto, 6%) 1fr 0.5fr; //6%
 
   }
 
   .TodoPomodoroHeader{
     height:fit-content
   }
+
+  .updates .CompletionForcast{
+    font-size: medium;
+    height: 100%;
+  }
+
+  .TodoPomodoroList{
+    max-height: 90%;
+    // grid-template-rows: 8% minmax(8%, auto) auto 10%;
+  }
+
+
 }
 
 @media (max-width: 840px){
