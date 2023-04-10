@@ -46,7 +46,7 @@ Whether you're a student, a professional, or just someone who wants to be more o
     <a href="https://github.com/lielbidago/Todo-Pomodoro"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/lielbidago/Todo-Pomodoro">View Demo</a>
+    <a href="https://todo-pomodoro-xi.vercel.app">View Demo</a>
     ·
     <a href="https://github.com/lielbidago/Todo-Pomodoro/issues">Report Bug</a>
     ·
