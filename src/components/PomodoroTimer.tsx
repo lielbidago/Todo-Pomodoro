@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Overlay, Tooltip } from "react-bootstrap";
 import soundbell from "../assets/achievementBell.wav";
-
+import '../scss/timer.scss';
 
 interface PomodoroTimer{
     timer: number,
@@ -13,7 +13,6 @@ interface PomodoroTimer{
     resumeTimer():void,
     changeTimerModes(newMode: string):void,
     handleShowSettings():void,
-    progressValue():number,
     sessionsLoop:boolean,
     sessionLen:number,
     breakLen:number, 
@@ -27,7 +26,6 @@ interface PomodoroTimer{
     buttonColor:string,
     toggleHelpTips: boolean,
     toggleTimerFullScreen():void,
-    timerFullScreen:boolean
 }
 
 function formatTimer(timer: number){
@@ -48,7 +46,7 @@ export function PomodoroTimer(props:PomodoroTimer){
     sessionsLoop, sessionLen, breakLen,
      setTimerTime, updateSessionAndBreakLen, timerBell, toggleSoundOn,
       soundOn, setLastSessionTaskCount, calculateCurSessionRate, buttonColor,
-      toggleHelpTips, toggleTimerFullScreen, timerFullScreen }
+      toggleHelpTips, toggleTimerFullScreen }
     = props
     
     function playBell(){
@@ -128,7 +126,7 @@ export function PomodoroTimer(props:PomodoroTimer){
 
     return (
         <div className="pomodoro-timer">
-            <div className="timer">
+            <div className={`timer ${buttonColor}`}>
                 <div className="timer-a">
                     <h5 onDoubleClick={handleModeChange} className="timer-title" ref={sessionTitleRef}>{timerMode}</h5>
                     <Overlay target={sessionTitleRef.current} show={toggleHelpTips} placement='top'>

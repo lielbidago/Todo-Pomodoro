@@ -87,8 +87,8 @@ footer{
     text-align: center;
     grid-template-areas: 
     "TodoPomodoroHeader TodoPomodoroHeader"
-    "TodoPomodoroList pomodoro-timer"
-    'TodoPomodoroList updates';
+    "list-container pomodoro-timer"
+    'list-container updates';
 
   
 }
@@ -100,10 +100,7 @@ footer{
   font-family: 'Red Hat Display', sans-serif;
   margin:0 1%;
   width: 98%;
-
-  // height: 100vh;
   height: 100%;
-  // height: max-content;
   gap: 1%;
   text-align: center;
   grid-template-areas: 
@@ -123,8 +120,6 @@ footer{
   width: 100%;
   margin:0;
   grid-area: TodoPomodoroHeader;
-  // height: fit-content;
-  // min-height: fit-content;
 
   h4{
     margin-bottom: 0%;
@@ -165,7 +160,6 @@ footer{
 
   .TodoPomodoroList{
     max-height: 90%;
-    // grid-template-rows: 8% minmax(8%, auto) auto 10%;
   }
 
 

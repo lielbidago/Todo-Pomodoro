@@ -88,7 +88,7 @@ export function TodoPomodoList(props: TodoPomodoListProps){
     }
 
 
-    function onDragEnd(e:React.DragEvent<HTMLDivElement>, index:number){
+    function onDragEnd(e:React.DragEvent<HTMLDivElement>){
         handleItemOrderChange(draggedItemRef.current,draggedOverItemRef.current)
         draggedItemRef.current = null
         draggedOverItemRef.current = null
@@ -115,7 +115,8 @@ export function TodoPomodoList(props: TodoPomodoListProps){
     const excelButton = useRef(null)
 
     return (
-        <div className="TodoPomodoroList">
+        <div className="list-container">
+                    <div className="TodoPomodoroList">
             <div className="todos-title" style={{borderTopColor: `${dotsColor1}`}}>
                 <Overlay target={todosTitleRef.current} show={toggleHelpTips} placement='right'>
                 {(props) => (
@@ -155,19 +156,19 @@ export function TodoPomodoList(props: TodoPomodoListProps){
                     todoList.map((td:itodoLi, index)=> 
                     (<TodoLI todo={td} key={index} changeStatusTodo={changeStatusTodo} toggleHelpTips={toggleHelpTips}
                   editTask={editTask} deleteTodo={deleteTodo} 
-                  onDragStart={(e)=>onDragStart(e,index)} onDragEnter={(e)=>onDragEnter(e,index)} onDragEnd={(e)=> onDragEnd(e,index)}/>))
+                  onDragStart={(e)=>onDragStart(e,index)} onDragEnter={(e)=>onDragEnter(e,index)} onDragEnd={(e)=> onDragEnd(e)}/>))
                 }
 
                 {todosFilter==='completed'&&todoList.filter(td => td.completed).map((td:itodoLi, index)=> 
                   (<TodoLI todo={td} key={index} changeStatusTodo={changeStatusTodo} toggleHelpTips={toggleHelpTips}
                     editTask={editTask} deleteTodo={deleteTodo} 
-                    onDragStart={(e)=>onDragStart(e,index)} onDragEnter={(e)=>onDragEnter(e,index)} onDragEnd={(e)=> onDragEnd(e,index)}/>))
+                    onDragStart={(e)=>onDragStart(e,index)} onDragEnter={(e)=>onDragEnter(e,index)} onDragEnd={(e)=> onDragEnd(e)}/>))
                 }
 
                 {todosFilter==='noncompleted'&&todoList.filter(td => !td.completed).map((td:itodoLi, index)=> 
                   (<TodoLI todo={td} key={index} changeStatusTodo={changeStatusTodo} toggleHelpTips={toggleHelpTips}
                     editTask={editTask} deleteTodo={deleteTodo} 
-                    onDragStart={(e)=>onDragStart(e,index)} onDragEnter={(e)=>onDragEnter(e,index)} onDragEnd={(e)=> onDragEnd(e,index)}/>))
+                    onDragStart={(e)=>onDragStart(e,index)} onDragEnter={(e)=>onDragEnter(e,index)} onDragEnd={(e)=> onDragEnd(e)}/>))
                 }
 
             </ul>                
@@ -190,5 +191,7 @@ export function TodoPomodoList(props: TodoPomodoListProps){
                 
             </div>
         </div>
+        </div>
+
     )
 }

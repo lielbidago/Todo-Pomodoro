@@ -1,0 +1,42 @@
+
+.Todo-li{
+    list-style: none;
+    border-bottom: 1px solid rgb(184, 184, 184);
+    width:90%;
+    max-width: 90%;
+    cursor: move;
+    font-family: 'Red Hat Display', sans-serif;
+
+    .todo{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+  
+    input[type=text]{
+      width:100%;
+      border:0;
+  
+    }
+  
+    label{
+      overflow-wrap: break-word;
+      text-align: left;
+    }
+  
+    .buttonTodo{
+      border: 0;
+      background-color: white;
+      font-weight: bold;
+      font-size: larger;
+      color: grey;
+      
+    }
+  
+    .deleteTodo:hover{
+      color: black;
+      box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+      padding: 0 2%;
+      border-radius: 50px;
+    }
+}
