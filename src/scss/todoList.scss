@@ -1,12 +1,14 @@
-
+.list-container{
+  grid-area: list-container;
+}
 
 .TodoPomodoroList{
-  grid-area: TodoPomodoroList;
 
   background: rgb(255, 255, 255);      
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.091);
   text-align: center;
 
+  height: 95%;
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
 
@@ -18,7 +20,7 @@
 
   display:grid;
   grid-template-columns: auto;
-  grid-template-rows: 18% 8% auto 10%;
+  grid-template-rows: 18% minmax(8%, 10%) auto 10%;
   grid-template-areas: "title"
                         "enterTodo"
                         "todos"
@@ -60,7 +62,7 @@
       border-radius: 10px;
 
     }
-
+    display:block;
   }
   .todos-title{
     grid-area: title;
@@ -77,7 +79,6 @@
     overflow-y: scroll; 
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
     scrollbar-width: none; /* for Firefox */
-    
   }
 
   .my-todos::-webkit-scrollbar {
@@ -125,66 +126,7 @@
   display: none; /* for Chrome, Safari, and Opera */
 }
 
-// .hide-todos{
-//   writing-mode: vertical-rl;
-//   text-orientation: mixed;
-//   width: 20px;
-//   height: fit-content;
-//   border-radius: 3px 0px 0px 3px;
-//   position: absolute;
-//   right:0;
-//   top: calc(40%);
-//   cursor:pointer;
-//   background-color: rgba(0, 0, 0, 0.304);
-//   color: white;
 
-//   p{
-//     margin:0px;
-//     padding:5px 0px;
-//   }
-// }
-
-.Todo-li{
-    list-style: none;
-    border-bottom: 1px solid rgb(184, 184, 184);
-    width:90%;
-    max-width: 90%;
-    cursor: move;
-  
-  
-    input[type=text]{
-      width:100%;
-      border:0;
-  
-    }
-  
-    label{
-      overflow-wrap: break-word;
-      word-wrap: break-word;
-      width: 85%;
-      text-align: left;
-    }
-  
-    .checkbox-wrapper-11{
-      display: flex;
-      
-    }
-    .buttonTodo{
-      border: 0;
-      background-color: white;
-      font-weight: bold;
-      font-size: larger;
-      color: grey;
-      
-    }
-  
-    .deleteTodo:hover{
-      color: black;
-      box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-      padding: 0 2%;
-      border-radius: 50px;
-    }
-}
   
 
 

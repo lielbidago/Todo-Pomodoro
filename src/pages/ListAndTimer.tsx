@@ -86,7 +86,6 @@ export function ListAndTimer(){
                 resumeTimer={resumeTimer}
                 changeTimerModes={changeTimerModes}
                 handleShowSettings={handleShowSettings}
-                progressValue={progressValue}
                 sessionsLoop={sessionsLoop}
                     sessionLen={sessionLen} breakLen={breakLen}
                     setTimerTime={setTimerTime}
@@ -99,7 +98,7 @@ export function ListAndTimer(){
                     buttonColor={buttonColor}
                     toggleHelpTips={toggleHelpTips}
                     toggleTimerFullScreen = {toggleTimerFullScreen}
-                    timerFullScreen = {timerFullScreen}
+
 
                 />
 
@@ -126,7 +125,6 @@ export function ListAndTimer(){
              resumeTimer={resumeTimer}
              changeTimerModes={changeTimerModes}
              handleShowSettings={handleShowSettings}
-              progressValue={progressValue}
                sessionsLoop={sessionsLoop}
                 sessionLen={sessionLen} breakLen={breakLen}
                 setTimerTime={setTimerTime}
@@ -139,7 +137,6 @@ export function ListAndTimer(){
                 buttonColor={buttonColor}
                 toggleHelpTips={toggleHelpTips}
                 toggleTimerFullScreen = {toggleTimerFullScreen}
-                timerFullScreen = {timerFullScreen}
 
              />
 
