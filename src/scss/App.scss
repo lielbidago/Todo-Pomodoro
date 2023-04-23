@@ -63,11 +63,10 @@ footer{
   
 }
 .session-settings:hover{
-  // background-color: #ffffff59;
   box-shadow: 2px 1px 4px 0px rgba(0, 0, 0, 0.274);
 }
 
-.modal-open .offcanvas{
+.modal-open .offcanvas, .modal-open .modal-content{
   background-color: rgba(255, 255, 255, 0.498);
   backdrop-filter: blur(8px) saturate(200%);
   -webkit-backdrop-filter: blur(15px) saturate(200%);
@@ -81,7 +80,7 @@ footer{
     margin:0 1%;
     width: 98%;
 
-    min-height: 90vhd;
+    min-height: 90dvh;
     height: 100%;
     gap: 1%;
     text-align: center;
@@ -96,7 +95,7 @@ footer{
 .ListAndTimer.timer-center{
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: minmax(auto, 9%) 1fr; //6%
+  grid-template-rows: minmax(auto, 9%) 1fr;
   font-family: 'Red Hat Display', sans-serif;
   margin:0 1%;
   width: 98%;
@@ -132,21 +131,43 @@ footer{
   text-decoration: none;
 }
 
+.fade.toast.show{
+  position:absolute;
+  bottom: 1%;
+  right:1%;
+  background-color: rgba(255, 255, 255, 0.498);
+  backdrop-filter: blur(8px) saturate(200%);
+  -webkit-backdrop-filter: blur(15px) saturate(200%);
+
+}
+
 @media (min-width: 1900px){
-  body{
-    font-size: medium;
-  }
 
   .todos-title{
     border-top: 19px dotted #9393938d;
     margin-top: 3%;
+    h4{
+      font-size: 200%;
+    }
+    
 
+  }
+
+  .Todo-li{
+    font-size: 130%;
+  }
+
+  button{
+    font-size: 130%;
   }
   
   .ListAndTimer{
     margin-top: 0px;
-    grid-template-rows: minmax(auto, 6%) 1fr 0.5fr; //6%
+    grid-template-rows: minmax(auto, 6%) 1fr 0.5fr; 
 
+  }
+  .timer .btn{
+    font-size: 130%;
   }
 
   .TodoPomodoroHeader{
@@ -154,7 +175,7 @@ footer{
   }
 
   .updates .CompletionForcast{
-    font-size: medium;
+    font-size: 120%;
     height: 100%;
   }
 

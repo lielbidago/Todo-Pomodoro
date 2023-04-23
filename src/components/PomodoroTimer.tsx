@@ -1,9 +1,8 @@
 import { useEffect, useRef } from "react";
 import { Overlay, Tooltip } from "react-bootstrap";
-import soundbell from "../assets/achievementBell.wav";
 import '../scss/timer.scss';
 
-interface PomodoroTimer{
+interface PomodoroTimerprops{
     timer: number,
     timerMode: string,
     startTimer():void,
@@ -39,7 +38,7 @@ function formatTimer(timer: number){
 }
 
 
-export function PomodoroTimer(props:PomodoroTimer){
+export function PomodoroTimer(props:PomodoroTimerprops){
     
     const {timer, timerMode, startTimer, timerStatus,
     changeTime, pauseTimer, resumeTimer, changeTimerModes, 

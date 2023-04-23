@@ -8,7 +8,7 @@ import { ProgressBarP } from '../components/prograssBar';
 import { CompletionForcast } from '../components/CompletionForcast';
 import { useContext, useEffect, useState } from 'react';
 import { themeContext } from '../context/themeContext';
-
+import Toast from 'react-bootstrap/Toast';
 
 
 
@@ -25,17 +25,22 @@ export function ListAndTimer(){
          addTodo, editTask, 
         progressValue, deleteTodo,todosTitle,
         changeTodosTitle, updateTodosList
-        , completedTasksCount, updateCompletedTasks, updateTodosTitle, handleItemOrderChange}
+        , completedTasksCount, updateCompletedTasks, updateTodosTitle,
+         handleItemOrderChange, timeTodo, cancelTimedTodo}
         = TodosListHook()
 
-    const {buttonColor, setButtonColor, customeTheme1, customeTheme2} = useContext(themeContext)
-    
+    const {buttonColor, customeTheme1, customeTheme2} = useContext(themeContext)
 
     const [completedTasksCounter, setCompletedTasksCounter] = useState(0)
     const [overallTaskRate, setOverallTaskRate] = useState(0)
     const [sessionNum, setSessionNum] = useState(0)
+
     const [toggleHelpTips, setToggleHelpTips] = useState(false)
+
     const [timerFullScreen, setTimerFullScreen] = useState(false)
+
+    const [showToast, setShowToast] = useState(false)
+    const toggleShowToast = () => { setShowToast(!showToast)}
 
     function toggleTimerFullScreen(){
         setTimerFullScreen(!timerFullScreen)
@@ -71,6 +76,11 @@ export function ListAndTimer(){
         }
 
     }
+
+    useEffect(()=>{
+        toggleShowToast()
+    }, [todoList.length])
+
 
     if(timerFullScreen){
         return (
@@ -108,7 +118,14 @@ export function ListAndTimer(){
              setSessionAndBreakLen={setSessionAndBreakLen}
              customeTheme1={customeTheme1}
              customeTheme2={customeTheme2} />
+            <Toast show={showToast} onClose={toggleShowToast}>
+                <Toast.Header>
+                    <strong className="me-auto">todo Pomodoro</strong>
+                </Toast.Header>
+                <Toast.Body>New Task Added!</Toast.Body>
+            </Toast>
             </div>
+            
         )
     }
     return (
@@ -157,6 +174,8 @@ export function ListAndTimer(){
                     updateTodosTitle={updateTodosTitle}
                     handleItemOrderChange = {handleItemOrderChange}
                     toggleHelpTips={toggleHelpTips}
+                    timeTodo = {timeTodo}
+                    cancelTimedTodo = {cancelTimedTodo}
             />
 
 
@@ -166,6 +185,12 @@ export function ListAndTimer(){
              setSessionAndBreakLen={setSessionAndBreakLen}
              customeTheme1={customeTheme1}
              customeTheme2={customeTheme2} />
+
+            <Toast show={showToast} onClose={toggleShowToast}>
+                <Toast.Header>
+                    <strong className="me-auto">todo Pomodoro</strong>
+                </Toast.Header>
+                <Toast.Body>New Task Added!</Toast.Body></Toast>
              
             
         </div>

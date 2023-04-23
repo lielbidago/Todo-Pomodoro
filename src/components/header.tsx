@@ -1,6 +1,6 @@
 
 import { useRef } from "react";
-import { Button, Overlay, Tooltip } from "react-bootstrap";
+import { Overlay, Tooltip } from "react-bootstrap";
 
 interface TodoPomodoroHeaderProps{
     handleShowSettings,
@@ -19,7 +19,6 @@ export function TodoPomodoroHeader(props:TodoPomodoroHeaderProps){
             <div className="container-fluid">
                 <a className="navbar-brand" href="\"><h4 style={{color:buttonColor==='light'? 'white':'black'}}>Todo Pomodoro</h4></a>
                 <div className="header-button">
-                    {/* <Button variant='none' onClick={handleShowSettings} className="me-2 session-settings">≡</Button> */}
                     <button onClick={()=> setToggleHelpTips(!toggleHelpTips)}
                      style={{color:buttonColor==='light'? 'white':'black'}} className="me-2 help ">?</button>
                     <button ref={menuRef} onClick={handleShowSettings} style={{color:buttonColor==='light'? 'white':'black'}} className="me-2 session-settings">≡</button>

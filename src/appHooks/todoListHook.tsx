@@ -5,6 +5,7 @@ export interface itodoLi{
     task: string,
     id: number
     completed: boolean
+    timed: NodeJS.Timer | null
 }
 
 export function TodosListHook(){
@@ -23,7 +24,7 @@ export function TodosListHook(){
     // {title:'do something 11', id:Date.now()+9, completed: false},
     // {title:'do something 12', id:Date.now()+10, completed: false}]
     
-    const [ todoList, setTodoList ] = useState([{task:'do something', id:Date.now(), completed: false}]);
+    const [ todoList, setTodoList ] = useState([{task:'do something', id:Date.now(), completed: false, timed:null}]);
     const [completedTasksCount, setCompletedTasksCount] = useState(0);
     const [todosTitle, setTodosTitle] = useState('My Todos');
 
@@ -57,7 +58,8 @@ export function TodosListHook(){
         newTodoList.push({
             task: task,
             id: Date.now(),
-            completed: false
+            completed: false,
+            timed:null
         })
 
         setTodoList(newTodoList)
@@ -99,6 +101,27 @@ export function TodosListHook(){
         setTodoList(newTodoList)
     }
 
+    function timeTodo(taskID:number, intervalID:NodeJS.Timer){
+        
+        const newTodoList: itodoLi[] = todoList.map((td) => (td.id === taskID ? {...td, timed:intervalID}: td ))
+        setTodoList(newTodoList);
+        localStorage.setItem('todoList', JSON.stringify(newTodoList));
+    }
+
+    function cancelTimedTodo(taskID:number){
+
+        const timedTask = todoList.filter((td)=> td.id == taskID)
+
+        if (timedTask.length !== 0){
+            clearInterval(timedTask[0].timed)
+        }
+        const newTodoList: itodoLi[] = todoList.map((td) => (td.id === taskID ? {...td, timed:null}: td ))
+
+        setTodoList(newTodoList)
+        localStorage.setItem('todoList', JSON.stringify(newTodoList));
+    }
+        
+
 
     return {
         todoList,
@@ -114,7 +137,9 @@ export function TodosListHook(){
         todosTitle,
         changeTodosTitle,
         updateTodosTitle,
-        handleItemOrderChange
+        handleItemOrderChange,
+        timeTodo,
+        cancelTimedTodo
     }
 
 }
