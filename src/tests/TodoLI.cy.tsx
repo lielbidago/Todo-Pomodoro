@@ -12,14 +12,14 @@ describe('<TodoLI />', () => {
   const onDragEnd = () => {};
   const todo1 = {id: 123, completed: false, task:'string to do'};
   const toggleHelpTips = false;
+  const toggleShowTodoModal = () => {};
   // const showInput = true
   // const event:React.DragEvent<HTMLDivElement> = null;
   
   it('it should renders TodoLI', () => {
 
-    cy.mount(<TodoLI todo={todo1} key={1} changeStatusTodo={changeStatusTodo} toggleHelpTips={toggleHelpTips}
-    editTask={editTask} deleteTodo={deleteTodo} 
-    onDragStart={onDragStart} onDragEnter={onDragEnter} onDragEnd={onDragEnd}/>)
+    cy.mount(<TodoLI key={1}  props = {{todo:todo1, changeStatusTodo, toggleHelpTips, editTask, deleteTodo, toggleShowTodoModal, onDragStart,
+      onDragEnter, onDragEnd}}/>)
 
     cy.get('li').should('have.attr', 'class', 'Todo-li');
     cy.get('.todo').should('exist')
@@ -32,9 +32,8 @@ describe('<TodoLI />', () => {
     const todo2 = {id: 123, completed: false, task:'string to do'};
     const changeStatusTodo = (TaskId:number) => {todo2.completed=!todo2.completed};
 
-    cy.mount(<TodoLI todo={todo2} key={1} changeStatusTodo={changeStatusTodo} toggleHelpTips={toggleHelpTips}
-    editTask={editTask} deleteTodo={deleteTodo} 
-    onDragStart={onDragStart} onDragEnter={onDragEnter} onDragEnd={onDragEnd}/>)
+    cy.mount(<TodoLI key={1}  props = {{todo:todo2, changeStatusTodo, toggleHelpTips, editTask, deleteTodo, toggleShowTodoModal, onDragStart,
+      onDragEnter, onDragEnd}}/>)
 
     cy.get('input[type=checkbox]').check({force: true})
     cy.get('label').should('have.css', 'color', 'rgb(65, 72, 86)')
@@ -45,9 +44,10 @@ describe('<TodoLI />', () => {
 
     const enter = cy.spy().as('enterNewTask');
 
-    cy.mount(<TodoLI todo={todo1} key={1} changeStatusTodo={changeStatusTodo} toggleHelpTips={toggleHelpTips}
-    editTask={enter} deleteTodo={deleteTodo} 
-    onDragStart={onDragStart} onDragEnter={onDragEnter} onDragEnd={onDragEnd}/>)
+    cy.mount(<TodoLI key={1}  props = {{todo:todo1, changeStatusTodo, toggleHelpTips, editTask, deleteTodo, toggleShowTodoModal, onDragStart,
+      onDragEnter, onDragEnd}}/>)
+
+
 
     cy.get('label').dblclick()
     cy.get('input').type('{selectAll}{del}new task!!!');

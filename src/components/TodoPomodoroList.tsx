@@ -5,6 +5,7 @@ import * as XLSX from 'xlsx';
 import FilterDropDown from "./FilterDropDown";
 import Overlay from 'react-bootstrap/Overlay';
 import Tooltip from 'react-bootstrap/Tooltip';
+import { TimedTodoModal } from "./TimedTodoModal";
 
 interface TodoPomodoListProps{
     todoList: itodoLi[]
@@ -19,21 +20,34 @@ interface TodoPomodoListProps{
     changeTodosTitle(newName:string):void,
     updateTodosTitle():void,
     handleItemOrderChange(fromIndex:number, toIndex:number):void,
-    toggleHelpTips: boolean
+    toggleHelpTips: boolean,
+    timeTodo(taskID:number, intervalID:NodeJS.Timer):void,
+    cancelTimedTodo
 
 }
+
+// interface ItimedTodo{
+//     taskId: number,
+//     time:{
+//         hour:number,
+//         minutes:number
+//     }
+// }
 
 export function TodoPomodoList(props: TodoPomodoListProps){
     
     const {todoList, changeStatusTodo, addTodo, editTask,
          deleteTodo, updateTodosList, completedTasksCount, updateCompletedTasks,
-         changeTodosTitle, todosTitle, updateTodosTitle, handleItemOrderChange, toggleHelpTips} = props
+         changeTodosTitle, todosTitle, updateTodosTitle, handleItemOrderChange,
+          toggleHelpTips, timeTodo, cancelTimedTodo} = props
 
     const inputRef = useRef(null);
 
     const [todosFilter, setTodosFilter] = useState('all')
     const [titleChange, setTitleChange]=useState(false);
     const titleRef = useRef(null);
+
+
     const dotsColor1 = localStorage.getItem('theme1');
 
 
@@ -114,9 +128,43 @@ export function TodoPomodoList(props: TodoPomodoListProps){
     const addButtonRef = useRef(null)
     const excelButton = useRef(null)
 
+    function setTimedTodo(timeToSet:string, taskID:number){
+        console.log(   `entered setTimedTodo with: ${timeToSet} and id: ${taskID}`)
+        const hour = Number(timeToSet.slice(0,2))
+        const minutes = Number(timeToSet.slice(3))
+
+        const targetTime = new Date();
+        targetTime.setHours(hour);
+        targetTime.setMinutes(minutes);
+        targetTime.setSeconds(0);
+
+        let timeDiff = targetTime.getTime() - Date.now();
+
+        if (timeDiff < 0){
+            timeDiff += 24 * 60 * 60 * 1000;
+        }
+
+        const todo = todoList.filter((td)=> td.id === taskID)[0]
+        
+        setTimeout(()=>{
+
+            const taskInterval = setInterval(()=>{
+                const task = todoList.filter((td)=> td.task === todo.task)
+                if (task.length === 0){
+                    addTodo(todo.task)
+                }
+            }, 24 * 60 * 60 * 1000)
+
+            timeTodo(taskID, taskInterval)
+
+        }, timeDiff)
+        
+    }
+
     return (
         <div className="list-container">
-                    <div className="TodoPomodoroList">
+
+            <div className="TodoPomodoroList">
             <div className="todos-title" style={{borderTopColor: `${dotsColor1}`}}>
                 <Overlay target={todosTitleRef.current} show={toggleHelpTips} placement='right'>
                 {(props) => (
@@ -154,21 +202,22 @@ export function TodoPomodoList(props: TodoPomodoListProps){
             <ul >  
                 {todosFilter==='all'&&
                     todoList.map((td:itodoLi, index)=> 
-                    (<TodoLI todo={td} key={index} changeStatusTodo={changeStatusTodo} toggleHelpTips={toggleHelpTips}
-                  editTask={editTask} deleteTodo={deleteTodo} 
-                  onDragStart={(e)=>onDragStart(e,index)} onDragEnter={(e)=>onDragEnter(e,index)} onDragEnd={(e)=> onDragEnd(e)}/>))
+                    (<TodoLI key={index}
+                  props = {{todo:td, changeStatusTodo, toggleHelpTips, editTask, deleteTodo, onDragStart:(e)=> onDragStart(e,index),
+                    onDragEnter:(e) => {onDragEnter(e,index)}, onDragEnd:(e) => {onDragEnd(e)}, setTimedTodo, cancelTimedTodo}}
+                  />))
                 }
 
                 {todosFilter==='completed'&&todoList.filter(td => td.completed).map((td:itodoLi, index)=> 
-                  (<TodoLI todo={td} key={index} changeStatusTodo={changeStatusTodo} toggleHelpTips={toggleHelpTips}
-                    editTask={editTask} deleteTodo={deleteTodo} 
-                    onDragStart={(e)=>onDragStart(e,index)} onDragEnter={(e)=>onDragEnter(e,index)} onDragEnd={(e)=> onDragEnd(e)}/>))
+                    (<TodoLI key={index}
+                        props = {{todo:td, changeStatusTodo, toggleHelpTips, editTask, deleteTodo, onDragStart:(e)=> onDragStart(e,index),
+                          onDragEnter:(e) => {onDragEnter(e,index)}, onDragEnd:(e) => {onDragEnd(e)}, setTimedTodo, cancelTimedTodo}}/>))
                 }
 
                 {todosFilter==='noncompleted'&&todoList.filter(td => !td.completed).map((td:itodoLi, index)=> 
-                  (<TodoLI todo={td} key={index} changeStatusTodo={changeStatusTodo} toggleHelpTips={toggleHelpTips}
-                    editTask={editTask} deleteTodo={deleteTodo} 
-                    onDragStart={(e)=>onDragStart(e,index)} onDragEnter={(e)=>onDragEnter(e,index)} onDragEnd={(e)=> onDragEnd(e)}/>))
+                    (<TodoLI key={index}
+                        props = {{todo:td, changeStatusTodo, toggleHelpTips, editTask, deleteTodo, onDragStart:(e)=> onDragStart(e,index),
+                          onDragEnter:(e) => {onDragEnter(e,index)}, onDragEnd:(e) => {onDragEnd(e)} , setTimedTodo, cancelTimedTodo}}/>))
                 }
 
             </ul>                

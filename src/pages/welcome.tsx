@@ -1,7 +1,4 @@
 import { Link } from "react-router-dom";
-import {customeBackground} from '../helperFunctions/themes'
-
-
 
 export function WelcomePage(){
 

@@ -1,5 +1,5 @@
 
-import { useState, useRef, useContext } from 'react';
+import { useRef, useContext } from 'react';
 import { Button, Offcanvas, Form, InputGroup, Col, Row  } from 'react-bootstrap';
 import {themeContext} from '../context/themeContext'
 
