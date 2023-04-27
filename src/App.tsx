@@ -5,7 +5,7 @@ import {ListAndTimer} from "./pages/ListAndTimer"
 import  {Route, Routes} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import { Footer } from './components/footer';
-import {themeContext} from './context/themeContext';
+import {ThemeContext} from './context/themeContext';
 import {customeBackground, getButtonsColor} from './helperFunctions/themes'
 
 
@@ -16,6 +16,8 @@ function App() {
   const [customeTheme2, setCustomeTheme2] = useState('#bfebe1');
   const [buttonColor, setButtonColor] = useState('light')
   
+  // reducer - לנהל מערך של צבעים
+  // לשנות לרף
   function getCustomeThemes(theme1: string, theme2: string,){
       setCustomeTheme1(theme1);
       setCustomeTheme2(theme2);
@@ -28,7 +30,7 @@ function App() {
     
     const c1 = localStorage.getItem('theme1')
     const c2 = localStorage.getItem('theme2')
-
+// לשנות לOUTER INNER
     if(c1){
       setCustomeTheme1(c1)
     }
@@ -44,13 +46,19 @@ function App() {
   },[customeTheme1, customeTheme2])
   
   return (
-    <themeContext.Provider value={{customeTheme1, customeTheme2, getCustomeThemes, buttonColor, setButtonColor} }>
+    <ThemeContext.Provider value={{customeTheme1, customeTheme2, getCustomeThemes, buttonColor, setButtonColor} }>
     <Routes>
-      <Route path='*' element={<div className='app-screen' style={customeBackground(customeTheme1, customeTheme2)}><WelcomePage/><Footer buttonColor={buttonColor}/></div>}/>
-      <Route path='todos-and-pomodoro' element={<div className='app-screen' style={customeBackground(customeTheme1, customeTheme2)}><ListAndTimer/><Footer buttonColor={buttonColor}/></div>}/>
+      
+      <Route path='*' element={<div className='app-screen'
+       style={customeBackground(customeTheme1, customeTheme2)}><WelcomePage/>
+       <Footer buttonColor={buttonColor}/></div>}/>
+
+      <Route path='todos-and-pomodoro' element={<div className='app-screen' 
+      style={customeBackground(customeTheme1, customeTheme2)}>
+        <ListAndTimer/><Footer buttonColor={buttonColor}/></div>}/>
     </Routes>
     
-    </themeContext.Provider>
+    </ThemeContext.Provider>
     
   )
 }

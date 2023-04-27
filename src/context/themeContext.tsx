@@ -1,3 +1,8 @@
 import {createContext} from "react";
 
-export const themeContext = createContext(null);
+export const ThemeContext = createContext(null);
+
+function useThemeContext(){
+    const ctx = ThemeContext;
+    return ctx;
+}

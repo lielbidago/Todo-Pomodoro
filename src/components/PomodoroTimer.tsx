@@ -48,6 +48,9 @@ export function PomodoroTimer(props:PomodoroTimerprops){
       toggleHelpTips, toggleTimerFullScreen }
     = props
     
+
+    //////////
+    
     function playBell(){
         timerBell.play()
     }
@@ -162,6 +165,8 @@ export function PomodoroTimer(props:PomodoroTimerprops){
                             </Tooltip>
                         )} 
                 </Overlay>
+
+
             </div>
         </div>
     );

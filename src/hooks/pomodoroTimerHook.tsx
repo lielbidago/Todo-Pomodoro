@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import soundbell from "../assets/achievementBell.wav";
 
 export function PomodoroTimerHook(){
@@ -8,14 +8,15 @@ export function PomodoroTimerHook(){
     const [timer, setTimer] = useState(2400)
     const [showSettings, setShowSettings] = useState(false);
     const [sessionsLoop, setSessionsLoop] = useState(false);
-      
-    const handleCloseSettings = () => setShowSettings(false);
-    const handleShowSettings = () => setShowSettings(true);
 
     const [timerMode, setTimerMode] = useState('Pomodoro Session') // or Pomodoro Break
     const [timerStatus, setTimerStatus] = useState(false)
     const [soundOn, setSoundOn] = useState(true)
-    const timerBell = new Audio(soundbell.toString())
+    
+    const timerBell = useMemo(()=> new Audio(soundbell.toString()), [soundbell])
+
+    const handleCloseSettings = () => setShowSettings(false);
+    const handleShowSettings = () => setShowSettings(true);
 
     function toggleSoundOn(){
         setSoundOn(!soundOn)
