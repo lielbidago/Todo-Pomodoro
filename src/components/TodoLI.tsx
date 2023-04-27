@@ -17,7 +17,7 @@ import { TimedTodoModal } from './TimedTodoModal';
 // }
 
 export function TodoLI({props}){
-    const {changeStatusTodo, editTask, deleteTodo,setTimedTodo, cancelTimedTodo, onDragEnter, onDragStart, onDragEnd, toggleHelpTips, todo} = props
+    const {changeStatusTodo, editTask,addTimeToTodo, deleteTodo,setTimedTodo, cancelTimedTodo, onDragEnter, onDragStart, onDragEnd, toggleHelpTips, todo} = props
     const {id, completed, task, timed} = todo
 
     const [showInput, setShowInput] = useState(false)
@@ -49,7 +49,7 @@ export function TodoLI({props}){
         <li className="Todo-li" draggable onDragStart={onDragStart} onDragEnter={onDragEnter}
          onDragEnd={onDragEnd} onDragOver={(e)=> e.preventDefault()} id={'li-'+ id.toString()}>
 
-            <TimedTodoModal props={{toggleShowTodoModal, editTask, setTimedTodo, cancelTimedTodo, showTodoModal, todo}}/>
+            <TimedTodoModal props={{toggleShowTodoModal, editTask, setTimedTodo, cancelTimedTodo, showTodoModal, todo, addTimeToTodo}}/>
 
             {!showInput? 
             <div className="todo">

@@ -6,7 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 
 export function TimedTodoModal({props}) {
 
-    const {toggleShowTodoModal, showTodoModal, todo, setTimedTodo, cancelTimedTodo, editTask} = props
+    const {toggleShowTodoModal, showTodoModal, todo, setTimedTodo, cancelTimedTodo, editTask, addTimeToTodo} = props
     const formRef = useRef(null)
     const [isTimed, setIsTimed] = useState(todo.timed !== null? true:false)
 
@@ -17,19 +17,20 @@ export function TimedTodoModal({props}) {
         const formData = new FormData(formRef.current);
         const payload = Object.fromEntries(formData)
 
-        console.log(payload.timeOfTodo, payload.timeOfTodo==='', payload.todoTitle)
-
         if (payload.todoTitle !== todo.task){
-            editTask(payload.todoTitle)
+            editTask(todo.id, payload.todoTitle)
         }
 
         if (payload.checked && payload.timeOfTodo !=='' && todo.timed === null){
-            setTimedTodo(payload.timeOfTodo, todo.id)
+            // setTimedTodo(payload.timeOfTodo, todo.id)
+            addTimeToTodo(todo.id, payload.timeOfTodo)
         }
 
-        if (!payload.checked && todo.timed !== null){
+        if (!payload.checked && todo.timed){
             cancelTimedTodo(todo.id)
         }
+        
+        toggleShowTodoModal()
 
     }
 

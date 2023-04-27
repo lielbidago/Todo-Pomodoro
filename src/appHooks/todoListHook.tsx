@@ -5,7 +5,8 @@ export interface itodoLi{
     task: string,
     id: number
     completed: boolean
-    timed: NodeJS.Timer | null
+    // timed: NodeJS.Timer | null
+    timed: string | null
 }
 
 export function TodosListHook(){
@@ -24,7 +25,8 @@ export function TodosListHook(){
     // {title:'do something 11', id:Date.now()+9, completed: false},
     // {title:'do something 12', id:Date.now()+10, completed: false}]
     
-    const [ todoList, setTodoList ] = useState([{task:'do something', id:Date.now(), completed: false, timed:null}]);
+    const [ todoList, setTodoList ] = useState([{task:'do something', id:Date.now(),
+     completed: false, timed:null}]);
     const [completedTasksCount, setCompletedTasksCount] = useState(0);
     const [todosTitle, setTodosTitle] = useState('My Todos');
 
@@ -53,14 +55,16 @@ export function TodosListHook(){
     }
 
 
-    function addTodo(task: string){
+    function addTodo(task: string, timed = null){
         const newTodoList: itodoLi[] = todoList.map((td)=>td)
         newTodoList.push({
             task: task,
             id: Date.now(),
             completed: false,
-            timed:null
+            timed:timed
         })
+
+        console.log(`added task: '${task}' and timed is: '${timed}'`)
 
         setTodoList(newTodoList)
         localStorage.setItem('todoList', JSON.stringify(newTodoList));
@@ -102,21 +106,28 @@ export function TodosListHook(){
     }
 
     function timeTodo(taskID:number, intervalID:NodeJS.Timer){
-        
+        console.log(`entered timeTodo with taskID: ${taskID} and intervalID: ${intervalID}`)
         const newTodoList: itodoLi[] = todoList.map((td) => (td.id === taskID ? {...td, timed:intervalID}: td ))
+        setTodoList(newTodoList);
+        localStorage.setItem('todoList', JSON.stringify(newTodoList));
+    }
+
+    function addTimeToTodo(taskID:number, timeto:string){
+        console.log(`entered addTimeToTodo with taskID: ${taskID} and timeto: ${timeto}`)
+        const newTodoList: itodoLi[] = todoList.map((td) => (td.id === taskID ? {...td, timed:timeto}: td ))
         setTodoList(newTodoList);
         localStorage.setItem('todoList', JSON.stringify(newTodoList));
     }
 
     function cancelTimedTodo(taskID:number){
 
-        const timedTask = todoList.filter((td)=> td.id == taskID)
+        const timedTask = todoList.filter((td)=> td.id === taskID)
 
         if (timedTask.length !== 0){
             clearInterval(timedTask[0].timed)
         }
         const newTodoList: itodoLi[] = todoList.map((td) => (td.id === taskID ? {...td, timed:null}: td ))
-
+        console.log(   `canceled timed task : ${taskID}`)
         setTodoList(newTodoList)
         localStorage.setItem('todoList', JSON.stringify(newTodoList));
     }
@@ -139,7 +150,8 @@ export function TodosListHook(){
         updateTodosTitle,
         handleItemOrderChange,
         timeTodo,
-        cancelTimedTodo
+        cancelTimedTodo,
+        addTimeToTodo
     }
 
 }

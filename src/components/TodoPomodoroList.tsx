@@ -10,7 +10,7 @@ import { TimedTodoModal } from "./TimedTodoModal";
 interface TodoPomodoListProps{
     todoList: itodoLi[]
     changeStatusTodo(taskID:number):void,
-    addTodo(td:string):void,
+    addTodo(td:string, timed?):void,
     editTask(TaskId:number, newTask:string):void,
     deleteTodo(taskID:number):void
     updateTodosList():void,
@@ -22,7 +22,9 @@ interface TodoPomodoListProps{
     handleItemOrderChange(fromIndex:number, toIndex:number):void,
     toggleHelpTips: boolean,
     timeTodo(taskID:number, intervalID:NodeJS.Timer):void,
-    cancelTimedTodo
+    cancelTimedTodo,
+    toggleShowToast,
+    addTimeToTodo
 
 }
 
@@ -39,7 +41,7 @@ export function TodoPomodoList(props: TodoPomodoListProps){
     const {todoList, changeStatusTodo, addTodo, editTask,
          deleteTodo, updateTodosList, completedTasksCount, updateCompletedTasks,
          changeTodosTitle, todosTitle, updateTodosTitle, handleItemOrderChange,
-          toggleHelpTips, timeTodo, cancelTimedTodo} = props
+          toggleHelpTips, timeTodo, cancelTimedTodo, toggleShowToast, addTimeToTodo} = props
 
     const inputRef = useRef(null);
 
@@ -106,17 +108,30 @@ export function TodoPomodoList(props: TodoPomodoListProps){
         handleItemOrderChange(draggedItemRef.current,draggedOverItemRef.current)
         draggedItemRef.current = null
         draggedOverItemRef.current = null
-
     }
 
     useEffect(()=>{
         updateTodosList()
         updateTodosTitle()
+        
     }, [])
 
     useEffect(()=>{
         updateCompletedTasks()
+
+
     }, [todoList])
+
+
+
+
+    //testtttt - clearIntreval
+    // useEffect(()=>{
+    //     console.log(todoList.filter((td)=> !td.timed))
+    //     todoList.filter((td)=> !td.timed).forEach((td)=>{
+    //         clearInterval(td.timed)
+    //     })
+    // })
 
     
     function handleFilterTodos(filter:string){
@@ -148,18 +163,117 @@ export function TodoPomodoList(props: TodoPomodoListProps){
         
         setTimeout(()=>{
 
+            console.log('entered timeout')
             const taskInterval = setInterval(()=>{
                 const task = todoList.filter((td)=> td.task === todo.task)
-                if (task.length === 0){
-                    addTodo(todo.task)
-                }
-            }, 24 * 60 * 60 * 1000)
 
-            timeTodo(taskID, taskInterval)
+                console.log('entered intreval with task: '+task[0].task)
+
+                if (task.length === 0){
+                    console.log('entered intreval if (task.length === 0)')
+                    addTodo(todo.task, todo.timed)
+                    toggleShowToast()
+                }
+            }, 60000)
+//24 * 60 * 60 * 1000
+
+            timeTodo(taskID, taskInterval)///
+            toggleShowToast() 
 
         }, timeDiff)
         
     }
+
+
+    function addTimedTodo(td){
+        const todo = todoList.filter((todo)=> todo.id === td.id)
+
+        if (todo.length === 0){
+            console.log('entered addTimedTodo')
+            addTodo(td.task, td.timed)
+            toggleShowToast()
+        }
+    }
+
+    const todosRef = useRef(todoList)
+    todosRef.current = todoList
+    
+    useEffect(()=>{
+        console.log(`entered useEffect of timed Tasks`)
+        
+        todoList.forEach((td)=>{
+
+            if (td.timed){
+
+                console.log('entered if (td.timed)')
+
+                const hour = Number(td.timed.slice(0,2))
+                const minutes = Number(td.timed.slice(3))
+
+                const targetTime = new Date();
+                targetTime.setHours(hour);
+                targetTime.setMinutes(minutes);
+                targetTime.setSeconds(0);
+
+                let timeDiff = targetTime.getTime() - Date.now();
+
+                if (timeDiff < 0){
+                    timeDiff += 24 * 60 * 60 * 1000;
+                }
+
+                const timeout = setTimeout(() => {
+                    const todo = todosRef.current.filter((todo)=> todo.id === td.id)
+
+                    if (todo.length === 0){
+                        console.log('entered addTimedTodo')
+                        addTodo(td.task, td.timed)
+                        toggleShowToast()
+                    }
+
+                }, timeDiff);
+                
+            
+                return ()=>clearTimeout(timeout);
+            }
+        })
+        
+    }, [todoList])
+
+    // useEffect(() => {
+    //     console.log(`entered useEffect of timed Tasks`);
+      
+    //     const timeouts = todoList.map((td) => {
+    //       if (td.timed) {
+    //         const hour = Number(td.timed.slice(0, 2));
+    //         const minutes = Number(td.timed.slice(3));
+      
+    //         const targetTime = new Date();
+    //         targetTime.setHours(hour);
+    //         targetTime.setMinutes(minutes);
+    //         targetTime.setSeconds(0);
+      
+    //         let timeDiff = targetTime.getTime() - Date.now();
+      
+    //         if (timeDiff < 0) {
+    //           timeDiff += 24 * 60 * 60 * 1000;
+    //         }
+
+    //         console.log(`Scheduling task "${td.task}" at ${targetTime}`);
+      
+    //         return setTimeout(() => {
+    //             console.log('entered setTimeout')
+    //             addTodo(td.task, td.timed);
+    //             toggleShowToast();
+    //         }, timeDiff);
+    //       }
+    //     });
+      
+    //     // Cleanup function to clear all timeouts
+    //     return () => timeouts.forEach((timeout) => clearTimeout(timeout));
+    //   }, [todoList]);
+
+      
+
 
     return (
         <div className="list-container">
@@ -204,20 +318,20 @@ export function TodoPomodoList(props: TodoPomodoListProps){
                     todoList.map((td:itodoLi, index)=> 
                     (<TodoLI key={index}
                   props = {{todo:td, changeStatusTodo, toggleHelpTips, editTask, deleteTodo, onDragStart:(e)=> onDragStart(e,index),
-                    onDragEnter:(e) => {onDragEnter(e,index)}, onDragEnd:(e) => {onDragEnd(e)}, setTimedTodo, cancelTimedTodo}}
+                    onDragEnter:(e) => {onDragEnter(e,index)}, onDragEnd:(e) => {onDragEnd(e)}, setTimedTodo, cancelTimedTodo, addTimeToTodo}}
                   />))
                 }
 
                 {todosFilter==='completed'&&todoList.filter(td => td.completed).map((td:itodoLi, index)=> 
                     (<TodoLI key={index}
                         props = {{todo:td, changeStatusTodo, toggleHelpTips, editTask, deleteTodo, onDragStart:(e)=> onDragStart(e,index),
-                          onDragEnter:(e) => {onDragEnter(e,index)}, onDragEnd:(e) => {onDragEnd(e)}, setTimedTodo, cancelTimedTodo}}/>))
+                          onDragEnter:(e) => {onDragEnter(e,index)}, onDragEnd:(e) => {onDragEnd(e)}, setTimedTodo, cancelTimedTodo, addTimeToTodo}}/>))
                 }
 
                 {todosFilter==='noncompleted'&&todoList.filter(td => !td.completed).map((td:itodoLi, index)=> 
                     (<TodoLI key={index}
                         props = {{todo:td, changeStatusTodo, toggleHelpTips, editTask, deleteTodo, onDragStart:(e)=> onDragStart(e,index),
-                          onDragEnter:(e) => {onDragEnter(e,index)}, onDragEnd:(e) => {onDragEnd(e)} , setTimedTodo, cancelTimedTodo}}/>))
+                          onDragEnter:(e) => {onDragEnter(e,index)}, onDragEnd:(e) => {onDragEnd(e)} , setTimedTodo, cancelTimedTodo, addTimeToTodo}}/>))
                 }
 
             </ul>                
