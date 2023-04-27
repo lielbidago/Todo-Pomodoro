@@ -1,15 +1,15 @@
-import {PomodoroTimerHook} from '../appHooks/pomodoroTimerHook'
+import {PomodoroTimerHook} from '../hooks/pomodoroTimerHook'
 import {TodoPomodoroHeader} from '../components/header'
 import { PomodoroTimer } from '../components/PomodoroTimer';
 import {TodoPomodoList} from '../components/TodoPomodoroList'
-import {TodosListHook} from '../appHooks/todoListHook'
+import {useTodosListHook} from '../hooks/todoListHook'
 import { Settings } from '../components/Settings';
 import { ProgressBarP } from '../components/prograssBar';
 import { CompletionForcast } from '../components/CompletionForcast';
 import { useContext, useEffect, useState } from 'react';
-import { themeContext } from '../context/themeContext';
+import { ThemeContext } from '../context/themeContext';
 import Toast from 'react-bootstrap/Toast';
-
+import useToast from '../hooks/useToast'
 
 
 export function ListAndTimer(){
@@ -19,7 +19,9 @@ export function ListAndTimer(){
         handleCloseSettings, showSettings, handleShowSettings,
         setSessionAndBreakLen,sessionsLoop,
         setSessionLoopMode, sessionLen, breakLen, setTimerTime,
-         updateSessionAndBreakLen, timerBell, toggleSoundOn, soundOn } = PomodoroTimerHook();
+         updateSessionAndBreakLen, timerBell, toggleSoundOn, soundOn } 
+         = PomodoroTimerHook();
+        //use
 
     const {todoList, changeStatusTodo,
          addTodo, editTask, 
@@ -27,28 +29,24 @@ export function ListAndTimer(){
         changeTodosTitle, updateTodosList
         , completedTasksCount, updateCompletedTasks, updateTodosTitle,
          handleItemOrderChange, timeTodo, cancelTimedTodo, addTimeToTodo}
-        = TodosListHook()
+        = useTodosListHook();
 
-    const {buttonColor, customeTheme1, customeTheme2} = useContext(themeContext)
+    const {buttonColor, customeTheme1, customeTheme2} = useContext(ThemeContext)
 
     const [completedTasksCounter, setCompletedTasksCounter] = useState(0)
     const [overallTaskRate, setOverallTaskRate] = useState(0)
     const [sessionNum, setSessionNum] = useState(0)
-
+// useRef 
     const [toggleHelpTips, setToggleHelpTips] = useState(false)
 
     const [timerFullScreen, setTimerFullScreen] = useState(false)
 
-    const [showToast, setShowToast] = useState(false)
-    const toggleShowToast = () => { setShowToast(!showToast)}
-    
 
     function toggleTimerFullScreen(){
         setTimerFullScreen(!timerFullScreen)
     }
     function setLastSessionTaskCount(){
         setCompletedTasksCounter(completedTasksCount)
-
     }
 
     function calculateCurSessionRate(){
@@ -78,13 +76,6 @@ export function ListAndTimer(){
 
     }
 
-    // useEffect(()=>{
-
-    //     toggleShowToast()
-    // }, [todoList.length])
-
-
-
 
     if(timerFullScreen){
         return (
@@ -101,18 +92,17 @@ export function ListAndTimer(){
                 changeTimerModes={changeTimerModes}
                 handleShowSettings={handleShowSettings}
                 sessionsLoop={sessionsLoop}
-                    sessionLen={sessionLen} breakLen={breakLen}
-                    setTimerTime={setTimerTime}
-                    updateSessionAndBreakLen={updateSessionAndBreakLen}
-                    timerBell={timerBell}
-                    soundOn={soundOn}
-                    toggleSoundOn = {toggleSoundOn}
-                    setLastSessionTaskCount={setLastSessionTaskCount}
-                    calculateCurSessionRate={calculateCurSessionRate}
-                    buttonColor={buttonColor}
-                    toggleHelpTips={toggleHelpTips}
-                    toggleTimerFullScreen = {toggleTimerFullScreen}
-
+                sessionLen={sessionLen} breakLen={breakLen}
+                setTimerTime={setTimerTime}
+                updateSessionAndBreakLen={updateSessionAndBreakLen}
+                timerBell={timerBell}
+                soundOn={soundOn}
+                toggleSoundOn = {toggleSoundOn}
+                setLastSessionTaskCount={setLastSessionTaskCount}
+                calculateCurSessionRate={calculateCurSessionRate}
+                buttonColor={buttonColor}
+                toggleHelpTips={toggleHelpTips}
+                toggleTimerFullScreen = {toggleTimerFullScreen}
 
                 />
 
@@ -122,12 +112,7 @@ export function ListAndTimer(){
              setSessionAndBreakLen={setSessionAndBreakLen}
              customeTheme1={customeTheme1}
              customeTheme2={customeTheme2} />
-            <Toast show={showToast} onClose={toggleShowToast}>
-                <Toast.Header>
-                    <strong className="me-auto">todo Pomodoro</strong>
-                </Toast.Header>
-                <Toast.Body>New Task Added!</Toast.Body>
-            </Toast>
+
             </div>
             
         )
@@ -180,7 +165,6 @@ export function ListAndTimer(){
                     toggleHelpTips={toggleHelpTips}
                     timeTodo = {timeTodo}
                     cancelTimedTodo = {cancelTimedTodo}
-                    toggleShowToast = {toggleShowToast}
                     addTimeToTodo={addTimeToTodo}
             />
 
@@ -191,12 +175,6 @@ export function ListAndTimer(){
              setSessionAndBreakLen={setSessionAndBreakLen}
              customeTheme1={customeTheme1}
              customeTheme2={customeTheme2} />
-
-            <Toast show={showToast} onClose={toggleShowToast}>
-                <Toast.Header>
-                    <strong className="me-auto">todo Pomodoro</strong>
-                </Toast.Header>
-                <Toast.Body>New Task Added!</Toast.Body></Toast>
              
             
         </div>

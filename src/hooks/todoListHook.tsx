@@ -9,7 +9,7 @@ export interface itodoLi{
     timed: string | null
 }
 
-export function TodosListHook(){
+export function useTodosListHook(){
 
     // const test = 
     // [{title:'do something', id:Date.now(), completed: false},
