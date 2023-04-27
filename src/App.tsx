@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './scss/App.scss';
 import {WelcomePage} from "./pages/welcome"
-import {ListAndTimer} from "./pages/ListAndTimer"
+import {Main} from "./pages/Main"
 import  {Route, Routes} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import { Footer } from './components/footer';
@@ -48,14 +48,14 @@ function App() {
   return (
     <ThemeContext.Provider value={{customeTheme1, customeTheme2, getCustomeThemes, buttonColor, setButtonColor} }>
     <Routes>
-      
+
       <Route path='*' element={<div className='app-screen'
        style={customeBackground(customeTheme1, customeTheme2)}><WelcomePage/>
        <Footer buttonColor={buttonColor}/></div>}/>
 
       <Route path='todos-and-pomodoro' element={<div className='app-screen' 
       style={customeBackground(customeTheme1, customeTheme2)}>
-        <ListAndTimer/><Footer buttonColor={buttonColor}/></div>}/>
+        <Main/><Footer buttonColor={buttonColor}/></div>}/>
     </Routes>
     
     </ThemeContext.Provider>
