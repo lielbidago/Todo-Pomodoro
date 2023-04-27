@@ -26,7 +26,7 @@ export function ListAndTimer(){
         progressValue, deleteTodo,todosTitle,
         changeTodosTitle, updateTodosList
         , completedTasksCount, updateCompletedTasks, updateTodosTitle,
-         handleItemOrderChange, timeTodo, cancelTimedTodo}
+         handleItemOrderChange, timeTodo, cancelTimedTodo, addTimeToTodo}
         = TodosListHook()
 
     const {buttonColor, customeTheme1, customeTheme2} = useContext(themeContext)
@@ -41,6 +41,7 @@ export function ListAndTimer(){
 
     const [showToast, setShowToast] = useState(false)
     const toggleShowToast = () => { setShowToast(!showToast)}
+    
 
     function toggleTimerFullScreen(){
         setTimerFullScreen(!timerFullScreen)
@@ -77,9 +78,12 @@ export function ListAndTimer(){
 
     }
 
-    useEffect(()=>{
-        toggleShowToast()
-    }, [todoList.length])
+    // useEffect(()=>{
+
+    //     toggleShowToast()
+    // }, [todoList.length])
+
+
 
 
     if(timerFullScreen){
@@ -176,6 +180,8 @@ export function ListAndTimer(){
                     toggleHelpTips={toggleHelpTips}
                     timeTodo = {timeTodo}
                     cancelTimedTodo = {cancelTimedTodo}
+                    toggleShowToast = {toggleShowToast}
+                    addTimeToTodo={addTimeToTodo}
             />
 
 
