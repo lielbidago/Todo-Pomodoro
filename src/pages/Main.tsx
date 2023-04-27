@@ -6,13 +6,12 @@ import {useTodosListHook} from '../hooks/todoListHook'
 import { Settings } from '../components/Settings';
 import { ProgressBarP } from '../components/prograssBar';
 import { CompletionForcast } from '../components/CompletionForcast';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { ThemeContext } from '../context/themeContext';
-import Toast from 'react-bootstrap/Toast';
-import useToast from '../hooks/useToast'
 
 
-export function ListAndTimer(){
+
+export function Main(){
 
     const {timer, timerMode, startTimer, timerStatus, changeTime,
         pauseTimer, resumeTimer, changeTimerModes,
