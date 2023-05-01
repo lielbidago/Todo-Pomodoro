@@ -1,61 +1,84 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useRef, useState } from 'react';
 import './scss/App.scss';
 import {WelcomePage} from "./pages/welcome"
-import {ListAndTimer} from "./pages/ListAndTimer"
+import {Main} from "./pages/Main"
 import  {Route, Routes} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import { Footer } from './components/footer';
 import {ThemeContext} from './context/themeContext';
 import {customeBackground, getButtonsColor} from './helperFunctions/themes'
 
+interface IthemeColors{
+  outerColor:string,
+  innerColor:string, 
+  buttonColor:string
+};
+
+function themeColorsReducer(colors:IthemeColors, action){
+  
+  if (action.type === "changed_theme_colors"){
+    return {
+      outerColor: action.payload.outerColor,
+      innerColor: action.payload.innerColor,
+      buttonColor: getButtonsColor(colors.innerColor, colors.outerColor)
+    };
+  }else{
+    throw Error('Unknown action.');
+  }
+  
+}
 
 function App() {
-  
-  
-  const [customeTheme1, setCustomeTheme1] = useState('#7394da');
-  const [customeTheme2, setCustomeTheme2] = useState('#bfebe1');
-  const [buttonColor, setButtonColor] = useState('light')
-  
-  // reducer - לנהל מערך של צבעים
-  // לשנות לרף
-  function getCustomeThemes(theme1: string, theme2: string,){
-      setCustomeTheme1(theme1);
-      setCustomeTheme2(theme2);
 
-      localStorage.setItem('theme1', theme1);
-      localStorage.setItem('theme2', theme2);
+  const [themeColors, dispatch] = useReducer(themeColorsReducer,
+    {outerColor:'#bfebe1', innerColor:'#7394da', buttonColor:'dark'});
+
+  function setCustomeThemes(innerColor: string, outerColor: string){
+
+    const usersTheme = {innerColor, outerColor};
+    dispatch({type:"changed_theme_colors", payload:usersTheme })
+
+    localStorage.setItem('innerColor', innerColor);
+    localStorage.setItem('outerColor', outerColor);
   }
 
-  function setThemeColors(){
+  function setSavedCustomeThemes(){
     
-    const c1 = localStorage.getItem('theme1')
-    const c2 = localStorage.getItem('theme2')
-// לשנות לOUTER INNER
-    if(c1){
-      setCustomeTheme1(c1)
-    }
-    if(c2){
-      setCustomeTheme2(c2)
-    }
+    const inner = localStorage.getItem('innerColor')
+    const outer = localStorage.getItem('outerColor')
+
+    const usersTheme = 
+      {innerColor: inner? inner: themeColors.innerColor,
+      outerColor: outer? outer: themeColors.outerColor};
+
+    dispatch({type:"changed_theme_colors", payload:usersTheme})
 
   }
+
+  const appScreen = useRef(null)
+
 
   useEffect(()=>{
-    setThemeColors()
-    setButtonColor(getButtonsColor(customeTheme1, customeTheme2))
-  },[customeTheme1, customeTheme2])
+    setSavedCustomeThemes()
+  },[])
+
+  useEffect(()=>{
+    appScreen.current.style.background = `radial-gradient(circle, ${themeColors.innerColor} 0%, ${themeColors.outerColor} 100%)`
+  }, [themeColors])
+
+
   
   return (
-    <ThemeContext.Provider value={{customeTheme1, customeTheme2, getCustomeThemes, buttonColor, setButtonColor} }>
+    <ThemeContext.Provider value={{themeColors, setCustomeThemes} }>
     <Routes>
-      
-      <Route path='*' element={<div className='app-screen'
-       style={customeBackground(customeTheme1, customeTheme2)}><WelcomePage/>
-       <Footer buttonColor={buttonColor}/></div>}/>
 
-      <Route path='todos-and-pomodoro' element={<div className='app-screen' 
-      style={customeBackground(customeTheme1, customeTheme2)}>
-        <ListAndTimer/><Footer buttonColor={buttonColor}/></div>}/>
+      <Route path='*' element={<div className='app-screen' ref={appScreen}
+       ><WelcomePage/>
+       <Footer themeColors={themeColors}/></div>}/>
+
+      <Route path='todos-and-pomodoro' element={<div className='app-screen' ref={appScreen}
+      >
+        <Main/><Footer themeColors={themeColors}/></div>}/>
     </Routes>
     
     </ThemeContext.Provider>
@@ -64,3 +87,6 @@ function App() {
 }
 
 export default App;
+
+
+

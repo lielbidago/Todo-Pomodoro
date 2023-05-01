@@ -22,7 +22,7 @@ interface PomodoroTimerprops{
     soundOn:boolean, 
     setLastSessionTaskCount():void,
     calculateCurSessionRate():void,
-    buttonColor:string,
+    themeColors,
     toggleHelpTips: boolean,
     toggleTimerFullScreen():void,
 }
@@ -42,12 +42,13 @@ export function PomodoroTimer(props:PomodoroTimerprops){
     
     const {timer, timerMode, startTimer, timerStatus,
     changeTime, pauseTimer, resumeTimer, changeTimerModes, 
-    sessionsLoop, sessionLen, breakLen,
+    sessionsLoop, sessionLen, breakLen, themeColors,
      setTimerTime, updateSessionAndBreakLen, timerBell, toggleSoundOn,
-      soundOn, setLastSessionTaskCount, calculateCurSessionRate, buttonColor,
+      soundOn, setLastSessionTaskCount, calculateCurSessionRate,
       toggleHelpTips, toggleTimerFullScreen }
     = props
     
+    const {buttonColor} = themeColors;
 
     //////////
     
@@ -90,9 +91,8 @@ export function PomodoroTimer(props:PomodoroTimerprops){
         if(timerStatus){
             const interval = setInterval(() => {
                 changeTime()
-        }, 1000);
+            }, 1000);
 
-            
             return () => {clearInterval(interval)};
         }
         

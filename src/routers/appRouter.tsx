@@ -1,6 +1,6 @@
 import {createBrowserRouter} from "react-router-dom";
 import App from '../App';
-import {ListAndTimer} from "../pages/ListAndTimer"
+import {Main} from "../pages/Main"
 import { WelcomePage } from "../pages/welcome";
 
 export const AppRoute = createBrowserRouter([
@@ -10,11 +10,11 @@ export const AppRoute = createBrowserRouter([
       children: [
         {
           path: 'Todos-and-pomodoro',
-          element: <ListAndTimer />
+          element: <Main />
         },
         {
           path: 'welcome',
-          element: <WelcomePage/>
+          element: <WelcomePage />
         },
       ]
     },

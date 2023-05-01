@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import soundbell from "../assets/achievementBell.wav";
 
-export function PomodoroTimerHook(){
+export function usePomodoroTimerHook(){
 
     const [sessionLen, setSessionLen] = useState(2400)
     const [breakLen, setBreakLen] = useState(600)

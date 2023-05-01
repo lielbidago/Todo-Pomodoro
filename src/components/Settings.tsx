@@ -4,9 +4,9 @@ import { Button, Offcanvas, Form, InputGroup, Col, Row  } from 'react-bootstrap'
 import {ThemeContext} from '../context/themeContext'
 
 export function Settings({showSettings, handleCloseSettings, setSessionAndBreakLen,
-     setSessionLoopMode, customeTheme1, customeTheme2}){
+     setSessionLoopMode}){
     
-    const {getCustomeThemes} = useContext(ThemeContext);
+    const {setCustomeThemes, themeColors} = useContext(ThemeContext);
     // usetheme 
     const formRef = useRef(null)
     
@@ -21,7 +21,7 @@ export function Settings({showSettings, handleCloseSettings, setSessionAndBreakL
             setSessionAndBreakLen(payload.session_len||='1', payload.break_len||='1');
         }
         
-        getCustomeThemes(payload.color1, payload.color2);
+        setCustomeThemes(payload.color1, payload.color2);
         
         
         if(payload.SessionLoopMode === 'Loop'){
@@ -75,7 +75,7 @@ export function Settings({showSettings, handleCloseSettings, setSessionAndBreakL
                                 <Form.Control
                                     type="color"
                                     id="exampleColorInput"
-                                    defaultValue={customeTheme1}
+                                    defaultValue={themeColors.innerColor}
                                     title="Choose your color"
                                     name="color1"
                                 />
@@ -83,7 +83,7 @@ export function Settings({showSettings, handleCloseSettings, setSessionAndBreakL
                                 <Form.Control
                                     type="color"
                                     id="exampleColorInput"
-                                    defaultValue={customeTheme2}
+                                    defaultValue={themeColors.outerColor}
                                     title="Choose your color"
                                     name="color2"
                                 />                            
