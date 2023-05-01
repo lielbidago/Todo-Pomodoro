@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react"
-import { itodoLi } from "../hooks/todoListHook"
+import { itodoLi } from "../hooks/usedTodoListHook"
 import { TodoLI } from "./TodoLI"
 import * as XLSX from 'xlsx';
 import FilterDropDown from "./FilterDropDown";
@@ -51,7 +51,7 @@ export function TodoPomodoList(props: TodoPomodoListProps){
     const titleRef = useRef(null);
     const {showToast, setShowToast, toggleShowToast} = useToast()
 
-    const dotsColor1 = localStorage.getItem('theme1');
+    const dotsColor1 = localStorage.getItem('innerColor');
     
     const todosRef = useRef(todoList)
     todosRef.current = todoList
@@ -121,7 +121,7 @@ export function TodoPomodoList(props: TodoPomodoListProps){
     useEffect(()=>{
         updateCompletedTasks()
         console.log(`entered useEffect of timed Tasks`)
-        todoList.forEach((td)=>{
+        const todoListTimeouts = todoList.map((td)=>{
             if (td.timed){
                 console.log('entered if (td.timed)')
                 const hour = Number(td.timed.slice(0,2))
@@ -149,9 +149,11 @@ export function TodoPomodoList(props: TodoPomodoListProps){
                     }
 
                 }, timeDiff);
-                return ()=>clearTimeout(timeout);
+                return timeout
             }
         })
+
+        return ()=>{ todoListTimeouts.forEach((tdTimeout)=>{ clearTimeout(tdTimeout)})}
 
     }, [todoList, addTodo, toggleShowToast])
 

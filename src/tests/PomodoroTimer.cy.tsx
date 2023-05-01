@@ -23,7 +23,7 @@ describe('PomodoroTimer tests',()=>{
             soundOn: true,
             setLastSessionTaskCount: () => {},
             calculateCurSessionRate: () => {},
-            buttonColor: 'dark',
+            themeColors: {buttonColor:'dark'},
             toggleHelpTips: false,
             toggleTimerFullScreen: () => {},
             timerFullScreen: false,

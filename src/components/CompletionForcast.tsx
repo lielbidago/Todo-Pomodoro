@@ -2,13 +2,13 @@ import { useRef } from "react";
 import { Overlay, Tooltip } from "react-bootstrap";
 
 
-export function CompletionForcast({CompletionForcastEval, buttonColor, toggleHelpTips}){
+export function CompletionForcast({CompletionForcastEval,themeColors, toggleHelpTips}){
     
     const forcastRef = useRef(null)
 
     return (
         <div ref={forcastRef}>
-            <div className={"CompletionForcast "+buttonColor}>
+            <div className={"CompletionForcast "+themeColors.buttonColor}>
                 <label htmlFor="CompletionForcast-title">At this rate,<br/> you'll finish your todos in:</label>
                 <h4>{CompletionForcastEval()}</h4>
                 sessions

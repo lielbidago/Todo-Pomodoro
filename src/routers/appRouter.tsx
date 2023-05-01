@@ -14,7 +14,7 @@ export const AppRoute = createBrowserRouter([
         },
         {
           path: 'welcome',
-          element: <WelcomePage/>
+          element: <WelcomePage />
         },
       ]
     },
