@@ -19,7 +19,6 @@
 
 .timer{
     padding: 1% 0;
-    // height: 100%;
     width: 80%;
     margin: 0% 5% 3% 5%;
     min-width: min-content;
@@ -59,13 +58,10 @@
 
 
 .timer-footer{
-    // text-align: end;
-    // margin-right: 4%;
-    // margin-bottom: 2%;
     font-weight: bold;
     display:flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: flex-end;
     margin-right: 4%;
     
     *{

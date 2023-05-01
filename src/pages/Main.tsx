@@ -1,12 +1,12 @@
-import {PomodoroTimerHook} from '../hooks/pomodoroTimerHook'
+import {usePomodoroTimerHook} from '../hooks/usepPomodoroTimerHook'
 import {TodoPomodoroHeader} from '../components/header'
 import { PomodoroTimer } from '../components/PomodoroTimer';
 import {TodoPomodoList} from '../components/TodoPomodoroList'
-import {useTodosListHook} from '../hooks/todoListHook'
+import {useTodosListHook} from '../hooks/usedTodoListHook'
 import { Settings } from '../components/Settings';
 import { ProgressBarP } from '../components/prograssBar';
 import { CompletionForcast } from '../components/CompletionForcast';
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { ThemeContext } from '../context/themeContext';
 
 
@@ -19,8 +19,7 @@ export function Main(){
         setSessionAndBreakLen,sessionsLoop,
         setSessionLoopMode, sessionLen, breakLen, setTimerTime,
          updateSessionAndBreakLen, timerBell, toggleSoundOn, soundOn } 
-         = PomodoroTimerHook();
-        //use
+         = usePomodoroTimerHook();
 
     const {todoList, changeStatusTodo,
          addTodo, editTask, 
@@ -30,12 +29,16 @@ export function Main(){
          handleItemOrderChange, timeTodo, cancelTimedTodo, addTimeToTodo}
         = useTodosListHook();
 
-    const {buttonColor, customeTheme1, customeTheme2} = useContext(ThemeContext)
+    const {themeColors, setCustomeThemes } = useContext(ThemeContext)
 
     const [completedTasksCounter, setCompletedTasksCounter] = useState(0)
-    const [overallTaskRate, setOverallTaskRate] = useState(0)
-    const [sessionNum, setSessionNum] = useState(0)
-// useRef 
+    // const [overallTaskRate, setOverallTaskRate] = useState(0)
+    // const [sessionNum, setSessionNum] = useState(0)
+    const overallTaskRate = useRef(null)
+    overallTaskRate.current = 0;
+    const sessionNum = useRef(null)
+    sessionNum.current = 0;
+
     const [toggleHelpTips, setToggleHelpTips] = useState(false)
 
     const [timerFullScreen, setTimerFullScreen] = useState(false)
@@ -51,17 +54,17 @@ export function Main(){
     function calculateCurSessionRate(){
 
         const completedTasks = completedTasksCount - completedTasksCounter
-        const cur_sum = overallTaskRate * sessionNum
+        const cur_sum = overallTaskRate.current * sessionNum.current
         const new_sum = cur_sum + completedTasks
 
-        setOverallTaskRate(new_sum/(sessionNum+1))
-        setSessionNum(sessionNum + 1)
+        overallTaskRate.current = new_sum/(sessionNum.current+1)
+        sessionNum.current += + 1
 
     }
 
 
     function CompletionForcastEval(){
-        let forcast = Math.round(((todoList.length - completedTasksCount)/overallTaskRate)*(sessionLen/60))
+        let forcast = Math.round(((todoList.length - completedTasksCount)/overallTaskRate.current)*(sessionLen/60))
         
         if(todoList.length - completedTasksCount > 0 && forcast===0){
             forcast = 1
@@ -79,7 +82,7 @@ export function Main(){
     if(timerFullScreen){
         return (
             <div className="ListAndTimer timer-center" >
-                <TodoPomodoroHeader handleShowSettings={handleShowSettings} buttonColor={buttonColor} toggleHelpTips={toggleHelpTips} setToggleHelpTips={setToggleHelpTips}/>
+                <TodoPomodoroHeader handleShowSettings={handleShowSettings} themeColors={themeColors} toggleHelpTips={toggleHelpTips} setToggleHelpTips={setToggleHelpTips}/>
 
                 <PomodoroTimer timer={timer}
                 timerMode={timerMode}
@@ -99,18 +102,16 @@ export function Main(){
                 toggleSoundOn = {toggleSoundOn}
                 setLastSessionTaskCount={setLastSessionTaskCount}
                 calculateCurSessionRate={calculateCurSessionRate}
-                buttonColor={buttonColor}
                 toggleHelpTips={toggleHelpTips}
                 toggleTimerFullScreen = {toggleTimerFullScreen}
+                themeColors = {themeColors}
 
                 />
 
             <Settings 
              setSessionLoopMode={setSessionLoopMode} showSettings={showSettings}
              handleCloseSettings={handleCloseSettings} 
-             setSessionAndBreakLen={setSessionAndBreakLen}
-             customeTheme1={customeTheme1}
-             customeTheme2={customeTheme2} />
+             setSessionAndBreakLen={setSessionAndBreakLen}/>
 
             </div>
             
@@ -119,7 +120,8 @@ export function Main(){
     return (
         <div className="ListAndTimer" >
 
-            <TodoPomodoroHeader handleShowSettings={handleShowSettings} buttonColor={buttonColor} toggleHelpTips={toggleHelpTips} setToggleHelpTips={setToggleHelpTips}/>
+            <TodoPomodoroHeader handleShowSettings={handleShowSettings} 
+            themeColors= {themeColors} toggleHelpTips={toggleHelpTips} setToggleHelpTips={setToggleHelpTips}/>
 
             <PomodoroTimer timer={timer}
              timerMode={timerMode}
@@ -139,7 +141,7 @@ export function Main(){
                 toggleSoundOn = {toggleSoundOn}
                 setLastSessionTaskCount={setLastSessionTaskCount}
                 calculateCurSessionRate={calculateCurSessionRate}
-                buttonColor={buttonColor}
+                themeColors= {themeColors}
                 toggleHelpTips={toggleHelpTips}
                 toggleTimerFullScreen = {toggleTimerFullScreen}
 
@@ -147,8 +149,10 @@ export function Main(){
 
             
             <div className="updates">
-                <ProgressBarP progressValue={progressValue()} buttonColor={buttonColor} toggleHelpTips={toggleHelpTips}/>
-                <CompletionForcast CompletionForcastEval={CompletionForcastEval} buttonColor={buttonColor} toggleHelpTips={toggleHelpTips}/>
+                <ProgressBarP progressValue={progressValue()} themeColors={themeColors} 
+                toggleHelpTips={toggleHelpTips}/>
+                <CompletionForcast CompletionForcastEval={CompletionForcastEval} 
+                themeColors={themeColors} toggleHelpTips={toggleHelpTips}/>
             </div>
 
             <TodoPomodoList todoList={todoList} 
@@ -171,9 +175,7 @@ export function Main(){
             <Settings 
              setSessionLoopMode={setSessionLoopMode} showSettings={showSettings}
              handleCloseSettings={handleCloseSettings} 
-             setSessionAndBreakLen={setSessionAndBreakLen}
-             customeTheme1={customeTheme1}
-             customeTheme2={customeTheme2} />
+             setSessionAndBreakLen={setSessionAndBreakLen} />
              
             
         </div>

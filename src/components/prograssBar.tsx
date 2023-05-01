@@ -3,13 +3,14 @@ import { Overlay, ProgressBar, Tooltip } from "react-bootstrap";
 
 interface prograssBarProps{
     progressValue: number,
-    buttonColor:string,
+    themeColors,
     toggleHelpTips: boolean
 }
 
 export function ProgressBarP(props: prograssBarProps){
     
-    const {progressValue, buttonColor, toggleHelpTips} = props;
+    const {progressValue, themeColors, toggleHelpTips} = props;
+    const {buttonColor} = themeColors
     const pbRef = useRef(null)
     return (
         <div className={`ProgressBarP ${buttonColor}`}>
