@@ -1,7 +1,8 @@
 
 import { useRef, useContext } from 'react';
 import { Button, Offcanvas, Form, InputGroup, Col, Row  } from 'react-bootstrap';
-import {ThemeContext} from '../context/themeContext'
+import { ThemeContext } from '../context/themeContext';
+
 
 export function Settings({showSettings, handleCloseSettings, setSessionAndBreakLen,
      setSessionLoopMode}){

@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useRef, useState } from 'react';
+import React, { useEffect, useReducer, useRef } from 'react';
 import './scss/App.scss';
 import {WelcomePage} from "./pages/welcome"
 import {Main} from "./pages/Main"
@@ -6,7 +6,7 @@ import  {Route, Routes} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import { Footer } from './components/footer';
 import {ThemeContext} from './context/themeContext';
-import {customeBackground, getButtonsColor} from './helperFunctions/themes'
+import {getButtonsColor} from './helperFunctions/themes'
 
 interface IthemeColors{
   outerColor:string,
@@ -72,9 +72,9 @@ function App() {
     <ThemeContext.Provider value={{themeColors, setCustomeThemes} }>
     <Routes>
 
-      <Route path='*' element={<div className='app-screen' ref={appScreen}
-       ><WelcomePage/>
-       <Footer themeColors={themeColors}/></div>}/>
+      <Route path='*' element={<div className='app-screen' ref={appScreen}>
+        <WelcomePage/>
+        <Footer themeColors={themeColors}/></div>}/>
 
       <Route path='todos-and-pomodoro' element={<div className='app-screen' ref={appScreen}
       >
