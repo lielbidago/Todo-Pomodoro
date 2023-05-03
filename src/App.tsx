@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, useRef } from 'react';
 import './scss/App.scss';
-import {WelcomePage} from "./pages/welcome"
-import {Main} from "./pages/Main"
+import {WelcomePage} from "./pages/welcome" ;
+import {Main} from "./pages/Main";
 import  {Route, Routes} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import { Footer } from './components/footer';

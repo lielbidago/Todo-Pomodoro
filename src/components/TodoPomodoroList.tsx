@@ -5,7 +5,6 @@ import * as XLSX from 'xlsx';
 import FilterDropDown from "./FilterDropDown";
 import Overlay from 'react-bootstrap/Overlay';
 import Tooltip from 'react-bootstrap/Tooltip';
-import { TimedTodoModal } from "./TimedTodoModal";
 import useToast from "../hooks/useToast";
 import { Toast } from "react-bootstrap";
 
