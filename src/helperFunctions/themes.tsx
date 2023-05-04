@@ -1,3 +1,5 @@
+import { buttonColortype } from "../App";
+
 export function customeBackground(customeTheme1:string,customeTheme2:string){
     return ({background: `radial-gradient(circle, ${customeTheme1} 0%, ${customeTheme2} 100%)`})
 }
@@ -14,7 +16,7 @@ function CalculateLuminance(rgbcolor:{r:number,g:number,b:number}){
     return 0.2126 * rgbcolor['r'] + 0.7152 * rgbcolor['g'] + 0.0722 * rgbcolor['b']
 }
 
-export function getButtonsColor(color1:string, color2:string){
+export function getButtonsColor(color1:string, color2:string):buttonColortype{
 
     const color1rgb = hexToRgb(color1);
     const color2rgb = hexToRgb(color2);

@@ -1,7 +1,7 @@
 
 export function Footer({themeColors}){
     return (
-        <footer>
+        <footer role="contentinfo">
             <div className="main-footer" style={{color:themeColors.buttonColor==='light'? 'white':'black'}}>
             This website was made by Liel Bidago,
             check out my other projects here:&nbsp;&nbsp;  

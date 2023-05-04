@@ -1,9 +1,17 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import {useRef} from 'react';
+import { Overlay, Tooltip } from 'react-bootstrap'
 
+interface IFilterDropDownProps{
+  handleFilterTodos(filter:string):void,
+  toggleHelpTips:boolean
 
-export default function FilterDropDown({handleFilterTodos, FilterDropDownRef}) {
+}
+
+export default function FilterDropDown({handleFilterTodos, toggleHelpTips}:IFilterDropDownProps) {
   
+  const FilterDropDownRef = useRef<HTMLDivElement>(null);
   
     return (
     <>
@@ -22,7 +30,15 @@ export default function FilterDropDown({handleFilterTodos, FilterDropDownRef}) {
               <Dropdown.Item eventKey="noncompleted" onClick={()=>handleFilterTodos('noncompleted')}>Show non-completed</Dropdown.Item>
             </DropdownButton>
       </div>
+      <Overlay target={FilterDropDownRef.current} show={toggleHelpTips} placement='top'>
+                {(props) => (
+                    <Tooltip {...props}>
+                        filter your tasks
+                    </Tooltip>
+                )}   
+      </Overlay>
     </>
   );
 }
+
 

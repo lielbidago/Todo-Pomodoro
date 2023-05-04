@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { itodoLi } from "../hooks/usedTodoListHook"
 import { TodoLI } from "./TodoLI"
 import * as XLSX from 'xlsx';
@@ -11,7 +11,7 @@ import { Toast } from "react-bootstrap";
 interface TodoPomodoListProps{
     todoList: itodoLi[]
     changeStatusTodo(taskID:number):void,
-    addTodo(td:string, timed?):void,
+    addTodo(task:string, timed:string|null):void,
     editTask(TaskId:number, newTask:string):void,
     deleteTodo(taskID:number):void
     updateTodosList():void,
@@ -22,19 +22,13 @@ interface TodoPomodoListProps{
     updateTodosTitle():void,
     handleItemOrderChange(fromIndex:number, toIndex:number):void,
     toggleHelpTips: boolean,
-    timeTodo(taskID:number, intervalID:NodeJS.Timer):void,
-    cancelTimedTodo,
-    addTimeToTodo
+    timeTodo(taskID:number, timed:string):void,
+    cancelTimedTodo(taskID:number):void,
+    addTimeToTodo(taskID:number, timeto:string):void
 
 }
 
-// interface ItimedTodo{
-//     taskId: number,
-//     time:{
-//         hour:number,
-//         minutes:number
-//     }
-// }
+
 
 export function TodoPomodoList(props: TodoPomodoListProps){
     
@@ -43,35 +37,41 @@ export function TodoPomodoList(props: TodoPomodoListProps){
          changeTodosTitle, todosTitle, updateTodosTitle, handleItemOrderChange,
           toggleHelpTips, timeTodo, cancelTimedTodo, addTimeToTodo} = props
 
-    const inputRef = useRef(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const [todosFilter, setTodosFilter] = useState('all')
+
+
     const [titleChange, setTitleChange]=useState(false);
-    const titleRef = useRef(null);
-    const {showToast, setShowToast, toggleShowToast} = useToast()
+    const titleRef = useRef<HTMLInputElement>(null);
+    const {showToast, toggleShowToast} = useToast()
 
     const dotsColor1 = localStorage.getItem('innerColor');
     
     const todosRef = useRef(todoList)
     todosRef.current = todoList
 
+    const draggedItemRef = useRef<null|number>(null);
+    const draggedOverItemRef = useRef<null|number>(null);
+
+
     function onTaskEnter(event: React.KeyboardEvent<HTMLDivElement>){
         if(event.key === 'Enter'){
-            if(inputRef.current.value!=='' && inputRef.current.value!==' '){
-                addTodo(inputRef.current.value);
+            if( inputRef.current && inputRef.current.value !=='' && inputRef.current.value!==' '){
+                addTodo(inputRef.current?.value as string, null);
                 inputRef.current.value = "";
             }
         }
     }
     function onEnterTask(event: React.MouseEvent<HTMLElement>){
-        if(inputRef.current.value!=='' && inputRef.current.value!==' '){
-            addTodo(inputRef.current.value);
+        if(inputRef.current && inputRef.current.value!=='' && inputRef.current.value!==' '){
+            addTodo(inputRef.current.value, null);
             inputRef.current.value = "";
         }
     }
     function handleTitleChange(event: React.KeyboardEvent<HTMLDivElement>){
         if(event.key === 'Enter'){
-            if(titleRef.current.value!=='' && titleRef.current.value!==' '){
+            if(titleRef.current && titleRef.current.value!=='' && titleRef.current.value!==' '){
                 changeTodosTitle(titleRef.current.value);
                 setTitleChange(false);
             }
@@ -93,21 +93,20 @@ export function TodoPomodoList(props: TodoPomodoListProps){
       
     };
 
-    const draggedItemRef = useRef(null);
-    const draggedOverItemRef = useRef(null);
+
     
 
-    function onDragStart(e:React.DragEvent<HTMLDivElement>, index:number){
+    function onDragStart(e:React.DragEvent<HTMLLIElement>, index:number){
         draggedItemRef.current = index
     }
 
-    function onDragEnter(e:React.DragEvent<HTMLDivElement>, index:number){
+    function onDragEnter(e:React.DragEvent<HTMLLIElement>, index:number){
         draggedOverItemRef.current = index
     }
 
 
-    function onDragEnd(e:React.DragEvent<HTMLDivElement>){
-        handleItemOrderChange(draggedItemRef.current,draggedOverItemRef.current)
+    function onDragEnd(e:React.DragEvent<HTMLLIElement>){
+        handleItemOrderChange(draggedItemRef.current as number,draggedOverItemRef.current as number)
         draggedItemRef.current = null
         draggedOverItemRef.current = null
     }
@@ -115,7 +114,7 @@ export function TodoPomodoList(props: TodoPomodoListProps){
     useEffect(()=>{
         updateTodosList()
         updateTodosTitle()
-    }, [])
+    }, [updateTodosList, updateTodosTitle ])
 
     useEffect(()=>{
         updateCompletedTasks()
@@ -143,7 +142,6 @@ export function TodoPomodoList(props: TodoPomodoListProps){
                     if (todo.length === 0){
                         console.log('entered addTimedTodo')
                         addTodo(td.task, td.timed)
-
                         toggleShowToast()
                     }
 
@@ -172,7 +170,7 @@ export function TodoPomodoList(props: TodoPomodoListProps){
         setTodosFilter(filter)
     }
 
-    const FilterDropDownRef = useRef(null)
+    
     const todosTitleRef = useRef(null)
     const addButtonRef = useRef(null)
     const excelButton = useRef(null)
@@ -211,7 +209,7 @@ export function TodoPomodoList(props: TodoPomodoListProps){
             }, 60000)
 //24 * 60 * 60 * 1000
 
-            timeTodo(taskID, taskInterval)///
+            timeTodo(taskID, timeToSet)///
             toggleShowToast() 
 
         }, timeDiff)
@@ -312,15 +310,7 @@ export function TodoPomodoList(props: TodoPomodoListProps){
                 <h4 onDoubleClick={()=>{setTitleChange(true)}} ref={todosTitleRef}>{todosTitle}</h4>}
             </div>
             <div className="EnterTodo">
-                <FilterDropDown FilterDropDownRef={FilterDropDownRef} handleFilterTodos={handleFilterTodos}/>
-                <Overlay target={FilterDropDownRef.current} show={toggleHelpTips} placement='top'>
-                {(props) => (
-                    <Tooltip {...props}>
-                        filter your tasks
-                    </Tooltip>
-                )}   
-                </Overlay>
-                
+                <FilterDropDown handleFilterTodos={handleFilterTodos} toggleHelpTips={toggleHelpTips} />
                 <input ref={inputRef} autoFocus placeholder={'Enter a task here...'} onKeyUp={onTaskEnter}/>
                 <button type="button" className="btn btn-outline-dark" onClick={onEnterTask} ref={addButtonRef}>add task</button>
                 <Overlay target={addButtonRef.current} show={toggleHelpTips} placement='right'>
@@ -338,21 +328,23 @@ export function TodoPomodoList(props: TodoPomodoListProps){
                 {todosFilter==='all'&&
                     todoList.map((td:itodoLi, index)=> 
                     (<TodoLI key={index}
-                  props = {{todo:td, changeStatusTodo, toggleHelpTips, editTask, deleteTodo, onDragStart:(e)=> onDragStart(e,index),
-                    onDragEnter:(e) => {onDragEnter(e,index)}, onDragEnd:(e) => {onDragEnd(e)}, setTimedTodo, cancelTimedTodo, addTimeToTodo}}
+                  props = {{todo:td, changeStatusTodo, toggleHelpTips, editTask, deleteTodo, onDragStart:(e:React.DragEvent<HTMLLIElement>)=> onDragStart(e,index),
+                    onDragEnter:(e:React.DragEvent<HTMLLIElement>) => {onDragEnter(e,index)}, onDragEnd:(e:React.DragEvent<HTMLLIElement>) => {onDragEnd(e)}, setTimedTodo, cancelTimedTodo, addTimeToTodo}}
                   />))
                 }
 
                 {todosFilter==='completed'&&todoList.filter(td => td.completed).map((td:itodoLi, index)=> 
                     (<TodoLI key={index}
-                        props = {{todo:td, changeStatusTodo, toggleHelpTips, editTask, deleteTodo, onDragStart:(e)=> onDragStart(e,index),
-                          onDragEnter:(e) => {onDragEnter(e,index)}, onDragEnd:(e) => {onDragEnd(e)}, setTimedTodo, cancelTimedTodo, addTimeToTodo}}/>))
+                        props = {{todo:td, changeStatusTodo, toggleHelpTips, editTask, deleteTodo, onDragStart:(e:React.DragEvent<HTMLDivElement>)=> onDragStart(e,index),
+                          onDragEnter:(e:React.DragEvent<HTMLDivElement>) => {onDragEnter(e,index)}, onDragEnd:(e:React.DragEvent<HTMLDivElement>) => {onDragEnd(e)}, setTimedTodo, cancelTimedTodo, addTimeToTodo}}
+                        />))
                 }
 
                 {todosFilter==='noncompleted'&&todoList.filter(td => !td.completed).map((td:itodoLi, index)=> 
                     (<TodoLI key={index}
-                        props = {{todo:td, changeStatusTodo, toggleHelpTips, editTask, deleteTodo, onDragStart:(e)=> onDragStart(e,index),
-                          onDragEnter:(e) => {onDragEnter(e,index)}, onDragEnd:(e) => {onDragEnd(e)} , setTimedTodo, cancelTimedTodo, addTimeToTodo}}/>))
+                        props = {{todo:td, changeStatusTodo, toggleHelpTips, editTask, deleteTodo, onDragStart:(e:React.DragEvent<HTMLDivElement>)=> onDragStart(e,index),
+                          onDragEnter:(e:React.DragEvent<HTMLDivElement>) => {onDragEnter(e,index)}, onDragEnd:(e:React.DragEvent<HTMLDivElement>) => {onDragEnd(e)}, setTimedTodo, cancelTimedTodo, addTimeToTodo}}
+                    />))                
                 }
 
             </ul>                

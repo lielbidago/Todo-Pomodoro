@@ -3,27 +3,40 @@ import { useRef, useState } from 'react';
 import { Col, Form, InputGroup, Row } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { itodoLi } from '../hooks/usedTodoListHook';
 
-export function TimedTodoModal({props}) {
+
+interface ITimedTodoModalProps{
+    toggleShowTodoModal():void,
+    showTodoModal:boolean,
+    todo:itodoLi,
+    setTimedTodo(timeToSet:string, taskID:number):void,
+    cancelTimedTodo(taskID:number):void,
+    editTask(TaskId:number, newTask:string):void,
+    addTimeToTodo(taskID:number, timeto:string):void
+}
+
+
+export function TimedTodoModal(props:ITimedTodoModalProps) {
 
     const {toggleShowTodoModal, showTodoModal, todo, setTimedTodo, cancelTimedTodo, editTask, addTimeToTodo} = props
-    const formRef = useRef(null)
+    const formRef = useRef<HTMLFormElement>(null)
     const [isTimed, setIsTimed] = useState(todo.timed !== null? true:false)
 
     const changeIsTimed = ()=>{setIsTimed(!isTimed)}
 
     function onSave(e:React.FormEvent<HTMLFormElement>){
         e.preventDefault()
-        const formData = new FormData(formRef.current);
+        const formData = new FormData(formRef.current as HTMLFormElement);
         const payload = Object.fromEntries(formData)
 
         if (payload.todoTitle !== todo.task){
-            editTask(todo.id, payload.todoTitle)
+            editTask(todo.id, payload.todoTitle as string)
         }
 
         if (payload.checked && payload.timeOfTodo !=='' && todo.timed === null){
             // setTimedTodo(payload.timeOfTodo, todo.id)
-            addTimeToTodo(todo.id, payload.timeOfTodo)
+            addTimeToTodo(todo.id, payload.timeOfTodo as string)
         }
 
         if (!payload.checked && todo.timed){

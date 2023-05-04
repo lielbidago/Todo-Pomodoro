@@ -87,7 +87,7 @@ Whether you're a student, a professional, or just someone who wants to be more o
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src="./public/img_examples/screen.png" title="todo-pomodoro-screen" >
+<img src="./public/img_examples/screen.png" alt='todo-pomodoro-screen' title="todo-pomodoro-screen" >
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -142,18 +142,18 @@ This is an example of how to list things you need to use the software and how to
 ## Usage
 
 ### Welcome Page
-<img src="./public/img_examples/welcome.png"
+<img src="./public/img_examples/welcome.png" alt='welcome-page'
  width='500' height='300' title="welcome" />
 
 ### Todo List
 1. add item to list
 
-<img src="./public/img_examples/todos-example.png"
+<img src="./public/img_examples/todos-example.png" alt="todos-example"
  width='350' height='400' title="todo-list" />
 
 2. export list to excel
 
-<img src="./public/img_examples/excel.png"
+<img src="./public/img_examples/excel.png" alt='excel-example'
  width='800' height='500' title="todo-list-excel" />
 
 3. filter list

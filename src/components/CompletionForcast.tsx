@@ -1,8 +1,13 @@
 import { useRef } from "react";
 import { Overlay, Tooltip } from "react-bootstrap";
+import { IthemeColors } from "../App";
 
-
-export function CompletionForcast({CompletionForcastEval,themeColors, toggleHelpTips}){
+interface ICompletionForcast{
+    CompletionForcastEval():number|'...'
+    themeColors:IthemeColors,
+    toggleHelpTips:boolean
+}
+export function CompletionForcast({CompletionForcastEval,themeColors, toggleHelpTips}:ICompletionForcast){
     
     const forcastRef = useRef(null)
 

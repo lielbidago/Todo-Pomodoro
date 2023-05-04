@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Overlay, Tooltip } from "react-bootstrap";
+import { IthemeColors } from "../App";
 import '../scss/timer.scss';
 
 interface PomodoroTimerprops{
@@ -22,7 +23,7 @@ interface PomodoroTimerprops{
     soundOn:boolean, 
     setLastSessionTaskCount():void,
     calculateCurSessionRate():void,
-    themeColors,
+    themeColors: IthemeColors,
     toggleHelpTips: boolean,
     toggleTimerFullScreen():void,
 }
@@ -42,13 +43,13 @@ export function PomodoroTimer(props:PomodoroTimerprops){
     
     const {timer, timerMode, startTimer, timerStatus,
     changeTime, pauseTimer, resumeTimer, changeTimerModes, 
-    sessionsLoop, sessionLen, breakLen, themeColors,
+    sessionsLoop, sessionLen, breakLen,
      setTimerTime, updateSessionAndBreakLen, timerBell, toggleSoundOn,
-      soundOn, setLastSessionTaskCount, calculateCurSessionRate,
+      soundOn, setLastSessionTaskCount, calculateCurSessionRate, themeColors,
       toggleHelpTips, toggleTimerFullScreen }
     = props
     
-    const {buttonColor} = themeColors;
+    const {buttonColor} = themeColors
 
     //////////
     
@@ -91,8 +92,9 @@ export function PomodoroTimer(props:PomodoroTimerprops){
         if(timerStatus){
             const interval = setInterval(() => {
                 changeTime()
-            }, 1000);
+        }, 1000);
 
+            
             return () => {clearInterval(interval)};
         }
         
@@ -102,9 +104,7 @@ export function PomodoroTimer(props:PomodoroTimerprops){
 
     useEffect(()=>{
         setTimerTime()
-    }, [timerMode])
-
-
+    }, [timerMode, setTimerTime]);
 
 
     function handleModeChange(event: React.MouseEvent<HTMLElement>){
@@ -148,13 +148,13 @@ export function PomodoroTimer(props:PomodoroTimerprops){
                 </div>
                 <div className="timer-footer" >
                         <div className="sound">
-                            {soundOn?<img height='15' ref={soundRef} onClick={()=>{toggleSoundOn()}}
+                            {soundOn?<img height='15' alt='volume-on' ref={soundRef} onClick={()=>{toggleSoundOn()}}
                             src="https://img.icons8.com/metro/26/null/high-volume.png"/>:
-                            <img height='15' ref={soundRef} onClick={()=>{toggleSoundOn()}}
+                            <img height='15' alt='volume-off' ref={soundRef} onClick={()=>{toggleSoundOn()}}
                             src="https://img.icons8.com/metro/26/null/no-audio.png"/>}
                         </div>
                         <div className="timer-full-screen">
-                            <img height='15' onClick={()=>{toggleTimerFullScreen()}} src="https://img.icons8.com/external-inkubators-detailed-outline-inkubators/25/null/external-full-screen-arrows-inkubators-detailed-outline-inkubators-3.png"/>
+                            <img height='15' alt="timer-full-screen" onClick={()=>{toggleTimerFullScreen()}} src="https://img.icons8.com/external-inkubators-detailed-outline-inkubators/25/null/external-full-screen-arrows-inkubators-detailed-outline-inkubators-3.png"/>
                         </div>
 
                 </div>

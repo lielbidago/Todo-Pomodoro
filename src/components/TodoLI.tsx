@@ -1,22 +1,26 @@
 import React, { useRef, useState } from 'react'
-import { Overlay, Tooltip } from 'react-bootstrap'
+import { Overlay, Tooltip } from 'react-bootstrap';
 import '../scss/TodoLI.scss';
 import '../scss/checkbox.scss';
 import { TimedTodoModal } from './TimedTodoModal';
+import { itodoLi } from '../hooks/usedTodoListHook';
 
-// export interface TodoLIProps{
-//     changeStatusTodo(TaskId:number),
-//     todo: {id: number, completed: boolean, task:string},
-//     editTask(TaskId:number, newTask:string):void,
-//     deleteTodo(taskID:number):void,
-//     onDragStart(e):void,
-//     onDragEnter(e),
-//     onDragEnd(e),
-//     toggleHelpTips: boolean,
-//     toggleShowTodoModal():void
-// }
+export interface TodoLIProps{
+    changeStatusTodo(TaskId:number):void,
+    todo: itodoLi,
+    editTask(TaskId:number, newTask:string):void,
+    deleteTodo(taskID:number):void,
+    onDragStart(e:React.DragEvent<HTMLLIElement>):void,
+    onDragEnter(e:React.DragEvent<HTMLLIElement>):void,
+    onDragEnd(e:React.DragEvent<HTMLLIElement>):void,
+    toggleHelpTips: boolean,
+    addTimeToTodo(taskID:number, timeto:string):void,
+    setTimedTodo(timeToSet:string, taskID:number):void,
+    cancelTimedTodo(taskID:number):void,
+    toggleShowTodoModal():void
+}
 
-export function TodoLI({props}){
+export function TodoLI(props:TodoLIProps){
     const {changeStatusTodo, editTask,addTimeToTodo, deleteTodo,setTimedTodo, cancelTimedTodo, onDragEnter, onDragStart, onDragEnd, toggleHelpTips, todo} = props
     const {id, completed, task, timed} = todo
 
@@ -25,12 +29,12 @@ export function TodoLI({props}){
     const [showTodoModal, setShowTodoModal] = useState(false);
     const toggleShowTodoModal = () => {setShowTodoModal(!showTodoModal)}
 
-    const inputRef = useRef(null);
-    const checkRef = useRef(null)
+    const inputRef = useRef<HTMLInputElement>(null);
+    const checkRef = useRef<HTMLInputElement>(null)
 
     function onTaskEnter(event: React.KeyboardEvent<HTMLDivElement>){
         
-        if(event.key === 'Enter'){
+        if(inputRef.current && event.key === 'Enter'){
             if(inputRef.current.value !=='' && inputRef.current.value!==' '){
                 editTask(id, inputRef.current.value);
             }
@@ -44,12 +48,14 @@ export function TodoLI({props}){
         toggleShowTodoModal()
     }
 
-
+//returnhere
     return (
-        <li className="Todo-li" draggable onDragStart={onDragStart} onDragEnter={onDragEnter}
-         onDragEnd={onDragEnd} onDragOver={(e)=> e.preventDefault()} id={'li-'+ id.toString()}>
+        <li className="Todo-li" draggable onDragStart={(e)=>onDragStart(e)} onDragEnter={(e)=> onDragEnter(e)}
+         onDragEnd={(e)=> onDragEnd(e)} onDragOver={(e)=> e.preventDefault()} id={'li-'+ id.toString()}>
 
-            <TimedTodoModal props={{toggleShowTodoModal, editTask, setTimedTodo, cancelTimedTodo, showTodoModal, todo, addTimeToTodo}}/>
+            <TimedTodoModal toggleShowTodoModal={toggleShowTodoModal}
+            editTask={editTask} setTimedTodo={setTimedTodo}
+             cancelTimedTodo={cancelTimedTodo} showTodoModal={showTodoModal} todo={todo} addTimeToTodo={addTimeToTodo}/>
 
             {!showInput? 
             <div className="todo">

@@ -29,14 +29,13 @@ export function Main(){
          handleItemOrderChange, timeTodo, cancelTimedTodo, addTimeToTodo}
         = useTodosListHook();
 
-    const {themeColors, setCustomeThemes } = useContext(ThemeContext)
+    const {themeColors } = useContext(ThemeContext)
 
     const [completedTasksCounter, setCompletedTasksCounter] = useState(0)
     // const [overallTaskRate, setOverallTaskRate] = useState(0)
     // const [sessionNum, setSessionNum] = useState(0)
-    const overallTaskRate = useRef(null)
-    overallTaskRate.current = 0;
-    const sessionNum = useRef(null)
+    const overallTaskRate = useRef<number>(0)
+    const sessionNum = useRef<number>(0)
     sessionNum.current = 0;
 
     const [toggleHelpTips, setToggleHelpTips] = useState(false)
@@ -151,6 +150,7 @@ export function Main(){
             <div className="updates">
                 <ProgressBarP progressValue={progressValue()} themeColors={themeColors} 
                 toggleHelpTips={toggleHelpTips}/>
+
                 <CompletionForcast CompletionForcastEval={CompletionForcastEval} 
                 themeColors={themeColors} toggleHelpTips={toggleHelpTips}/>
             </div>

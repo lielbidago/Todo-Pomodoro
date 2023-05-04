@@ -1,5 +1,6 @@
 import { PomodoroTimer } from "../components/PomodoroTimer";
 import soundbell from "../assets/achievementBell.wav";
+import { IthemeColors } from "../App";
 
 
 describe('PomodoroTimer tests',()=>{
@@ -23,7 +24,7 @@ describe('PomodoroTimer tests',()=>{
             soundOn: true,
             setLastSessionTaskCount: () => {},
             calculateCurSessionRate: () => {},
-            themeColors: {buttonColor:'dark'},
+            themeColors: {buttonColor: 'light', innerColor:'#00000', outerColor:'#00000'} as IthemeColors,
             toggleHelpTips: false,
             toggleTimerFullScreen: () => {},
             timerFullScreen: false,
@@ -33,8 +34,8 @@ describe('PomodoroTimer tests',()=>{
 
           cy.mount(<PomodoroTimer {...mockProps}/>)
 
-          cy.get('.timer.dark').should('exist')
-          cy.get('.timer.dark .time').should('have.text', '00:25:00')
+          cy.get('.timer.light').should('exist')
+          cy.get('.timer.light .time').should('have.text', '00:25:00')
           cy.get('.timer-title').should('have.text', 'Pomodoro Session')
           cy.get('.timerButtons .btn.btn-outline-dark').first().should('have.text', 'resume')
           cy.get('.timerButtons .btn.btn-outline-dark:nth-child(2)').should('have.text', 'start')

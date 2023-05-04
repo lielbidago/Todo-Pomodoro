@@ -1,42 +1,61 @@
-import React, { useEffect, useReducer, useRef } from 'react';
+import { useEffect, useReducer } from 'react';
 import './scss/App.scss';
-import {WelcomePage} from "./pages/welcome" ;
-import {Main} from "./pages/Main";
 import  {Route, Routes} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import { Footer } from './components/footer';
 import {ThemeContext} from './context/themeContext';
-import {getButtonsColor} from './helperFunctions/themes'
+import { WelcomePage } from './pages/welcome';
+import { Main } from './pages/Main';
+import { getButtonsColor } from './helperFunctions/themes';
 
-interface IthemeColors{
+const buttonColor = {
+  dark:'dark',
+  light:'light'
+ } as const 
+
+export type buttonColortype = keyof typeof buttonColor
+
+ const ThemeReducerActions = {
+  changed_theme_colors:'changed_theme_colors'
+} as const
+
+
+
+export interface IthemeColors{
   outerColor:string,
   innerColor:string, 
-  buttonColor:string
+  buttonColor: keyof typeof buttonColor
 };
 
-function themeColorsReducer(colors:IthemeColors, action){
+interface IThemeAction{
+  type: keyof typeof ThemeReducerActions,
+  payload: IthemeColors
+}
+
+function themeColorsReducer(colors:IthemeColors, action: IThemeAction){
   
-  if (action.type === "changed_theme_colors"){
-    return {
-      outerColor: action.payload.outerColor,
-      innerColor: action.payload.innerColor,
-      buttonColor: getButtonsColor(colors.innerColor, colors.outerColor)
-    };
-  }else{
-    throw Error('Unknown action.');
+  switch(action.type){
+    case ThemeReducerActions.changed_theme_colors:
+      return {
+        outerColor: action.payload.outerColor,
+        innerColor: action.payload.innerColor,
+        buttonColor: getButtonsColor(colors.innerColor, colors.outerColor)
+      };
+    default:
+      throw Error('Unknown action.');
+      
   }
-  
 }
 
 function App() {
 
-  const [themeColors, dispatch] = useReducer(themeColorsReducer,
-    {outerColor:'#bfebe1', innerColor:'#7394da', buttonColor:'dark'});
+  const defaultTheme:IthemeColors = {outerColor:'#bfebe1', innerColor:'#7394da', buttonColor:buttonColor.dark}
+  const [themeColors, dispatch] = useReducer(themeColorsReducer, defaultTheme);
 
   function setCustomeThemes(innerColor: string, outerColor: string){
 
-    const usersTheme = {innerColor, outerColor};
-    dispatch({type:"changed_theme_colors", payload:usersTheme })
+    const usersTheme = {innerColor, outerColor, buttonColor:getButtonsColor(outerColor,innerColor)};
+    dispatch({type:ThemeReducerActions.changed_theme_colors, payload:usersTheme })
 
     localStorage.setItem('innerColor', innerColor);
     localStorage.setItem('outerColor', outerColor);
@@ -44,39 +63,37 @@ function App() {
 
   function setSavedCustomeThemes(){
     
-    const inner = localStorage.getItem('innerColor')
-    const outer = localStorage.getItem('outerColor')
+    const inner: string = localStorage.getItem('innerColor') || themeColors.innerColor
+    const outer: string = localStorage.getItem('outerColor') || themeColors.outerColor
+    
+    let usersTheme = 
+      {innerColor: inner,
+      outerColor: outer,
+      buttonColor: getButtonsColor(inner,outer)
+    };
 
-    const usersTheme = 
-      {innerColor: inner? inner: themeColors.innerColor,
-      outerColor: outer? outer: themeColors.outerColor};
-
-    dispatch({type:"changed_theme_colors", payload:usersTheme})
+    dispatch({type:ThemeReducerActions.changed_theme_colors, payload:usersTheme})
 
   }
-
-  const appScreen = useRef(null)
-
 
   useEffect(()=>{
     setSavedCustomeThemes()
   },[])
 
-  useEffect(()=>{
-    appScreen.current.style.background = `radial-gradient(circle, ${themeColors.innerColor} 0%, ${themeColors.outerColor} 100%)`
-  }, [themeColors])
 
-
-  
   return (
     <ThemeContext.Provider value={{themeColors, setCustomeThemes} }>
     <Routes>
 
-      <Route path='*' element={<div className='app-screen' ref={appScreen}>
+      <Route path='*' element={<div className='app-screen'
+      style={{background:`radial-gradient(circle, ${themeColors.innerColor} 0%, ${themeColors.outerColor} 100%)`}}
+      >
         <WelcomePage/>
         <Footer themeColors={themeColors}/></div>}/>
 
-      <Route path='todos-and-pomodoro' element={<div className='app-screen' ref={appScreen}
+      <Route path='todos-and-pomodoro'
+        element={<div className='app-screen'
+        style={{background:`radial-gradient(circle, ${themeColors.innerColor} 0%, ${themeColors.outerColor} 100%)`}}
       >
         <Main/><Footer themeColors={themeColors}/></div>}/>
     </Routes>
