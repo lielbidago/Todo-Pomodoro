@@ -50,12 +50,12 @@ function themeColorsReducer(colors:IthemeColors, action: IThemeAction){
 function App() {
 
   const defaultTheme:IthemeColors = {outerColor:'#bfebe1', innerColor:'#7394da', buttonColor:buttonColor.dark}
-  const [themeColors, dispatch] = useReducer(themeColorsReducer, defaultTheme);
+  const [themeColors, dispatchTheme] = useReducer(themeColorsReducer, defaultTheme);
 
   function setCustomeThemes(innerColor: string, outerColor: string){
 
     const usersTheme = {innerColor, outerColor, buttonColor:getButtonsColor(outerColor,innerColor)};
-    dispatch({type:ThemeReducerActions.changed_theme_colors, payload:usersTheme })
+    dispatchTheme({type:ThemeReducerActions.changed_theme_colors, payload:usersTheme })
 
     localStorage.setItem('innerColor', innerColor);
     localStorage.setItem('outerColor', outerColor);
@@ -72,9 +72,12 @@ function App() {
       buttonColor: getButtonsColor(inner,outer)
     };
 
-    dispatch({type:ThemeReducerActions.changed_theme_colors, payload:usersTheme})
+    dispatchTheme({type:ThemeReducerActions.changed_theme_colors, payload:usersTheme})
 
   }
+
+  //"fetch" from local storage
+ 
 
   useEffect(()=>{
     setSavedCustomeThemes()

@@ -3,23 +3,30 @@ import { useRef, useContext } from 'react';
 import { Button, Offcanvas, Form, InputGroup, Col, Row  } from 'react-bootstrap';
 import { ThemeContext } from '../context/themeContext';
 
+interface ISettingsProps{
+    showSettings:boolean,
+    handleCloseSettings():void,
+    setSessionAndBreakLen(sessionLenStr: string, breakLenStr: string):void,
+    setSessionLoopMode(status:boolean):void
 
+}
 export function Settings({showSettings, handleCloseSettings, setSessionAndBreakLen,
-     setSessionLoopMode}){
+     setSessionLoopMode}:ISettingsProps){
     
     const {setCustomeThemes, themeColors} = useContext(ThemeContext);
     // usetheme 
-    const formRef = useRef(null)
+    const formRef = useRef<HTMLFormElement>(null)
     
     function submitForm(event: React.FormEvent<HTMLFormElement>): void {
         event.preventDefault()
-        const formData = new FormData(formRef.current);
+        const formData = new FormData(formRef.current!);
         const payload = Object.fromEntries(formData)
 
         if (payload.session_len !== "" &&
         payload.session_len !== " " &&
          payload.break_len !== '' && payload.break_len !== ' '){
-            setSessionAndBreakLen(payload.session_len||='1', payload.break_len||='1');
+            setSessionAndBreakLen(payload.session_len as string ||'1' , 
+            payload.break_len as string || '1');
         }
         
         setCustomeThemes(payload.color1, payload.color2);

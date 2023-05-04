@@ -1,10 +1,11 @@
 
 import { useRef } from "react";
 import { Overlay, Tooltip } from "react-bootstrap";
+import { IthemeColors } from "../App";
 
 interface TodoPomodoroHeaderProps{
-    handleShowSettings,
-    themeColors,
+    handleShowSettings():void,
+    themeColors:IthemeColors,
     toggleHelpTips: boolean,
     setToggleHelpTips(state:boolean):void
 }

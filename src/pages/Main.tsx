@@ -2,13 +2,13 @@ import {usePomodoroTimerHook} from '../hooks/usepPomodoroTimerHook'
 import {TodoPomodoroHeader} from '../components/header'
 import { PomodoroTimer } from '../components/PomodoroTimer';
 import {TodoPomodoList} from '../components/TodoPomodoroList'
-import {useTodosListHook} from '../hooks/usedTodoListHook'
+// import {useTodosListHook} from '../hooks/usedTodoListHook'
 import { Settings } from '../components/Settings';
 import { ProgressBarP } from '../components/prograssBar';
 import { CompletionForcast } from '../components/CompletionForcast';
-import { useContext, useRef, useState } from 'react';
+import { useContext, useRef, useState, useCallback, useEffect } from 'react';
 import { ThemeContext } from '../context/themeContext';
-
+import {todosActions, useTodoListState} from '../hooks/usedTodoListHook'
 
 
 export function Main(){
@@ -21,19 +21,20 @@ export function Main(){
          updateSessionAndBreakLen, timerBell, toggleSoundOn, soundOn } 
          = usePomodoroTimerHook();
 
-    const {todoList, changeStatusTodo,
-         addTodo, editTask, 
-        progressValue, deleteTodo,todosTitle,
-        changeTodosTitle, updateTodosList
-        , completedTasksCount, updateCompletedTasks, updateTodosTitle,
-         handleItemOrderChange, timeTodo, cancelTimedTodo, addTimeToTodo}
-        = useTodosListHook();
+    // const {todoList, changeStatusTodo,
+    //      addTodo, editTask, 
+    //     progressValue, deleteTodo,todosTitle,
+    //     changeTodosTitle, updateTodosList
+    //     , completedTasksCount, updateCompletedTasks, updateTodosTitle,
+    //      handleItemOrderChange, timeTodo, cancelTimedTodo, addTimeToTodo}
+    //     = useTodosListHook();
+
+    const { todosCompState, dispatch} = useTodoListState()
 
     const {themeColors } = useContext(ThemeContext)
 
     const [completedTasksCounter, setCompletedTasksCounter] = useState(0)
-    // const [overallTaskRate, setOverallTaskRate] = useState(0)
-    // const [sessionNum, setSessionNum] = useState(0)
+
     const overallTaskRate = useRef<number>(0)
     const sessionNum = useRef<number>(0)
     sessionNum.current = 0;
@@ -41,18 +42,20 @@ export function Main(){
     const [toggleHelpTips, setToggleHelpTips] = useState(false)
 
     const [timerFullScreen, setTimerFullScreen] = useState(false)
-
+    
+    const updateTodosState = useCallback(()=>{
+        dispatch({type:todosActions.updateTodosState, payload:{}})},[])
 
     function toggleTimerFullScreen(){
         setTimerFullScreen(!timerFullScreen)
     }
     function setLastSessionTaskCount(){
-        setCompletedTasksCounter(completedTasksCount)
+        setCompletedTasksCounter(todosCompState.completedNum)
     }
 
     function calculateCurSessionRate(){
-
-        const completedTasks = completedTasksCount - completedTasksCounter
+        //completedTasksCount
+        const completedTasks = todosCompState.allNum - completedTasksCounter
         const cur_sum = overallTaskRate.current * sessionNum.current
         const new_sum = cur_sum + completedTasks
 
@@ -61,11 +64,16 @@ export function Main(){
 
     }
 
-
     function CompletionForcastEval(){
-        let forcast = Math.round(((todoList.length - completedTasksCount)/overallTaskRate.current)*(sessionLen/60))
+        // let forcast = Math.round(((todoList.length - completedTasksCount)/overallTaskRate.current)*(sessionLen/60))
         
-        if(todoList.length - completedTasksCount > 0 && forcast===0){
+        // if(todoList.length - completedTasksCount > 0 && forcast===0){
+        //     forcast = 1
+        // }
+
+        let forcast = Math.round(((todosCompState.allNum - todosCompState.completedNum)/overallTaskRate.current)*(sessionLen/60))
+        
+        if(todosCompState.allNum - todosCompState.completedNum > 0 && forcast===0){
             forcast = 1
         }
         
@@ -76,6 +84,14 @@ export function Main(){
         }
 
     }
+
+    function progressValue(){
+        return Math.round((todosCompState.completedNum/todosCompState.allNum)*100)
+    }
+
+    useEffect(()=>{
+        updateTodosState()
+    },[updateTodosState])
 
 
     if(timerFullScreen){
@@ -155,20 +171,8 @@ export function Main(){
                 themeColors={themeColors} toggleHelpTips={toggleHelpTips}/>
             </div>
 
-            <TodoPomodoList todoList={todoList} 
-                changeStatusTodo={changeStatusTodo}
-                 addTodo={addTodo}
-                  editTask={editTask}
-                  deleteTodo={deleteTodo} updateTodosList={updateTodosList}
-                   completedTasksCount={completedTasksCount}
-                    updateCompletedTasks={updateCompletedTasks}
-                    todosTitle={todosTitle} changeTodosTitle={changeTodosTitle}
-                    updateTodosTitle={updateTodosTitle}
-                    handleItemOrderChange = {handleItemOrderChange}
-                    toggleHelpTips={toggleHelpTips}
-                    timeTodo = {timeTodo}
-                    cancelTimedTodo = {cancelTimedTodo}
-                    addTimeToTodo={addTimeToTodo}
+            <TodoPomodoList todosCompState={todosCompState} toggleHelpTips={toggleHelpTips} 
+            dispatch={dispatch}
             />
 
 
@@ -181,3 +185,4 @@ export function Main(){
         </div>
     )
 }
+

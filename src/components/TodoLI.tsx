@@ -3,25 +3,37 @@ import { Overlay, Tooltip } from 'react-bootstrap';
 import '../scss/TodoLI.scss';
 import '../scss/checkbox.scss';
 import { TimedTodoModal } from './TimedTodoModal';
-import { itodoLi } from '../hooks/usedTodoListHook';
+import { itodoLi, ItodosReducerAction, todosActions } from '../hooks/usedTodoListHook';
+
+// export interface TodoLIProps{
+//     changeStatusTodo(TaskId:number):void,
+//     todo: itodoLi,
+//     editTask(TaskId:number, newTask:string):void,
+//     deleteTodo(taskID:number):void,
+//     onDragStart(e:React.DragEvent<HTMLLIElement>):void,
+//     onDragEnter(e:React.DragEvent<HTMLLIElement>):void,
+//     onDragEnd(e:React.DragEvent<HTMLLIElement>):void,
+//     toggleHelpTips: boolean,
+//     addTimeToTodo(taskID:number, timeto:string):void,
+//     setTimedTodo(timeToSet:string, taskID:number):void,
+//     cancelTimedTodo(taskID:number):void,
+//     toggleShowTodoModal():void
+// }
 
 export interface TodoLIProps{
-    changeStatusTodo(TaskId:number):void,
     todo: itodoLi,
-    editTask(TaskId:number, newTask:string):void,
-    deleteTodo(taskID:number):void,
+    dispatch(action:ItodosReducerAction):void,
+    toggleHelpTips: boolean,
     onDragStart(e:React.DragEvent<HTMLLIElement>):void,
     onDragEnter(e:React.DragEvent<HTMLLIElement>):void,
     onDragEnd(e:React.DragEvent<HTMLLIElement>):void,
-    toggleHelpTips: boolean,
-    addTimeToTodo(taskID:number, timeto:string):void,
-    setTimedTodo(timeToSet:string, taskID:number):void,
-    cancelTimedTodo(taskID:number):void,
-    toggleShowTodoModal():void
+
 }
 
 export function TodoLI(props:TodoLIProps){
-    const {changeStatusTodo, editTask,addTimeToTodo, deleteTodo,setTimedTodo, cancelTimedTodo, onDragEnter, onDragStart, onDragEnd, toggleHelpTips, todo} = props
+    
+    const {todo, dispatch, toggleHelpTips, onDragStart,onDragEnter, onDragEnd} = props
+    
     const {id, completed, task, timed} = todo
 
     const [showInput, setShowInput] = useState(false)
@@ -36,7 +48,10 @@ export function TodoLI(props:TodoLIProps){
         
         if(inputRef.current && event.key === 'Enter'){
             if(inputRef.current.value !=='' && inputRef.current.value!==' '){
-                editTask(id, inputRef.current.value);
+                dispatch({
+                    type:todosActions.editTask, 
+                    payload:{taskId: id, newTask:inputRef.current.value}
+                });
             }
 
             setShowInput(false);
@@ -48,19 +63,35 @@ export function TodoLI(props:TodoLIProps){
         toggleShowTodoModal()
     }
 
+    function handleDeleteTodo(){
+        dispatch({
+            type:todosActions.deleteTodo,
+            payload:{taskId:todo.id}
+        })
+    }
+
+    function handleChangeStatusTodo(){
+        dispatch({
+            type:todosActions.changeStatusTodo,
+            payload:{taskId:todo.id}
+        })
+    }
+
+
+
 //returnhere
     return (
         <li className="Todo-li" draggable onDragStart={(e)=>onDragStart(e)} onDragEnter={(e)=> onDragEnter(e)}
          onDragEnd={(e)=> onDragEnd(e)} onDragOver={(e)=> e.preventDefault()} id={'li-'+ id.toString()}>
 
             <TimedTodoModal toggleShowTodoModal={toggleShowTodoModal}
-            editTask={editTask} setTimedTodo={setTimedTodo}
-             cancelTimedTodo={cancelTimedTodo} showTodoModal={showTodoModal} todo={todo} addTimeToTodo={addTimeToTodo}/>
+            dispatch={dispatch}
+            showTodoModal={showTodoModal} todo={todo} />
 
             {!showInput? 
             <div className="todo">
                 <div className='checkbox-wrapper-11'>
-                    <input className="toggle" type="checkbox" ref={checkRef} checked={completed} onChange = {()=>changeStatusTodo(id)}></input>
+                    <input className="toggle" type="checkbox" ref={checkRef} checked={completed} onChange = {()=>handleChangeStatusTodo()}></input>
                     
                     <Overlay target={checkRef.current} show={toggleHelpTips} placement='right'>
                     
@@ -76,7 +107,7 @@ export function TodoLI(props:TodoLIProps){
                 </div>
                 <div className="buttons">
                     
-                    <button className="buttonTodo" onClick={()=>deleteTodo(id)}>🗑</button>
+                    <button className="buttonTodo" onClick={()=>handleDeleteTodo()}>🗑</button>
                     <button className="buttonTodo" onClick={handleShowTodoModal} >✎</button>
                 
                 </div>
