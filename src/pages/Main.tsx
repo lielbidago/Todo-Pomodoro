@@ -9,25 +9,19 @@ import { CompletionForcast } from '../components/CompletionForcast';
 import { useContext, useRef, useState, useCallback, useEffect } from 'react';
 import { ThemeContext } from '../context/themeContext';
 import {todosActions, useTodoListState} from '../hooks/usedTodoListHook'
+import { useSettings } from '../hooks/useSettings';
 
 
 export function Main(){
 
     const {timer, timerMode, startTimer, timerStatus, changeTime,
         pauseTimer, resumeTimer, changeTimerModes,
-        handleCloseSettings, showSettings, handleShowSettings,
         setSessionAndBreakLen,sessionsLoop,
         setSessionLoopMode, sessionLen, breakLen, setTimerTime,
          updateSessionAndBreakLen, timerBell, toggleSoundOn, soundOn } 
          = usePomodoroTimerHook();
 
-    // const {todoList, changeStatusTodo,
-    //      addTodo, editTask, 
-    //     progressValue, deleteTodo,todosTitle,
-    //     changeTodosTitle, updateTodosList
-    //     , completedTasksCount, updateCompletedTasks, updateTodosTitle,
-    //      handleItemOrderChange, timeTodo, cancelTimedTodo, addTimeToTodo}
-    //     = useTodosListHook();
+    const {showSettings, toggleShowSettings} = useSettings();
 
     const { todosCompState, dispatch} = useTodoListState()
 
@@ -97,7 +91,7 @@ export function Main(){
     if(timerFullScreen){
         return (
             <div className="ListAndTimer timer-center" >
-                <TodoPomodoroHeader handleShowSettings={handleShowSettings} themeColors={themeColors} toggleHelpTips={toggleHelpTips} setToggleHelpTips={setToggleHelpTips}/>
+                <TodoPomodoroHeader handleShowSettings={toggleShowSettings} themeColors={themeColors} toggleHelpTips={toggleHelpTips} setToggleHelpTips={setToggleHelpTips}/>
 
                 <PomodoroTimer timer={timer}
                 timerMode={timerMode}
@@ -107,7 +101,7 @@ export function Main(){
                 pauseTimer={pauseTimer}
                 resumeTimer={resumeTimer}
                 changeTimerModes={changeTimerModes}
-                handleShowSettings={handleShowSettings}
+                handleShowSettings={toggleShowSettings}
                 sessionsLoop={sessionsLoop}
                 sessionLen={sessionLen} breakLen={breakLen}
                 setTimerTime={setTimerTime}
@@ -125,7 +119,7 @@ export function Main(){
 
             <Settings 
              setSessionLoopMode={setSessionLoopMode} showSettings={showSettings}
-             handleCloseSettings={handleCloseSettings} 
+             handleCloseSettings={toggleShowSettings} 
              setSessionAndBreakLen={setSessionAndBreakLen}/>
 
             </div>
@@ -135,7 +129,7 @@ export function Main(){
     return (
         <div className="ListAndTimer" >
 
-            <TodoPomodoroHeader handleShowSettings={handleShowSettings} 
+            <TodoPomodoroHeader handleShowSettings={toggleShowSettings} 
             themeColors= {themeColors} toggleHelpTips={toggleHelpTips} setToggleHelpTips={setToggleHelpTips}/>
 
             <PomodoroTimer timer={timer}
@@ -146,7 +140,7 @@ export function Main(){
              pauseTimer={pauseTimer}
              resumeTimer={resumeTimer}
              changeTimerModes={changeTimerModes}
-             handleShowSettings={handleShowSettings}
+             handleShowSettings={toggleShowSettings}
                sessionsLoop={sessionsLoop}
                 sessionLen={sessionLen} breakLen={breakLen}
                 setTimerTime={setTimerTime}
@@ -178,7 +172,7 @@ export function Main(){
 
             <Settings 
              setSessionLoopMode={setSessionLoopMode} showSettings={showSettings}
-             handleCloseSettings={handleCloseSettings} 
+             handleCloseSettings={toggleShowSettings} 
              setSessionAndBreakLen={setSessionAndBreakLen} />
              
             

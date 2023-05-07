@@ -15,6 +15,7 @@ export interface ItodosListState{
     allNum:number
 }
 
+
 export const todosActions = {
     allTodos:'allTodos',
     completedTodos:'completedTodos',
