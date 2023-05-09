@@ -1,25 +1,20 @@
 import { useRef } from "react";
 import { Overlay, Tooltip } from "react-bootstrap";
-import { IthemeColors } from "../App";
+import { buttonColortype } from "../App";
+import '../scss/CompletionForcast.scss';
 
-// interface ICompletionForcast{
-//     CompletionForcastEval():number|'...'
-//     themeColors:IthemeColors,
-//     toggleHelpTips:boolean
-// }
-
-interface ICompletionForcast{
+export interface ICompletionForcast{
     forcast:string,
-    themeColors:IthemeColors,
+    buttonColor:buttonColortype,
     toggleHelpTips:boolean
 }
-export function CompletionForcast({forcast,themeColors, toggleHelpTips}:ICompletionForcast){
+export function CompletionForcast({forcast,buttonColor, toggleHelpTips}:ICompletionForcast){
     
     const forcastRef = useRef(null)
 
     return (
-        <div ref={forcastRef}>
-            <div className={"CompletionForcast "+themeColors.buttonColor}>
+        <div ref={forcastRef} data-cy='forcast'>
+            <div className={"CompletionForcast "+buttonColor}>
                 <label htmlFor="CompletionForcast-title">At this rate,<br/> you'll finish your todos in:</label>
                 <h4>{forcast}</h4>
                 sessions

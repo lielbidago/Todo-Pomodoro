@@ -3,7 +3,8 @@ import { useRef, useState } from 'react';
 import { Col, Form, InputGroup, Row } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { itodoLi, ItodosReducerAction, todosReducerActions } from '../hooks/useTodoList';
+import {  todosReducerActions } from '../hooks/useTodoList';
+import { itodoLi, ItodosReducerAction } from '../hooks/useTodoListTypes';
 
 
 // interface ITimedTodoModalProps{

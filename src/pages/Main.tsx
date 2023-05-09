@@ -2,11 +2,10 @@ import {useTimer} from '../hooks/useTimer'
 import {TodoPomodoroHeader} from '../components/header'
 import { PomodoroTimer } from '../components/PomodoroTimer';
 import {TodoPomodoList} from '../components/TodoPomodoroList'
-// import {useTodosListHook} from '../hooks/usedTodoListHook'
 import { Settings } from '../components/Settings';
 import { ProgressBarP } from '../components/prograssBar';
 import { CompletionForcast } from '../components/CompletionForcast';
-import { useContext, useRef, useState, useCallback, useEffect } from 'react';
+import { useContext, useState, useCallback, useEffect } from 'react';
 import { ThemeContext } from '../context/themeContext';
 import {todosReducerActions, useTodoListState} from '../hooks/useTodoList'
 import { useSettings } from '../hooks/useSettings';
@@ -26,7 +25,7 @@ export function Main(){
     const [timerFullScreen, setTimerFullScreen] = useState(false)
     
     const updateTodosState = useCallback(()=>{
-        listDispatch({type:todosReducerActions.updateTodosState, payload:{}})},[])
+        listDispatch({type:todosReducerActions.updateTodosState, payload:{}})},[listDispatch])
 
     function toggleTimerFullScreen(){
         setTimerFullScreen(!timerFullScreen)
@@ -46,7 +45,7 @@ export function Main(){
         setLastSessionTaskCount(todosCompState.completedNum)
     }
 
-    function updateForast(){
+    function updateForcast(){
         calculateCurSessionRate(todosCompState.completedNum);
         forcastDispatch({type:forcastReducerActions.updateCompletionForcastEval, payload:{
             tasksLeftNum:todosCompState.allNum-todosCompState.completedNum, 
@@ -65,7 +64,7 @@ export function Main(){
                 <PomodoroTimer timerState={timerState} 
                 timerDispatch = {timerDispatch}
                 handleRateTasksUpdate={handleRateTasksUpdate}
-                updateForast={updateForast}
+                updateForcast={updateForcast}
                 toggleHelpTips={toggleHelpTips}
                 toggleTimerFullScreen = {toggleTimerFullScreen}
                 themeColors = {themeColors}
@@ -91,7 +90,7 @@ export function Main(){
             <PomodoroTimer timerState={timerState} 
                 timerDispatch = {timerDispatch}
                 handleRateTasksUpdate={handleRateTasksUpdate}
-                updateForast={updateForast}
+                updateForcast={updateForcast}
                 toggleHelpTips={toggleHelpTips}
                 toggleTimerFullScreen = {toggleTimerFullScreen}
                 themeColors = {themeColors}
@@ -103,7 +102,7 @@ export function Main(){
                 toggleHelpTips={toggleHelpTips}/>
 
                 <CompletionForcast forcast={forcast} 
-                themeColors={themeColors} toggleHelpTips={toggleHelpTips}/>
+                buttonColor={themeColors.buttonColor} toggleHelpTips={toggleHelpTips}/>
             </div>
 
             <TodoPomodoList todosCompState={todosCompState} toggleHelpTips={toggleHelpTips} 

@@ -4,9 +4,9 @@ import  {Route, Routes} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import { Footer } from './components/footer';
 import {ThemeContext} from './context/themeContext';
-import { WelcomePage } from './pages/welcome';
 import { Main } from './pages/Main';
 import { getButtonsColor } from './helperFunctions/themes';
+import { WelcomePage } from './pages/Welcome';
 
 const buttonColor = {
   dark:'dark',

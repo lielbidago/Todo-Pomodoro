@@ -2,7 +2,9 @@ import { useEffect, useRef } from "react";
 import { Overlay, Tooltip } from "react-bootstrap";
 import { IthemeColors } from "../App";
 import { useBellSound } from "../hooks/useBellSound";
-import { ItimerReducerAction, ItimerState, timerReducerActions } from "../hooks/useTimer";
+import { timerReducerActions } from "../hooks/useTimer";
+import { ItimerReducerAction, ItimerState } from "../hooks/useTimerTypes";
+
 import '../scss/timer.scss';
 
 // interface PomodoroTimerprops{
@@ -44,7 +46,7 @@ interface PomodoroTimerprops{
     timerState:ItimerState,
     timerDispatch(action:ItimerReducerAction):void
     handleRateTasksUpdate():void,
-    updateForast():void,
+    updateForcast():void,
     themeColors: IthemeColors,
     toggleHelpTips: boolean,
     toggleTimerFullScreen():void,
@@ -54,16 +56,18 @@ interface PomodoroTimerprops{
 export function PomodoroTimer(props:PomodoroTimerprops){
     
     const {timerState, timerDispatch, handleRateTasksUpdate, 
-        updateForast, themeColors,
+        updateForcast, themeColors,
       toggleHelpTips, toggleTimerFullScreen }
     = props;
     const {soundOn, timerBell, toggleSoundOn} = useBellSound();
     const {buttonColor} = themeColors;
-
-    const timerTitles = useRef({
+    
+    const timerOptions = {
         session:'Pomodoro Session',
         break:'Pomodoro Break',
-    });
+    }//left it as not const since maybe inthe future i will add timerMods name customization. instead 'Pomodoro Session' - 'Study time'
+
+    const timerTitles = useRef(timerOptions);
     
     function playBell(){
         timerBell.play()
@@ -71,7 +75,7 @@ export function PomodoroTimer(props:PomodoroTimerprops){
 
     useEffect(()=>{
         timerDispatch({type:timerReducerActions.updateTimerState, payload:{}})
-    }, []);
+    }, [timerDispatch]);
 
     useEffect(()=>{
         
@@ -81,7 +85,7 @@ export function PomodoroTimer(props:PomodoroTimerprops){
                 playBell()
             }
 
-            updateForast();
+            updateForcast();
 
             timerDispatch({type:timerReducerActions.pauseTimer, payload:{}})
             timerDispatch({type:timerReducerActions.changeTimerModes, payload:{}})

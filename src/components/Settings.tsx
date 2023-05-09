@@ -2,7 +2,8 @@
 import { useRef, useContext } from 'react';
 import { Button, Offcanvas, Form, InputGroup, Col, Row  } from 'react-bootstrap';
 import { ThemeContext } from '../context/themeContext';
-import { ItimerReducerAction, ItimerState, timerReducerActions } from '../hooks/useTimer';
+import { timerReducerActions } from "../hooks/useTimer";
+import { ItimerReducerAction, ItimerState } from "../hooks/useTimerTypes";
 
 // interface ISettingsProps{
 //     showSettings:boolean,

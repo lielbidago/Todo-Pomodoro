@@ -3,7 +3,8 @@ import { Overlay, Tooltip } from 'react-bootstrap';
 import '../scss/TodoLI.scss';
 import '../scss/checkbox.scss';
 import { TimedTodoModal } from './TimedTodoModal';
-import { itodoLi, ItodosReducerAction, todosReducerActions } from '../hooks/useTodoList';
+import { todosReducerActions } from '../hooks/useTodoList';
+import { itodoLi, ItodosReducerAction } from '../hooks/useTodoListTypes';
 
 // export interface TodoLIProps{
 //     changeStatusTodo(TaskId:number):void,
@@ -34,7 +35,7 @@ export function TodoLI(props:TodoLIProps){
     
     const {todo, listDispatch, toggleHelpTips, onDragStart,onDragEnter, onDragEnd} = props
     
-    const {id, completed, task, timed} = todo
+    const {id, completed, task} = todo
 
     const [showInput, setShowInput] = useState(false)
 
