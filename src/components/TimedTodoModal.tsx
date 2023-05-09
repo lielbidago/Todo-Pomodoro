@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 import { Col, Form, InputGroup, Row } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { itodoLi, ItodosReducerAction, todosActions } from '../hooks/usedTodoListHook';
+import { itodoLi, ItodosReducerAction, todosReducerActions } from '../hooks/useTodoList';
 
 
 // interface ITimedTodoModalProps{
@@ -20,13 +20,14 @@ interface ITimedTodoModalProps{
     toggleShowTodoModal():void,
     showTodoModal:boolean,
     todo:itodoLi,
-    dispatch(action:ItodosReducerAction):void
+    listDispatch(action:ItodosReducerAction):void
 }
 
 
 export function TimedTodoModal(props:ITimedTodoModalProps) {
 
-    const {toggleShowTodoModal, showTodoModal, todo, dispatch} = props
+    const {toggleShowTodoModal, showTodoModal, todo, listDispatch} = props
+
     const formRef = useRef<HTMLFormElement>(null)
     const [isTimed, setIsTimed] = useState(todo.timed !== null? true:false)
 
@@ -38,23 +39,23 @@ export function TimedTodoModal(props:ITimedTodoModalProps) {
         const payload = Object.fromEntries(formData)
 
         if (payload.todoTitle !== todo.task){
-            dispatch({
-                type:todosActions.editTask, 
+            listDispatch({
+                type:todosReducerActions.editTask, 
                 payload:{taskId:todo.id, newTask:payload.todoTitle as string}
             })
         }
 
         if (payload.checked && payload.timeOfTodo !=='' && todo.timed === null){
-            dispatch({
-                type:todosActions.addTimeToTodo, 
+            listDispatch({
+                type:todosReducerActions.addTimeToTodo, 
                 payload:{taskId:todo.id, timed:payload.timeOfTodo as string}
                 }
             )
         }
 
         if (!payload.checked && todo.timed){
-            dispatch({
-                type:todosActions.cancelTimedTodo, 
+            listDispatch({
+                type:todosReducerActions.cancelTimedTodo, 
                 payload:{taskId:todo.id}
             })
         }

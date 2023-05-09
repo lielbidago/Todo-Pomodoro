@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { itodoLi, ItodosListState, ItodosReducerAction, todosActions, TtodosActions } from "../hooks/usedTodoListHook"
+import { itodoLi, ItodosListState, ItodosReducerAction, todosReducerActions, TtodosActions } from "../hooks/useTodoList"
 import { TodoLI } from "./TodoLI"
 import * as XLSX from 'xlsx';
 import FilterDropDown from "./FilterDropDown";
@@ -30,7 +30,7 @@ import { Toast } from "react-bootstrap";
 
 interface TodoPomodoListProps{
     todosCompState:ItodosListState,
-    dispatch(action:ItodosReducerAction):void,
+    listDispatch(action:ItodosReducerAction):void,
     toggleHelpTips: boolean,
 
 }
@@ -45,7 +45,7 @@ export type TtodosFilter = keyof typeof todosFilter;
 
 export function TodoPomodoList(props: TodoPomodoListProps){
     
-    const {todosCompState, dispatch, toggleHelpTips} = props
+    const {todosCompState, listDispatch, toggleHelpTips} = props
 
     const inputRef = useRef<HTMLInputElement>(null);
     const [titleChange, setTitleChange] = useState(false);
@@ -60,21 +60,21 @@ export function TodoPomodoList(props: TodoPomodoListProps){
     function onTaskEnter(event: React.KeyboardEvent<HTMLDivElement>){
         if(event.key === 'Enter'){
             if( inputRef.current && inputRef.current.value !=='' && inputRef.current.value!==' '){
-                dispatch({type:todosActions.addTodo,payload: {task:inputRef.current?.value as string, timed:null}});
+                listDispatch({type:todosReducerActions.addTodo,payload: {task:inputRef.current?.value as string, timed:null}});
                 inputRef.current.value = "";
             }
         }
     }
     function onEnterTask(event: React.MouseEvent<HTMLElement>){
         if(inputRef.current && inputRef.current.value!=='' && inputRef.current.value!==' '){
-            dispatch({type:todosActions.addTodo,payload: {task:inputRef.current?.value as string, timed:null}});
+            listDispatch({type:todosReducerActions.addTodo,payload: {task:inputRef.current?.value as string, timed:null}});
             inputRef.current.value = "";
         }
     }
     function handleTitleChange(event: React.KeyboardEvent<HTMLDivElement>){
         if(event.key === 'Enter'){
             if(titleRef.current && titleRef.current.value!=='' && titleRef.current.value!==' '){
-                dispatch({type:todosActions.changeTitle,payload: {newTitle:titleRef.current.value as string}});
+                listDispatch({type:todosReducerActions.changeTitle,payload: {newTitle:titleRef.current.value as string}});
                 setTitleChange(false);
             }
         }
@@ -105,7 +105,7 @@ export function TodoPomodoList(props: TodoPomodoListProps){
 
 
     function onDragEnd(e:React.DragEvent<HTMLLIElement>){
-        dispatch({type:todosActions.handleItemOrderChange,payload: {
+        listDispatch({type:todosReducerActions.handleItemOrderChange,payload: {
             fromIndex:draggedItemRef.current as number,
             toIndex:draggedOverItemRef.current as number
         }});
@@ -143,7 +143,7 @@ export function TodoPomodoList(props: TodoPomodoListProps){
 
                     if (todo.length === 0){
                         console.log('entered addTimedTodo')
-                        dispatch({type:todosActions.addTodo,payload: {task:td.task, timed:td.timed}});
+                        listDispatch({type:todosReducerActions.addTodo,payload: {task:td.task, timed:td.timed}});
 
                         toggleShowToast()
                     }
@@ -204,7 +204,7 @@ export function TodoPomodoList(props: TodoPomodoListProps){
                     todosCompState.todos.map((td:itodoLi, index)=> 
                     (<TodoLI key={index}
                    todo={td} toggleHelpTips={toggleHelpTips} 
-                   dispatch={dispatch}
+                   listDispatch={listDispatch}
                    onDragStart={(e:React.DragEvent<HTMLLIElement>)=> {onDragStart(e,index)}}
                     onDragEnter={(e:React.DragEvent<HTMLLIElement>) => {onDragEnter(e,index)}} 
                     onDragEnd={(e:React.DragEvent<HTMLLIElement>) => {onDragEnd(e)}}
@@ -216,7 +216,7 @@ export function TodoPomodoList(props: TodoPomodoListProps){
                 todosCompState.todos.filter(td => td.completed).map((td:itodoLi, index)=> 
                 (<TodoLI key={index}
                     todo={td} toggleHelpTips={toggleHelpTips} 
-                    dispatch={dispatch}
+                    listDispatch={listDispatch}
                     onDragStart={(e:React.DragEvent<HTMLLIElement>)=> {onDragStart(e,index)}}
                      onDragEnter={(e:React.DragEvent<HTMLLIElement>) => {onDragEnter(e,index)}} 
                      onDragEnd={(e:React.DragEvent<HTMLLIElement>) => {onDragEnd(e)}}
@@ -227,7 +227,7 @@ export function TodoPomodoList(props: TodoPomodoListProps){
                 todosCompState.todos.filter(td => !td.completed).map((td:itodoLi, index)=> 
                 (<TodoLI key={index}
                     todo={td} toggleHelpTips={toggleHelpTips} 
-                    dispatch={dispatch}
+                    listDispatch={listDispatch}
                     onDragStart={(e:React.DragEvent<HTMLLIElement>)=> {onDragStart(e,index)}}
                      onDragEnter={(e:React.DragEvent<HTMLLIElement>) => {onDragEnter(e,index)}} 
                      onDragEnd={(e:React.DragEvent<HTMLLIElement>) => {onDragEnd(e)}}

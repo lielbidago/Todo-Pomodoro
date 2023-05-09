@@ -3,7 +3,7 @@ import { Overlay, Tooltip } from 'react-bootstrap';
 import '../scss/TodoLI.scss';
 import '../scss/checkbox.scss';
 import { TimedTodoModal } from './TimedTodoModal';
-import { itodoLi, ItodosReducerAction, todosActions } from '../hooks/usedTodoListHook';
+import { itodoLi, ItodosReducerAction, todosReducerActions } from '../hooks/useTodoList';
 
 // export interface TodoLIProps{
 //     changeStatusTodo(TaskId:number):void,
@@ -22,7 +22,7 @@ import { itodoLi, ItodosReducerAction, todosActions } from '../hooks/usedTodoLis
 
 export interface TodoLIProps{
     todo: itodoLi,
-    dispatch(action:ItodosReducerAction):void,
+    listDispatch(action:ItodosReducerAction):void,
     toggleHelpTips: boolean,
     onDragStart(e:React.DragEvent<HTMLLIElement>):void,
     onDragEnter(e:React.DragEvent<HTMLLIElement>):void,
@@ -32,7 +32,7 @@ export interface TodoLIProps{
 
 export function TodoLI(props:TodoLIProps){
     
-    const {todo, dispatch, toggleHelpTips, onDragStart,onDragEnter, onDragEnd} = props
+    const {todo, listDispatch, toggleHelpTips, onDragStart,onDragEnter, onDragEnd} = props
     
     const {id, completed, task, timed} = todo
 
@@ -48,8 +48,8 @@ export function TodoLI(props:TodoLIProps){
         
         if(inputRef.current && event.key === 'Enter'){
             if(inputRef.current.value !=='' && inputRef.current.value!==' '){
-                dispatch({
-                    type:todosActions.editTask, 
+                listDispatch({
+                    type:todosReducerActions.editTask, 
                     payload:{taskId: id, newTask:inputRef.current.value}
                 });
             }
@@ -64,15 +64,15 @@ export function TodoLI(props:TodoLIProps){
     }
 
     function handleDeleteTodo(){
-        dispatch({
-            type:todosActions.deleteTodo,
+        listDispatch({
+            type:todosReducerActions.deleteTodo,
             payload:{taskId:todo.id}
         })
     }
 
     function handleChangeStatusTodo(){
-        dispatch({
-            type:todosActions.changeStatusTodo,
+        listDispatch({
+            type:todosReducerActions.changeStatusTodo,
             payload:{taskId:todo.id}
         })
     }
@@ -85,7 +85,7 @@ export function TodoLI(props:TodoLIProps){
          onDragEnd={(e)=> onDragEnd(e)} onDragOver={(e)=> e.preventDefault()} id={'li-'+ id.toString()}>
 
             <TimedTodoModal toggleShowTodoModal={toggleShowTodoModal}
-            dispatch={dispatch}
+            listDispatch={listDispatch}
             showTodoModal={showTodoModal} todo={todo} />
 
             {!showInput? 
