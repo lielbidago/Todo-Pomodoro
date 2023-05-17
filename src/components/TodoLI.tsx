@@ -2,24 +2,11 @@ import React, { useRef, useState } from 'react'
 import { Overlay, Tooltip } from 'react-bootstrap';
 import '../scss/TodoLI.scss';
 import '../scss/checkbox.scss';
-import { TimedTodoModal } from './TimedTodoModal';
+import { EditTodoModal } from './EditTodoModal';
 import { todosReducerActions } from '../hooks/useTodoList';
 import { itodoLi, ItodosReducerAction } from '../hooks/useTodoListTypes';
 
-// export interface TodoLIProps{
-//     changeStatusTodo(TaskId:number):void,
-//     todo: itodoLi,
-//     editTask(TaskId:number, newTask:string):void,
-//     deleteTodo(taskID:number):void,
-//     onDragStart(e:React.DragEvent<HTMLLIElement>):void,
-//     onDragEnter(e:React.DragEvent<HTMLLIElement>):void,
-//     onDragEnd(e:React.DragEvent<HTMLLIElement>):void,
-//     toggleHelpTips: boolean,
-//     addTimeToTodo(taskID:number, timeto:string):void,
-//     setTimedTodo(timeToSet:string, taskID:number):void,
-//     cancelTimedTodo(taskID:number):void,
-//     toggleShowTodoModal():void
-// }
+
 
 export interface TodoLIProps{
     todo: itodoLi,
@@ -79,13 +66,11 @@ export function TodoLI(props:TodoLIProps){
     }
 
 
-
-//returnhere
     return (
         <li className="Todo-li" draggable onDragStart={(e)=>onDragStart(e)} onDragEnter={(e)=> onDragEnter(e)}
          onDragEnd={(e)=> onDragEnd(e)} onDragOver={(e)=> e.preventDefault()} id={'li-'+ id.toString()}>
 
-            <TimedTodoModal toggleShowTodoModal={toggleShowTodoModal}
+            <EditTodoModal toggleShowTodoModal={toggleShowTodoModal}
             listDispatch={listDispatch}
             showTodoModal={showTodoModal} todo={todo} />
 

@@ -13,8 +13,6 @@ export const todosReducerActions = {
     editTask:'editTask',
     handleItemOrderChange:'handleItemOrderChange',
     changeTitle:'changeTitle',
-    addTimeToTodo:'addTimeToTodo',
-    cancelTimedTodo:'cancelTimedTodo',
     updateTodosState:'updateTodosState'
 
 } as const;
@@ -42,7 +40,6 @@ function todosComponentReducer(state:ItodosListState,
                 task: action.payload.task,
                 id: Date.now(),
                 completed: false,
-                timed:action.payload.timed
             } as itodoLi], allNum: state.allNum++};
             localStorage.setItem('todoList', JSON.stringify(newTodosState.todos));
             return newTodosState
@@ -105,23 +102,6 @@ function todosComponentReducer(state:ItodosListState,
             localStorage.setItem('todosTitle', action.payload.newTitle!)
             return newTodosState;
 
-        case todosReducerActions.addTimeToTodo:
-            newTodosState = {
-                ...state,
-                todos:state.todos.map((td) => (td.id === action.payload.taskId ? 
-                    {...td, timed:action.payload.timed} as itodoLi: td ))
-            };
-            localStorage.setItem('todoList', JSON.stringify(newTodosState.todos));
-            return newTodosState
-
-        case todosReducerActions.cancelTimedTodo:
-            newTodosState = {
-                ...state,
-                todos:state.todos.map((td) => (td.id === action.payload.taskId ? 
-                    {...td, timed:null} as itodoLi: td ))
-            };
-            localStorage.setItem('todoList', JSON.stringify(newTodosState.todos));
-            return newTodosState
 
         case todosReducerActions.updateTodosState:
 
@@ -149,7 +129,7 @@ function todosComponentReducer(state:ItodosListState,
 export function useTodoListState(){
 
     const defaultList:itodoLi[] = 
-    [{task:'do something', id:Date.now(),completed: false, timed:null}]; 
+    [{task:'do something', id:Date.now(),completed: false}]; 
 
     const defaultState:ItodosListState = 
     {todos:defaultList, title:'My Todos', allNum:1,completedNum:0};

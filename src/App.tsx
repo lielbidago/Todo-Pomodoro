@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from 'react';
+import { useEffect, useReducer, useRef } from 'react';
 import './scss/App.scss';
 import  {Route, Routes} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -51,11 +51,15 @@ function App() {
 
   const defaultTheme:IthemeColors = {outerColor:'#bfebe1', innerColor:'#7394da', buttonColor:buttonColor.dark}
   const [themeColors, dispatchTheme] = useReducer(themeColorsReducer, defaultTheme);
-
+  const appScreen = useRef<HTMLDivElement>(null);
+  
   function setCustomeThemes(innerColor: string, outerColor: string){
 
     const usersTheme = {innerColor, outerColor, buttonColor:getButtonsColor(outerColor,innerColor)};
     dispatchTheme({type:ThemeReducerActions.changed_theme_colors, payload:usersTheme })
+
+    appScreen.current!.style.setProperty('--themeOuter', outerColor+(66).toString());
+    appScreen.current!.style.setProperty('--themeInner', innerColor+(66).toString());
 
     localStorage.setItem('innerColor', innerColor);
     localStorage.setItem('outerColor', outerColor);
@@ -65,7 +69,7 @@ function App() {
     
     const inner: string = localStorage.getItem('innerColor') || themeColors.innerColor
     const outer: string = localStorage.getItem('outerColor') || themeColors.outerColor
-    
+    console.log(inner)
     let usersTheme = 
       {innerColor: inner,
       outerColor: outer,
@@ -73,14 +77,16 @@ function App() {
     };
 
     dispatchTheme({type:ThemeReducerActions.changed_theme_colors, payload:usersTheme})
-
+    appScreen.current!.style.setProperty('--themeOuter', outer+(66).toString());
+    appScreen.current!.style.setProperty('--themeInner', inner+(66).toString());
   }
 
   //"fetch" from local storage
  
 
   useEffect(()=>{
-    setSavedCustomeThemes()
+    setSavedCustomeThemes();
+
   },[])
 
 
@@ -88,17 +94,18 @@ function App() {
     <ThemeContext.Provider value={{themeColors, setCustomeThemes} }>
     <Routes>
 
-      <Route path='*' element={<div className='app-screen'
+      <Route path='*' element={<div className='app-screen' ref={appScreen}
       style={{background:`radial-gradient(circle, ${themeColors.innerColor} 0%, ${themeColors.outerColor} 100%)`}}
       >
         <WelcomePage/>
         <Footer themeColors={themeColors}/></div>}/>
 
       <Route path='todos-and-pomodoro'
-        element={<div className='app-screen'
+        element={<div className='app-screen' ref={appScreen}
         style={{background:`radial-gradient(circle, ${themeColors.innerColor} 0%, ${themeColors.outerColor} 100%)`}}
       >
-        <Main/><Footer themeColors={themeColors}/></div>}/>
+        <Main/>
+        <Footer themeColors={themeColors}/></div>}/>
     </Routes>
     
     </ThemeContext.Provider>

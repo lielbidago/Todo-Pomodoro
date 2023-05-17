@@ -4,7 +4,6 @@ export interface itodoLi{
     task: string,
     id: number
     completed: boolean
-    timed: string | null
 }
 
 export interface ItodosListState{
@@ -20,7 +19,6 @@ export interface ItodosReducerAction{
     type:TtodosActions,
     payload:{
         task?:string,
-        timed?:string|null,
         taskId?:number,
         newTask?:string,
         fromIndex?:number,

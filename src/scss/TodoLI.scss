@@ -30,13 +30,13 @@
       font-weight: bold;
       font-size: larger;
       color: grey;
+      border-radius: 50px;
       
     }
-  
-    .deleteTodo:hover{
-      color: black;
-      box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-      padding: 0 2%;
-      border-radius: 50px;
+
+    .buttonTodo:hover{
+      border-radius: 10px;
     }
+    
+
 }
