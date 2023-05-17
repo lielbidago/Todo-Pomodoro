@@ -52,14 +52,15 @@ function App() {
   const defaultTheme:IthemeColors = {outerColor:'#bfebe1', innerColor:'#7394da', buttonColor:buttonColor.dark}
   const [themeColors, dispatchTheme] = useReducer(themeColorsReducer, defaultTheme);
   const appScreen = useRef<HTMLDivElement>(null);
-  
+  const transparentby = 'b6';
+
   function setCustomeThemes(innerColor: string, outerColor: string){
 
     const usersTheme = {innerColor, outerColor, buttonColor:getButtonsColor(outerColor,innerColor)};
     dispatchTheme({type:ThemeReducerActions.changed_theme_colors, payload:usersTheme })
 
-    appScreen.current!.style.setProperty('--themeOuter', outerColor+(66).toString());
-    appScreen.current!.style.setProperty('--themeInner', innerColor+(66).toString());
+    appScreen.current!.style.setProperty('--themeOuter', outerColor+transparentby);
+    appScreen.current!.style.setProperty('--themeInner', innerColor+transparentby);
 
     localStorage.setItem('innerColor', innerColor);
     localStorage.setItem('outerColor', outerColor);
@@ -69,7 +70,7 @@ function App() {
     
     const inner: string = localStorage.getItem('innerColor') || themeColors.innerColor
     const outer: string = localStorage.getItem('outerColor') || themeColors.outerColor
-    console.log(inner)
+
     let usersTheme = 
       {innerColor: inner,
       outerColor: outer,
@@ -77,8 +78,8 @@ function App() {
     };
 
     dispatchTheme({type:ThemeReducerActions.changed_theme_colors, payload:usersTheme})
-    appScreen.current!.style.setProperty('--themeOuter', outer+(66).toString());
-    appScreen.current!.style.setProperty('--themeInner', inner+(66).toString());
+    appScreen.current!.style.setProperty('--themeOuter', outer+transparentby);
+    appScreen.current!.style.setProperty('--themeInner', inner+transparentby);
   }
 
   //"fetch" from local storage
