@@ -20,7 +20,7 @@
 
   display:grid;
   grid-template-columns: auto;
-  grid-template-rows: 18% minmax(8%, 10%) auto 10%;
+  grid-template-rows: 18% minmax(8%, 10%) auto 7%;
   grid-template-areas: "title"
                         "enterTodo"
                         "todos"
@@ -77,6 +77,7 @@
   .my-todos{
     grid-area: todos;
     overflow-y: scroll; 
+    
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
     scrollbar-width: none; /* for Firefox */
   }
@@ -88,8 +89,10 @@
   .todos-footer{
     grid-area: todos-footer;
     
-    position: absolute;
-    bottom:0;
+    position: sticky;
+    bottom: 0;
+
+    height:fit-content;
 
     div{
       width: fit-content;
