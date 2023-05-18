@@ -7,12 +7,11 @@ export default function Welcome(){
             <div className="welcomediv">
                 <h4>Hello, welcome to</h4>
                 <h1>PomodoTodo</h1>
-                <p>Welcome to Todo-Pomodoro! 
-                    Manage your tasks and increase your productivity. 
-                    With PomodoTodo, you can create and manage your to-do list, 
-                    and track your progress. 
-                    The Pomodoro timer helps you stay focused and work in concentrated bursts, 
-                    which has been shown to increase productivity and reduce procrastination.</p>
+                <p> 
+                    Manage your tasks and increase your productivity. <br/>
+                    With <strong>PomodoTodo</strong>, you can create and manage your to-do list, 
+                    as well as track your progress. <br/>
+                    The Pomodoro timer helps you stay focused, work in concentrated bursts and pace yourself.</p>
                      
                 <Link role="button" type="button" className="start btn btn-outline-dark" to={`todos-and-pomodoro`}>START</Link>
 
