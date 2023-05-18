@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { Overlay, Tooltip } from "react-bootstrap";
-import { buttonColortype } from "../App";
 import '../scss/CompletionForcast.scss';
+import { buttonColortype } from "../hooks/useThemeTypes";
 
 export interface ICompletionForcast{
     forcast:string,

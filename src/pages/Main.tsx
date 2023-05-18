@@ -70,12 +70,12 @@ export function Main(){
                 themeColors = {themeColors}
                 />
 
-            <Settings 
-              showSettings={showSettings}
-             handleCloseSettings={toggleShowSettings} 
-             timerDispatch={timerDispatch}
-             timerState={timerState}
-             />
+                <Settings
+                showSettings={showSettings}
+                handleCloseSettings={toggleShowSettings} 
+                timerDispatch={timerDispatch}
+                timerState={timerState}
+                />
 
             </div>
             

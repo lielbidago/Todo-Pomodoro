@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { Overlay, ProgressBar, Tooltip } from "react-bootstrap";
-import { IthemeColors } from "../App";
+import { IthemeColors } from "../hooks/useThemeTypes";
+
 
 interface prograssBarProps{
     progressValue: number,

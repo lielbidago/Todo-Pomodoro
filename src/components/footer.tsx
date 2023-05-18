@@ -1,4 +1,5 @@
-import { IthemeColors } from "../App";
+import { IthemeColors } from "../hooks/useThemeTypes"
+
 
 interface IFooterProps{
     themeColors:IthemeColors

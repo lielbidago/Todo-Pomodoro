@@ -1,6 +1,5 @@
 import { PomodoroTimer } from "../components/PomodoroTimer";
 import soundbell from "../assets/achievementBell.wav";
-import { IthemeColors } from "../App";
 
 
 describe('PomodoroTimer tests',()=>{

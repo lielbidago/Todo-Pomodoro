@@ -24,11 +24,10 @@ body{
 
 
 .app-screen{
-  --themeOuter:#bfebe1 ;
-  --themeInner: #7394da;
+  --themeOuter:#70e1c6;
+  --themeInner: #d45454;
   font-family: 'Red Hat Display', sans-serif;
   background: --themeInner;
-  background: radial-gradient(circle, --themeOuter 0%, --themeInner 100%);
   overflow-y: scroll;
   min-width: 282px;
   min-height: 100vh;

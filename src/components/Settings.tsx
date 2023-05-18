@@ -17,8 +17,7 @@ interface ISettingsProps{
 export function Settings({showSettings, timerState, handleCloseSettings, timerDispatch }:ISettingsProps){
    
    const {setCustomeThemes, themeColors} = useContext(ThemeContext);
-   // usetheme 
-   const formRef = useRef<HTMLFormElement>(null)
+   const formRef = useRef<HTMLFormElement>(null);
    
    function submitForm(event: React.FormEvent<HTMLFormElement>): void {
        event.preventDefault()
