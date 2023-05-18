@@ -1,14 +1,13 @@
-import { useContext, useEffect, useReducer, useRef } from 'react';
+import { useEffect, } from 'react';
 import './scss/App.scss';
 import  {Route, Routes} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import { Footer } from './components/footer';
-import {ThemeContext} from './context/themeContext';
 import { Main } from './pages/Main';
-
-import { WelcomePage } from './pages/Welcome';
 import ThemeProvider from './context/themeProvider'
 import { useTheme } from './hooks/useTheme';
+import { WelcomePage } from './pages/Welcome';
+
 
 
 function App() {
@@ -40,7 +39,6 @@ function App() {
     </Routes>
 
     </ThemeProvider>
-    // {/* // </ThemeContext.Provider> */}
     
   )
 }

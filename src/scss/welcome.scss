@@ -16,7 +16,9 @@
     
     text-align: center;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.435) 0%, rgba(1, 0, 0, 0.148) 100%);
-    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    border-radius: 65px;
+    box-shadow:  41px 41px 82px rgba(0, 0, 0, 0.1),
+             -41px -41px 82px rgba(255, 255, 255, 0.101);
     
 
 }
@@ -25,4 +27,14 @@
     animation:welcomediv .9s cubic-bezier(.47,0.000,.745,.715) both
 }
 
-@keyframes welcomediv{0%{transform:scale(2);filter:blur(4px);opacity:0}100%{transform:scale(1);filter:blur(0);opacity:1}}
+@keyframes welcomediv{
+    0%{
+        transform:scale(1.5);
+        filter:blur(4px);
+        opacity:0
+    }
+    100%{
+        transform:scale(1);
+        filter:blur(0);
+        opacity:1}
+    }
