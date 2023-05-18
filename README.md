@@ -30,16 +30,16 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://todo-pomodoro-xi.vercel.app">
+  <a href="https://pomodotodo.vercel.app/">
     <img src="./public/android-chrome-192x192.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">todo-pomodoro</h3>
+<h3 align="center">PomodoTodo</h3>
 
   <p align="center">
     Welcome to Todo-Pomodoro! This website is the perfect tool to help you manage your tasks and increase your productivity. With a simple and intuitive design, you can easily create to-do lists and use the Pomodoro technique to stay focused and get things done.
 
-With Todo-Pomodoro, you can create and manage your to-do list, and track your progress. The Pomodoro timer helps you stay focused and work in concentrated bursts, which has been shown to increase productivity and reduce procrastination.
+With PomodoTodo, you can create and manage your to-do list, and track your progress. The Pomodoro timer helps you stay focused and work in concentrated bursts, which has been shown to increase productivity and reduce procrastination.
 
 Whether you're a student, a professional, or just someone who wants to be more organized, Todo-Pomodoro is the perfect solution. Try it out today and see how much more productive you can be!
     <br />

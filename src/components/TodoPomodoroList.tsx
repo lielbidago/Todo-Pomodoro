@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useContext, useRef, useState } from "react"
 import {  todosReducerActions,  } from "../hooks/useTodoList"
 import { itodoLi, ItodosReducerAction, ItodosListState } from '../hooks/useTodoListTypes';
 import { TodoLI } from "./TodoLI"
@@ -8,6 +8,7 @@ import Overlay from 'react-bootstrap/Overlay';
 import Tooltip from 'react-bootstrap/Tooltip';
 import useToast from "../hooks/useToast";
 import { Toast } from "react-bootstrap";
+import { ThemeContext } from "../context/themeContext";
 
 interface TodoPomodoListProps{
     todosCompState:ItodosListState,
@@ -32,7 +33,8 @@ export function TodoPomodoList(props: TodoPomodoListProps){
     const [titleChange, setTitleChange] = useState(false);
     const titleRef = useRef<HTMLInputElement>(null);
     const {showToast, toggleShowToast} = useToast()
-    const dotsColor1 = localStorage.getItem('innerColor');
+    const {themeColors} = useContext(ThemeContext);
+    const {innerColor} = themeColors;
     const draggedItemRef = useRef<null|number>(null);
     const draggedOverItemRef = useRef<null|number>(null);
     const [filterMode, setFilterMode] = useState<TtodosFilter>('allTodos')
@@ -111,7 +113,7 @@ export function TodoPomodoList(props: TodoPomodoListProps){
         <div className="list-container">
 
             <div className="TodoPomodoroList">
-            <div className="todos-title" style={{borderTopColor: `${dotsColor1}`}}>
+            <div className="todos-title" style={{borderTopColor: `${innerColor}`}}>
                 <Overlay target={todosTitleRef.current} show={toggleHelpTips} placement='right'>
                 {(props) => (
                     <Tooltip {...props}>
