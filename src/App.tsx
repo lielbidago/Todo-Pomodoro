@@ -6,7 +6,7 @@ import { Footer } from './components/footer';
 import { Main } from './pages/Main';
 import ThemeProvider from './context/themeProvider'
 import { useTheme } from './hooks/useTheme';
-import { WelcomePage } from './pages/Welcome';
+import { Welcome } from './pages/Welcome';
 
 
 
@@ -27,8 +27,9 @@ function App() {
       <Route path='*' element={<div className='app-screen' ref={appScreen}
       style={{background:`radial-gradient(circle, ${themeColors.innerColor} 0%, ${themeColors.outerColor} 100%)`}}
       >
-        <WelcomePage/>
-        <Footer themeColors={themeColors}/></div>}/>
+        <Welcome/>
+        <Footer themeColors={themeColors}/></div>}
+      />
 
       <Route path='todos-and-pomodoro'
         element={<div className='app-screen' ref={appScreen}

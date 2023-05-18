@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 
-export function WelcomePage(){
+export function Welcome(){
     
-      
     return (
         <div className="welcome-page" >
             <div className="welcomediv">
