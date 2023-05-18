@@ -76,6 +76,7 @@ Whether you're a student, a professional, or just someone who wants to be more o
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#Additions-to-future-versions">Additions to Future Versions</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
@@ -219,20 +220,6 @@ It's important to note that since this project was meant to be a front project, 
 without using a db and server i've used only the local storage to store that data.
 
 
-<!-- ROADMAP -->
-<!-- ## Roadmap
-
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
-
-See the [open issues](https://github.com/lielbidago/Todo-Pomodoro/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
-
-
-
 <!-- CONTRIBUTING -->
 ## Contributing
 
@@ -249,7 +236,14 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- ADDITIONS TO FUTURE VERSIONS -->
+## Additions to Future Versions
 
+1. Option to add sub-lists to your main list.
+2. Recovery of deleted items.
+3. Uploading of lists from excel files.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
 ## License
