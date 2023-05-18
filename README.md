@@ -76,6 +76,7 @@ Whether you're a student, a professional, or just someone who wants to be more o
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#Additions-to-future-versions">Additions to Future Versions</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
@@ -87,7 +88,7 @@ Whether you're a student, a professional, or just someone who wants to be more o
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src="./public/img_examples/screen.png" title="todo-pomodoro-screen" >
+<img src="./public/img_examples/screen.png" alt='todo-pomodoro-screen' title="todo-pomodoro-screen" >
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -142,18 +143,18 @@ This is an example of how to list things you need to use the software and how to
 ## Usage
 
 ### Welcome Page
-<img src="./public/img_examples/welcome.png"
+<img src="./public/img_examples/welcome.png" alt='welcome-page'
  width='500' height='300' title="welcome" />
 
 ### Todo List
 1. add item to list
 
-<img src="./public/img_examples/todos-example.png"
+<img src="./public/img_examples/todos-example.png" alt="todos-example"
  width='350' height='400' title="todo-list" />
 
 2. export list to excel
 
-<img src="./public/img_examples/excel.png"
+<img src="./public/img_examples/excel.png" alt='excel-example'
  width='800' height='500' title="todo-list-excel" />
 
 3. filter list
@@ -219,20 +220,6 @@ It's important to note that since this project was meant to be a front project, 
 without using a db and server i've used only the local storage to store that data.
 
 
-<!-- ROADMAP -->
-<!-- ## Roadmap
-
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
-
-See the [open issues](https://github.com/lielbidago/Todo-Pomodoro/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
-
-
-
 <!-- CONTRIBUTING -->
 ## Contributing
 
@@ -249,7 +236,14 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- ADDITIONS TO FUTURE VERSIONS -->
+## Additions to Future Versions
 
+1. Option to add sub-lists to your main list.
+2. Recovery of deleted items.
+3. Uploading of lists from excel files.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
 ## License

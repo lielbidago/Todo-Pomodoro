@@ -7,9 +7,6 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
 
 
-$themecolor1: #7394da;
-$themecolor2: #bfebe1;
-
 h4, h2, h1, p{
     font-family: 'Red Hat Display', sans-serif;
 }
@@ -19,14 +16,15 @@ body{
   padding: 0;
   text-align: center;
   overflow-x: hidden;
+  
 }
 
 
 .app-screen{
-    
+  --themeOuter:#70e1c6;
+  --themeInner: #d45454;
   font-family: 'Red Hat Display', sans-serif;
-  background: $themecolor1;
-  background: radial-gradient(circle, $themecolor1 0%, $themecolor2 100%);
+  background: --themeInner;
   overflow-y: scroll;
   min-width: 282px;
   min-height: 100vh;
@@ -34,7 +32,15 @@ body{
   width: 100vw;
 
 
+  button:hover{
+    background-color: var(--themeInner);
+  }
+
+
+
 }
+
+
 
 .app-screen::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
@@ -70,6 +76,7 @@ footer{
   background-color: rgba(255, 255, 255, 0.498);
   backdrop-filter: blur(8px) saturate(200%);
   -webkit-backdrop-filter: blur(15px) saturate(200%);
+
 }
 
 .ListAndTimer{
@@ -79,7 +86,6 @@ footer{
     font-family: 'Red Hat Display', sans-serif;
     margin:0 1%;
     width: 98%;
-
     min-height: 90dvh;
     height: 100%;
     gap: 1%;
@@ -89,7 +95,9 @@ footer{
     "list-container pomodoro-timer"
     'list-container updates';
 
-  
+
+
+    //
 }
 
 .ListAndTimer.timer-center{
@@ -164,6 +172,7 @@ footer{
   .ListAndTimer{
     margin-top: 0px;
     grid-template-rows: minmax(auto, 6%) 1fr 0.5fr; 
+    
 
   }
   .timer .btn{

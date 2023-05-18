@@ -1,7 +1,8 @@
 import {createBrowserRouter} from "react-router-dom";
 import App from '../App';
-import {Main} from "../pages/Main"
-import { WelcomePage } from "../pages/welcome";
+import Main from "../pages/Main";
+import Welcome from "../pages/Welcome";
+
 
 export const AppRoute = createBrowserRouter([
     {
@@ -9,12 +10,12 @@ export const AppRoute = createBrowserRouter([
       element: <App/>,
       children: [
         {
-          path: 'Todos-and-pomodoro',
+          path: 'todos-and-pomodoro',
           element: <Main />
         },
         {
           path: 'welcome',
-          element: <WelcomePage />
+          element: <Welcome />
         },
       ]
     },

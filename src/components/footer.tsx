@@ -1,7 +1,15 @@
+import { IthemeColors } from "../hooks/useThemeTypes";
 
-export function Footer({themeColors}){
+
+interface IFooterProps{
+    themeColors:IthemeColors
+}
+
+export function Footer(props:IFooterProps){
+    const {themeColors} = props
+    
     return (
-        <footer>
+        <footer role="contentinfo">
             <div className="main-footer" style={{color:themeColors.buttonColor==='light'? 'white':'black'}}>
             This website was made by Liel Bidago,
             check out my other projects here:&nbsp;&nbsp;  
