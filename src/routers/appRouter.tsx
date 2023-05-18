@@ -1,7 +1,8 @@
 import {createBrowserRouter} from "react-router-dom";
 import App from '../App';
-import {Main} from "../pages/Main"
-import { Welcome } from "../pages/Welcome";
+import Main from "../pages/Main";
+import Welcome from "../pages/Welcome";
+
 
 export const AppRoute = createBrowserRouter([
     {

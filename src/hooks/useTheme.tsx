@@ -65,9 +65,11 @@ export function useTheme(){
   
       const usersTheme = {innerColor, outerColor, buttonColor:getButtonsColor(outerColor,innerColor)};
       dispatchTheme({type:ThemeReducerActions.changed_theme_colors, payload:usersTheme })
-  
-      appScreen.current!.style.setProperty('--themeOuter', outerColor+transparentby);
-      appScreen.current!.style.setProperty('--themeInner', innerColor+transparentby);
+      if (appScreen.current){
+        appScreen.current.style.setProperty('--themeOuter', outerColor+transparentby);
+        appScreen.current.style.setProperty('--themeInner', innerColor+transparentby);
+      }
+
   
       localStorage.setItem('innerColor', innerColor);
       localStorage.setItem('outerColor', outerColor);
@@ -85,8 +87,11 @@ export function useTheme(){
       };
   
       dispatchTheme({type:ThemeReducerActions.changed_theme_colors, payload:usersTheme})
-      appScreen.current!.style.setProperty('--themeOuter', outer+transparentby);
-      appScreen.current!.style.setProperty('--themeInner', inner+transparentby);
+      
+      if (appScreen.current){
+        appScreen.current.style.setProperty('--themeOuter', outer+transparentby);
+        appScreen.current.style.setProperty('--themeInner', inner+transparentby);
+      }
     }
 
     return ({setSavedCustomeThemes,setCustomeThemes, appScreen, themeColors })

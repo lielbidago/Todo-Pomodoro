@@ -11,15 +11,13 @@ import {todosReducerActions, useTodoListState} from '../hooks/useTodoList'
 import { useSettings } from '../hooks/useSettings';
 import { forcastReducerActions, useCompletionForcast } from '../hooks/useCompletionForcast';
 
-export function Main(){
-
+export default function Main(){
 
     const {timerState, timerDispatch} = useTimer();
     const {showSettings, toggleShowSettings} = useSettings();
     const { todosCompState, listDispatch} = useTodoListState();
     const {setLastSessionTaskCount, calculateCurSessionRate,forcast,forcastDispatch, overallTaskRate } = useCompletionForcast();
     const {themeColors } = useContext(ThemeContext)
-
 
     const [toggleHelpTips, setToggleHelpTips] = useState(false)
     const [timerFullScreen, setTimerFullScreen] = useState(false)
