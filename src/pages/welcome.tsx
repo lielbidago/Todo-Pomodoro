@@ -6,7 +6,7 @@ export function Welcome(){
         <div className="welcome-page" >
             <div className="welcomediv">
                 <h4>Hello, welcome to</h4>
-                <h1>Todo Pomodoro!</h1>
+                <h1>PomodoTodo!</h1>
                 <p>Here you can enter your tasks into a todo list and create a timeline for compilation,<br/>
                      that you'll complete using our pomodoro timer</p>
                      
