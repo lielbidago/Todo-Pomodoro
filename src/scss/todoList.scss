@@ -60,9 +60,16 @@
     input{
       width:60%;
       border-radius: 10px;
-
     }
     display:block;
+    
+  }
+  .EnterTodo input{
+    outline: none;
+  }
+  .EnterTodo input:focus{
+    border: solid var(--themeOuter) 2px;
+    box-shadow: var(--themeInner) 0px 0px 4px 0px; 
   }
   .todos-title{
     grid-area: title;
