@@ -1,8 +1,5 @@
 import { useReducer } from "react";
-import {ItimerState, ItimerReducerAction} from './useTimerTypes'
-
-
-
+import {ItimerState, ItimerReducerAction} from './useTimerTypes';
 
 export const timerMods = {
     session:'session',

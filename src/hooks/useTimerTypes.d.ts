@@ -1,5 +1,4 @@
-
-import {timerMods, TtimerReducerActions} from './useTimer'
+import {timerMods, TtimerReducerActions} from './useTimer';
 
 export type TtimerMods = keyof typeof timerMods;
 

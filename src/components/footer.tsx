@@ -1,4 +1,4 @@
-import { IthemeColors } from "../hooks/useThemeTypes"
+import { IthemeColors } from "../hooks/useThemeTypes";
 
 
 interface IFooterProps{

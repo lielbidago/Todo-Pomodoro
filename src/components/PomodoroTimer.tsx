@@ -4,7 +4,6 @@ import { Overlay, Tooltip } from "react-bootstrap";
 import { useBellSound } from "../hooks/useBellSound";
 import { timerReducerActions } from "../hooks/useTimer";
 import { ItimerReducerAction, ItimerState } from "../hooks/useTimerTypes";
-
 import '../scss/timer.scss';
 import { IthemeColors } from "../hooks/useThemeTypes";
 

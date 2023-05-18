@@ -1,4 +1,4 @@
-import { ReactNode} from "react";
+import { ReactNode } from "react";
 import { ThemeContext } from "./themeContext";
 import { IthemeColors } from "../hooks/useThemeTypes";
 
