@@ -34,7 +34,7 @@ function timerReducer(state:ItimerState, action:ItimerReducerAction):ItimerState
 
             return {...state, 
                 curMode: state.curMode === 'break'? 'session':'break',
-                timer:state[state.curMode]
+                timer:state[state.curMode === 'break'? 'session':'break']
             };
 
         case timerReducerActions.pauseTimer || timerReducerActions.resumeTimer:
