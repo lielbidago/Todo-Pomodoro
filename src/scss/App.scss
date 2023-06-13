@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;1,300&family=Red+Hat+Display:ital,wght@0,300;0,600;1,300&display=swap');
+@import '../scss/checkbox.scss';
+@import '../scss/welcome.scss';
+@import '../scss/timer.scss';
+@import '../scss/updates.scss';
+@import '../scss/todoList.scss';
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+
+
+// $themecolor1: #7394da;
+// $themecolor2: #bfebe1;
+
+h4, h2, h1, p{
+    font-family: 'Red Hat Display', sans-serif;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  overflow-x: hidden;
+  
+}
+
+
+.app-screen{
+  --themeOuter:#70e1c6;
+  --themeInner: #d45454;
+  font-family: 'Red Hat Display', sans-serif;
+  background: --themeInner;
+  overflow-y: scroll;
+  min-width: 282px;
+  min-height: 100vh;
+  height: 100vh;
+  width: 100vw;
+
+
+  button:hover{
+    background-color: var(--themeInner);
+  }
+
+
+
+}
+
+
+
+.app-screen::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
+
+
+footer{
+  width: 100%;
+  text-align: center;
+  font-weight: lighter;
+  font-size:medium;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.139);
+  height: fit-content;
+  margin-top: 1%;
+  
+  .main-footer{
+    padding:0.5%;
+  }
+
+}
+.session-settings, .help{
+  background-color: transparent;
+  border-radius: 5px;
+  border: none;
+  transform: scale(1.5);
+  
+}
+.session-settings:hover{
+  box-shadow: 2px 1px 4px 0px rgba(0, 0, 0, 0.274);
+}
+
+.modal-open .offcanvas, .modal-open .modal-content{
+  background-color: rgba(255, 255, 255, 0.498);
+  backdrop-filter: blur(8px) saturate(200%);
+  -webkit-backdrop-filter: blur(15px) saturate(200%);
+
+  // .btn:hover{
+  //   background-color: transparent;
+  //   backdrop-filter:saturate(200%);
+  // }
+}
+
+.ListAndTimer{
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-template-rows: minmax(auto, 8%) 1fr 0.5fr; //6%
+    font-family: 'Red Hat Display', sans-serif;
+    margin:0 1%;
+    width: 98%;
+    min-height: 90dvh;
+    height: 100%;
+    gap: 1%;
+    text-align: center;
+    grid-template-areas: 
+    "TodoPomodoroHeader TodoPomodoroHeader"
+    "list-container pomodoro-timer"
+    'list-container updates';
+
+
+
+    //
+}
+
+.ListAndTimer.timer-center{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: minmax(auto, 9%) 1fr;
+  font-family: 'Red Hat Display', sans-serif;
+  margin:0 1%;
+  width: 98%;
+  height: 100%;
+  gap: 1%;
+  text-align: center;
+  grid-template-areas: 
+  "TodoPomodoroHeader"
+  "pomodoro-timer";
+
+  .pomodoro-timer{
+    align-items: center;
+    .timer{
+      width:60%;
+    }
+  }
+
+}
+
+.TodoPomodoroHeader{
+  width: 100%;
+  margin:0;
+  grid-area: TodoPomodoroHeader;
+
+  h4{
+    margin-bottom: 0%;
+  }
+
+}
+
+.fa{
+  color: white;
+  text-decoration: none;
+}
+
+.fade.toast.show{
+  position:absolute;
+  bottom: 1%;
+  right:1%;
+  background-color: rgba(255, 255, 255, 0.498);
+  backdrop-filter: blur(8px) saturate(200%);
+  -webkit-backdrop-filter: blur(15px) saturate(200%);
+
+}
+
+@media (min-width: 1900px){
+
+  .todos-title{
+    border-top: 19px dotted #9393938d;
+    margin-top: 3%;
+    h4{
+      font-size: 200%;
+    }
+    
+
+  }
+
+  .Todo-li{
+    font-size: 130%;
+  }
+
+  button{
+    font-size: 130%;
+  }
+  
+  .ListAndTimer{
+    margin-top: 0px;
+    grid-template-rows: minmax(auto, 6%) 1fr 0.5fr; 
+    
+
+  }
+  .timer .btn{
+    font-size: 130%;
+  }
+
+  .TodoPomodoroHeader{
+    height:fit-content
+  }
+
+  .updates .CompletionForcast{
+    font-size: 120%;
+    height: 100%;
+  }
+
+  .TodoPomodoroList{
+    max-height: 90%;
+  }
+
+
+}
+
+@media (max-width: 840px){
+
+  .app-screen{
+    margin: 0;
+    padding: 0;
+    min-width: 282px;
+    height: 100%;
+  }
+
+  .ListAndTimer{
+    display: block;
+  }
+
+  .TodoPomodoroHeader{
+        min-width: 100vw;
+        height: fit-content;
+        min-height: 5%; //
+
+       
+  }
+
+
+  .timer{
+    min-width: 40vw;
+    width: 90%;
+    height: 85%;
+    text-align: center;
+    align-self: center;
+
+  }
+
+  .TodoPomodoroList{
+    margin: 2%;
+    height: 50%;
+    max-height: 100dvh;
+    min-height: 500px;
+    margin-bottom: 5%;
+    grid-template-rows: 15% minmax(8%,15%) auto 10%;
+
+    .todos-footer{
+      position: relative;
+      bottom: 0%;
+    }
+
+    .EnterTodo{
+      height:fit-content
+    }
+
+  }
+
+  footer{
+    width: 100%;
+
+  }
+}
+
+
+
+

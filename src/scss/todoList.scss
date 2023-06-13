@@ -1,0 +1,135 @@
+.list-container{
+  grid-area: list-container;
+}
+
+.TodoPomodoroList{
+
+  background: rgb(255, 255, 255);      
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.091);
+  text-align: center;
+
+  height: 95%;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+
+  overflow-y: scroll; 
+
+  border-radius: 0px 0px 18px 22px;
+  
+  position: relative;
+
+  display:grid;
+  grid-template-columns: auto;
+  grid-template-rows: 18% minmax(8%, 10%) auto 7%;
+  grid-template-areas: "title"
+                        "enterTodo"
+                        "todos"
+                        "todos-footer";
+                      
+  
+  .EnterTodo > * {
+    display: inline-block;
+    padding:1%;
+    margin:0 2%;
+    box-shadow:0 0 10px 1px rgba(0, 0, 0, 0.166);
+    border: 0;
+    
+  }
+
+  .filter{
+    border-radius: 10px;
+    background-color: white;
+    border:1px;
+    padding:0;
+  }
+
+  .filter:hover{
+    .dropend{
+      background-color: --themeInner;
+      border-radius: 10px;
+      .dropdown-toggle::after, svg{
+        filter: invert(48%) saturate(2476%) hue-rotate(86deg) brightness(190%) contrast(119%);
+      }
+    }
+    
+
+  }
+  .EnterTodo{
+    grid-area: enterTodo;
+    margin-bottom: 2%;
+    input{
+      width:60%;
+      border-radius: 10px;
+
+    }
+    display:block;
+  }
+  .todos-title{
+    grid-area: title;
+    border-top: 15px dotted #9393938d;
+    margin-left: 2%;
+    margin-top: 2%;
+    width: 95%;
+    text-align: center;
+    padding: 3%;
+  }
+
+  .my-todos{
+    grid-area: todos;
+    overflow-y: scroll; 
+    
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+  }
+
+  .my-todos::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+  }
+
+  .todos-footer{
+    grid-area: todos-footer;
+    
+    position: sticky;
+    bottom: 0;
+
+    height:fit-content;
+
+    div{
+      width: fit-content;
+      display: inline;
+    }
+
+    .all{
+      margin: 0% 10%;
+    }
+
+    button{
+      padding: 1%;
+      border-radius: 5px;
+      border: none;
+      box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.274);
+    }
+
+    .bold{
+      font-size: larger;
+    }
+
+    background-color: white;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.139);
+
+    padding:1%;
+    width: 100%;
+    border-radius: 0px 0px 18px 22px;
+    margin-bottom: 0;
+}
+
+}
+
+.TodoPomodoroList::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
+
+
+  
+
+

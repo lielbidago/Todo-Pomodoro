@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;1,300&family=Red+Hat+Display:ital,wght@0,300;0,600;1,300&display=swap');
+
+
+.pomodoro-timer{
+    grid-area: pomodoro-timer;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Red Hat Display', sans-serif;
+
+    button{
+      margin: 1%;
+      background-color: transparent;
+      border-radius: 5px;
+      border: none;
+      box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.274);
+    }
+      
+}
+
+.timer{
+    padding: 1% 0;
+    width: 80%;
+    margin: 0% 5% 3% 5%;
+    min-width: min-content;
+    min-height: min-content;
+    max-width: 100%;
+
+    text-align: center;
+    background: rgb(163, 163, 163);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.308) 0%, rgba(1, 0, 0, 0.148) 100%);
+    backdrop-filter: blur(8px) saturate(150%);
+    -webkit-backdrop-filter: blur(8px) saturate(150%);
+        
+    .timer-a{
+      padding: 13% 10%;
+      .timer-title{
+        cursor: pointer;
+      }
+      .timer-title:hover{
+        font-weight: bold;
+      }
+    }
+
+    border-radius: 65px;
+    box-shadow:  41px 41px 82px rgba(0, 0, 0, 0.1),
+             -41px -41px 82px rgba(255, 255, 255, 0.101);
+
+}
+
+.timer.light{
+  h5, h2{
+    color: white;
+  }
+
+  img{
+    filter: invert(48%) brightness(190%) contrast(119%);
+  }
+}
+
+
+
+.timer-footer{
+    font-weight: bold;
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-right: 4%;
+    
+    *{
+      margin:0.5%;
+    }
+
+
+}
+
+.timer-footer img{
+  cursor: pointer;
+}
+
+.sound > input{
+  accent-color: rgb(0, 0, 0);
+  padding: 2%;
+  
+
+}

@@ -1,0 +1,49 @@
+.updates{
+  display: flex;
+  grid-area: updates;
+  flex-direction: row-reverse;
+  margin: 0% 10% 2% 0%;
+  height:fit-content;
+
+
+  .ProgressBarP{
+
+    padding:1%;
+    width: 50%;
+    margin:0% 7% ;
+    align-self: top;
+    
+    .PB-container{
+      height: 50%;
+      
+    }
+    h6{
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+  }
+  .light{
+    color: white;
+    h6{
+      font-weight: normal;
+    }
+
+  }
+
+  .progress{
+    background-color: rgba(255, 255, 255, 0.161) !important;
+    height: 50% !important;
+    border-radius: 65px;
+    box-shadow:  41px 41px 82px rgba(0, 0, 0, 0.1),
+             -41px -41px 82px rgba(255, 255, 255, 0.101);
+    backdrop-filter: blur(8px) saturate(150%);
+    -webkit-backdrop-filter: blur(8px) saturate(150%);
+
+  }
+  .progress-bar{
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.059) 0%, rgba(0,0,0,0.16867997198879547) 96%)!important;
+    
+  }
+}
+  
