@@ -31,9 +31,9 @@ export default function Main(){
 
 
 
-    function progressValue(){
-        return Math.round((todosCompState.completedNum/todosCompState.allNum)*100)
-    }
+    // function progressValue(){
+    //     return Math.round((todosCompState.completedNum/todosCompState.allNum)*100)
+    // }
 
     useEffect(()=>{
         updateTodosState()
@@ -96,7 +96,7 @@ export default function Main(){
 
             
             <div className="updates">
-                <ProgressBarP progressValue={progressValue()} themeColors={themeColors} 
+                <ProgressBarP todosCompState={todosCompState} themeColors={themeColors} 
                 toggleHelpTips={toggleHelpTips}/>
 
                 <CompletionForcast forcast={forcast} 
