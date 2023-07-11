@@ -31,7 +31,7 @@ export function ProgressBarP(props: prograssBarProps){
 
     return (
         <div className={`ProgressBarP ${buttonColor}`}>
-            <div ref={pbRef} className='PB-container'>
+            {/* <div ref={pbRef} className='PB-container'>
                 <h6>Your progress</h6>
                 <ProgressBar variant='' now={currentProgressMemo} label={`${currentProgressMemo}%`}/>
             </div>
@@ -41,7 +41,8 @@ export function ProgressBarP(props: prograssBarProps){
                                 shows your progression
                             </Tooltip>
                         )} 
-            </Overlay>
+            </Overlay> */}
+            <h1>{currentProgressMemo}</h1>
         </div>
 
         
