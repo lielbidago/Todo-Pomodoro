@@ -20,18 +20,15 @@ export function ProgressBarP(props: prograssBarProps){
     const pbRef = useRef(null)
     let currentProgressValue = progressValue(todosCompState.completedNum, todosCompState.allNum)
 
-    // useEffect(()=>{
-    //     let currentProgressValue = progressValue(todosCompState.completedNum, todosCompState.allNum)
-
-    // }, [todosCompState.allNum, todosCompState.completedNum])
 
     const currentProgressMemo = useMemo(()=>(
         progressValue(todosCompState.completedNum, todosCompState.allNum)
-    ),[todosCompState]);
+    ),[todosCompState.completedNum, todosCompState.allNum]);
+
 
     return (
         <div className={`ProgressBarP ${buttonColor}`}>
-            {/* <div ref={pbRef} className='PB-container'>
+            <div ref={pbRef} className='PB-container'>
                 <h6>Your progress</h6>
                 <ProgressBar variant='' now={currentProgressMemo} label={`${currentProgressMemo}%`}/>
             </div>
@@ -41,8 +38,7 @@ export function ProgressBarP(props: prograssBarProps){
                                 shows your progression
                             </Tooltip>
                         )} 
-            </Overlay> */}
-            <h1>{currentProgressMemo}</h1>
+            </Overlay>    
         </div>
 
         

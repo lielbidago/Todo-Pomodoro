@@ -25,7 +25,7 @@ function todosComponentReducer(state:ItodosListState,
     action:ItodosReducerAction){
     
     let newTodosState:ItodosListState = {...state};
-    
+
     switch(action.type){
         case todosReducerActions.allTodos:
             return {...state};
@@ -45,12 +45,12 @@ function todosComponentReducer(state:ItodosListState,
             return newTodosState
 
         case todosReducerActions.changeStatusTodo:
-            const tdbool = state.todos.filter(td => td.id === action.payload.taskId)[0].completed
+            const tdbool = state.todos.filter(td => td.id === action.payload.taskId)[0].completed;
 
             newTodosState = {
                 ...state,
                 todos:state.todos.map((td) => (td.id === action.payload.taskId ? {...td, completed:!td.completed}: td )),
-                completedNum:tdbool?state.completedNum--:state.completedNum++,
+                completedNum:tdbool? --state.completedNum:++state.completedNum,
             };
             localStorage.setItem('todoList', JSON.stringify(newTodosState.todos));
             return newTodosState

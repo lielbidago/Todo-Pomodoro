@@ -29,12 +29,6 @@ export default function Main(){
         setTimerFullScreen(!timerFullScreen)
     }
 
-
-
-    // function progressValue(){
-    //     return Math.round((todosCompState.completedNum/todosCompState.allNum)*100)
-    // }
-
     useEffect(()=>{
         updateTodosState()
     },[updateTodosState])
@@ -52,8 +46,8 @@ export default function Main(){
         }})
     }
 
-
     if(timerFullScreen){
+        
         return (
             <div className="ListAndTimer timer-center" >
                 <TodoPomodoroHeader handleShowSettings={toggleShowSettings} themeColors={themeColors} 
@@ -79,7 +73,9 @@ export default function Main(){
             
         )
     }
-    return (
+
+    return (  
+   
         <div className="ListAndTimer" >
 
             <TodoPomodoroHeader handleShowSettings={toggleShowSettings} 
@@ -96,6 +92,7 @@ export default function Main(){
 
             
             <div className="updates">
+                
                 <ProgressBarP todosCompState={todosCompState} themeColors={themeColors} 
                 toggleHelpTips={toggleHelpTips}/>
 
